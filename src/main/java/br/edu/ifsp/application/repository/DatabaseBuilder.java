@@ -7,7 +7,6 @@ import java.sql.Statement;
 
 public class DatabaseBuilder {
 
-    // public pq é o unico método que pode ser chamado de fora
     public void buildDatabaseIfMissing() {
         if (isDatabaseMissing()) {
             System.out.println("Database is missing. Building database: \n");
@@ -23,7 +22,7 @@ public class DatabaseBuilder {
     private void buildTables() {
         try (Statement statement = ConnectionFactory.createStatement()) {
             statement.addBatch(createBookTable());
-//            statement.addBatch(createUserTable());
+            statement.addBatch(createInstrutorTable());
 //            statement.addBatch(createTransactionTable());
             statement.executeBatch();
 
@@ -49,6 +48,18 @@ public class DatabaseBuilder {
         builder.append("observacao TEXT\n");
 //        builder.append("ultimoTreinoRealizado TEXT\n");
         builder.append("); \n");
+
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
+
+    private String createInstrutorTable() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("CREATE TABLE Instrutor(\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
+        builder.append("nome TEXT NOT NULL);");
 
         System.out.println(builder.toString());
         return builder.toString();

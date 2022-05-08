@@ -7,5 +7,8 @@ import java.util.Optional;
 
 public interface AlunoDAO extends DAO<Aluno, Integer> {
 
-    Optional<Object> findByCpf(String cpf);
+    Optional<Aluno> findByCpf(String cpf);
+
+    Optional<Aluno> findByNome(String nome);
+
 }

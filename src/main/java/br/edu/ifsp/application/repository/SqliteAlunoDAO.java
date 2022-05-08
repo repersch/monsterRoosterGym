@@ -91,6 +91,8 @@ public class SqliteAlunoDAO implements AlunoDAO {
             stmt.setDouble(8, aluno.getAltura());
             stmt.setString(9, aluno.getObservacoes());
 
+            stmt.setInt(10, aluno.getId());
+
             stmt.execute();
 
             return true;
@@ -101,7 +103,7 @@ public class SqliteAlunoDAO implements AlunoDAO {
     }
 
     @Override
-    public Optional<Object> findByCpf(String cpf) {
+    public Optional<Aluno> findByCpf(String cpf) {
 
         String sql = "SELECT * FROM Aluno WHERE cpf = ?";
         Aluno aluno = null;
@@ -117,6 +119,24 @@ public class SqliteAlunoDAO implements AlunoDAO {
         }
         return Optional.ofNullable(aluno);
     }
+
+    @Override
+    public Optional<Aluno> findByNome(String nome) {
+        String sql = "SELECT * FROM Aluno WHERE nome = ?";
+        Aluno aluno = null;
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, nome);
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                aluno = resultSetToEntity(resultado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(aluno);
+    }
+
 
     private Aluno resultSetToEntity(ResultSet resultado) throws SQLException {
         return new Aluno(
