@@ -46,7 +46,7 @@ public class DatabaseBuilder {
         builder.append("data_nascimento DATE NOT NULL, \n");
         builder.append("peso DOBLE NOT NULL, \n");
         builder.append("altura DOUBLE NOT NULL, \n");
-        builder.append("observacao TEXT,\n");
+        builder.append("observacao TEXT\n");
 //        builder.append("ultimoTreinoRealizado TEXT\n");
         builder.append("); \n");
 
