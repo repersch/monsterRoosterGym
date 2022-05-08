@@ -1,7 +1,7 @@
 module br.edu.ifsp {
     requires javafx.controls;
     requires javafx.fxml;
-    requires lombok;
+    requires static lombok;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
 
