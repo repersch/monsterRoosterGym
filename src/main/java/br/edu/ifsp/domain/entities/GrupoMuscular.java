@@ -21,4 +21,5 @@ public enum GrupoMuscular {
     public String toString() {
         return musculo;
     }
+
 }
