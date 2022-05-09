@@ -40,21 +40,39 @@ public class SqliteAlunoDAO implements AlunoDAO {
     }
 
     @Override
-    public Optional<Aluno> findOne(Integer id) {
-       String sql = "SELECT * FROM Aluno WHERE id = ?";
-       Aluno aluno = null;
+    public Optional<Aluno> findByAttribute(String attribute, String key) {
+        String sql = "SELECT * FROM Aluno WHERE " + attribute + " = ?";
+        Aluno aluno = null;
 
-       try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-           stmt.setInt(1, id);
-           ResultSet resultado = stmt.executeQuery();
-           if (resultado.next()) {
-               aluno = resultSetToEntity(resultado);
-           }
-       } catch (SQLException e) {
-           e.printStackTrace();
-       }
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, key);
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                aluno = resultSetToEntity(resultado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-       return Optional.ofNullable(aluno);
+        return Optional.ofNullable(aluno);
+    }
+
+    @Override
+    public Optional<Aluno> findById(Integer id) {
+        String sql = "SELECT * FROM Aluno WHERE id = ?";
+        Aluno aluno = null;
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                aluno = resultSetToEntity(resultado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Optional.ofNullable(aluno);
     }
 
     @Override
@@ -101,42 +119,6 @@ public class SqliteAlunoDAO implements AlunoDAO {
         }
         return false;
     }
-
-    @Override
-    public Optional<Aluno> findByCpf(String cpf) {
-
-        String sql = "SELECT * FROM Aluno WHERE cpf = ?";
-        Aluno aluno = null;
-
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setString(1, cpf);
-            ResultSet resultado = stmt.executeQuery();
-            if (resultado.next()) {
-                aluno = resultSetToEntity(resultado);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(aluno);
-    }
-
-    @Override
-    public Optional<Aluno> findByNome(String nome) {
-        String sql = "SELECT * FROM Aluno WHERE nome = ?";
-        Aluno aluno = null;
-
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setString(1, nome);
-            ResultSet resultado = stmt.executeQuery();
-            if (resultado.next()) {
-                aluno = resultSetToEntity(resultado);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(aluno);
-    }
-
 
     private Aluno resultSetToEntity(ResultSet resultado) throws SQLException {
         return new Aluno(

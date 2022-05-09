@@ -59,8 +59,10 @@ public class DatabaseBuilder {
 
         builder.append("CREATE TABLE Instrutor(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
-        builder.append("nome TEXT NOT NULL);");
-
+        builder.append("nome TEXT NOT NULL,");
+        builder.append("email TEXT NOT NULL UNIQUE,");
+        builder.append("senha TEXT NOT NULL");
+        builder.append("); \n");
         System.out.println(builder.toString());
         return builder.toString();
     }

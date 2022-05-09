@@ -8,5 +8,4 @@ import java.util.Optional;
 public interface InstrutorDAO extends DAO<Instrutor, Integer> {
 
 
-    Optional<Instrutor> findByNome(String nome);
 }

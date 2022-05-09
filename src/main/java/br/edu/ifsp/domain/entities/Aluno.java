@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class Aluno {
@@ -14,7 +15,8 @@ public class Aluno {
     private Double peso;
     private Double altura;
     private String observacoes;
-    //private Treino ultimoTreinoRealizado;
+    private List<RegistroTreino> listaTreinos;
+//    private Treino ultimoTreinoRealizado;
 
     public Aluno() {
     }
