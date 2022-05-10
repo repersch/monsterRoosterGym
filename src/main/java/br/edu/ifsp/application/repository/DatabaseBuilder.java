@@ -21,8 +21,9 @@ public class DatabaseBuilder {
     // batch serve para executar várias sql de uma vez
     private void buildTables() {
         try (Statement statement = ConnectionFactory.createStatement()) {
-            statement.addBatch(createBookTable());
+            statement.addBatch(createAlunoTable());
             statement.addBatch(createInstrutorTable());
+            statement.addBatch(createRegistroTreinoTable());
 //            statement.addBatch(createTransactionTable());
             statement.executeBatch();
 
@@ -32,7 +33,7 @@ public class DatabaseBuilder {
         }
     }
 
-    private String createBookTable() {
+    private String createAlunoTable() {
         StringBuilder builder = new StringBuilder();
 
         builder.append("CREATE TABLE Aluno(\n");
@@ -60,9 +61,26 @@ public class DatabaseBuilder {
         builder.append("CREATE TABLE Instrutor(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
         builder.append("nome TEXT NOT NULL,");
-        builder.append("email TEXT NOT NULL UNIQUE,");
+        builder.append("email TEXT NOT NULL,");
         builder.append("senha TEXT NOT NULL");
         builder.append("); \n");
+
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
+    private String createRegistroTreinoTable() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("CREATE TABLE Registro_Treino(\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
+        builder.append("inicio TEXT NOT NULL,\n");
+        builder.append("fim TEXT,\n");
+        builder.append("finalizado INTEGER NOT NULL,\n");
+        builder.append("aluno INTEGER NOT NULL,\n");
+        builder.append("FOREIGN KEY(aluno) REFERENCES Aluno(id)\n");
+        builder.append("); \n");
+
         System.out.println(builder.toString());
         return builder.toString();
     }

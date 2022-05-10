@@ -3,14 +3,20 @@ package br.edu.ifsp.application.main;
 import br.edu.ifsp.application.repository.DatabaseBuilder;
 import br.edu.ifsp.application.repository.SqliteAlunoDAO;
 import br.edu.ifsp.application.repository.SqliteInstrutorDAO;
+import br.edu.ifsp.application.repository.SqliteRegistroTreinoDAO;
 import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.Instrutor;
+import br.edu.ifsp.domain.entities.RegistroTreino;
+import br.edu.ifsp.domain.entities.Treino;
 import br.edu.ifsp.domain.usecases.aluno.AlunoDAO;
 import br.edu.ifsp.domain.usecases.aluno.BuscarAlunoUC;
 import br.edu.ifsp.domain.usecases.aluno.CriarAlunoUC;
 import br.edu.ifsp.domain.usecases.aluno.EditarAlunoUC;
+import br.edu.ifsp.domain.usecases.instrutor.BuscarInstrutorUC;
 import br.edu.ifsp.domain.usecases.instrutor.CriarInstrutorUC;
 import br.edu.ifsp.domain.usecases.instrutor.InstrutorDAO;
+import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
+import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
 
 import java.time.LocalDate;
 
@@ -21,6 +27,9 @@ public class Main {
     public static EditarAlunoUC editarAlunoUC;
 
     public static CriarInstrutorUC criarInstrutorUC;
+    public static BuscarInstrutorUC buscarInstrutorUC;
+
+    public static RegistrarInicioTreinoUC registrarInicioTreinoUC;
 
     public static void main(String[] args) {
         System.out.println("Configurando INJECTIONS");
@@ -56,12 +65,29 @@ public class Main {
 
 
         System.out.println("-------------------- INSTRUTOR ---------------------");
-        Instrutor instrutor1 = new Instrutor("Marcio SalvaVidas");
-        Instrutor instrutor2 = new Instrutor("Guillermo Presegura");
+
+        Instrutor instrutor1 = new Instrutor("Marcio SalvaVidas", "marcio@mail.com", "senha");
+        Instrutor instrutor2 = new Instrutor("Guillermo Presegura", "gui@mail.com", "senha");
+
+
 
         criarInstrutorUC.salvar(instrutor1);
         criarInstrutorUC.salvar(instrutor2);
 
+        System.out.println("Buscar todos: " + buscarInstrutorUC.buscarTodos());
+        System.out.println("Buscar por nome: " + buscarInstrutorUC.buscarPorNome(instrutor1.getNome()));
+        System.out.println("Buscar por email: " + buscarInstrutorUC.buscarPorEmail(instrutor2.getEmail()));
+        System.out.println("Buscar por id: " + buscarInstrutorUC.buscarPorId(1));
+
+        System.out.println("-------------------- Registro Treino ---------------------");
+
+        RegistroTreino registroTreino1 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(15), false, buscarAlunoUC.buscarPorCpf(aluno1.getCpf()).get());
+        RegistroTreino registroTreino2 = new RegistroTreino(LocalDate.now().minusDays(5), LocalDate.now().plusDays(30), false, buscarAlunoUC.buscarPorCpf(aluno2.getCpf()).get());
+        RegistroTreino registroTreino3 = new RegistroTreino(LocalDate.now().minusDays(3), LocalDate.now().plusDays(20), false, buscarAlunoUC.buscarPorCpf(aluno1.getCpf()).get());
+
+        registrarInicioTreinoUC.salvar(registroTreino1);
+        registrarInicioTreinoUC.salvar(registroTreino2);
+        registrarInicioTreinoUC.salvar(registroTreino3);
 
 
     }
@@ -76,6 +102,10 @@ public class Main {
 
         InstrutorDAO instrutorDAO = new SqliteInstrutorDAO();
         criarInstrutorUC = new CriarInstrutorUC(instrutorDAO);
+        buscarInstrutorUC = new BuscarInstrutorUC(instrutorDAO);
+
+        RegistroTreinoDAO registroTreinoDAO = new SqliteRegistroTreinoDAO();
+        registrarInicioTreinoUC = new RegistrarInicioTreinoUC(registroTreinoDAO);
 
 
     }

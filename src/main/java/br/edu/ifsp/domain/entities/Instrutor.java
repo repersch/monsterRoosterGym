@@ -60,6 +60,8 @@ public class Instrutor {
         return "Instrutor{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
                 '}';
     }
 }

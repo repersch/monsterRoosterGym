@@ -20,9 +20,11 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, registroTreino.getInicio().toString());
             stmt.setString(2, registroTreino.getFim().toString());
-            stmt.setBoolean(3, registroTreino.getFinalizado());
+            // se esta criando o treino significa que não esta finalizado, por isso é 0 (false)
+            stmt.setInt(3, 0);
             stmt.setInt(4, registroTreino.getAluno().getId());
 
+            stmt.execute();
             ResultSet resultado = stmt.getGeneratedKeys();
             int chaveGerada = resultado.getInt(1);
 

@@ -15,10 +15,12 @@ public class SqliteInstrutorDAO implements InstrutorDAO {
 
     @Override
     public Integer create(Instrutor instrutor) {
-        String sql = "INSERT INTO Instrutor(nome) VALUES (?)";
+        String sql = "INSERT INTO Instrutor(nome, email, senha) VALUES (?, ?, ?)";
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, instrutor.getNome());
+            stmt.setString(2, instrutor.getEmail());
+            stmt.setString(3, instrutor.getSenha());
 
             stmt.execute();
             ResultSet resultado = stmt.getGeneratedKeys();
@@ -60,10 +62,7 @@ public class SqliteInstrutorDAO implements InstrutorDAO {
 
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
-                instrutor = new Instrutor(resultado.getInt("id"),
-                        resultado.getString("nome"),
-                        resultado.getString("email"),
-                        resultado.getString("senha"));
+                instrutor = resultSetToEntity(resultado);
             }
         } catch (SQLException e) {
             e.printStackTrace();
