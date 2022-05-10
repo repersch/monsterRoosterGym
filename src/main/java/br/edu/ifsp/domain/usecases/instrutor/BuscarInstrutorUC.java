@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class BuscarInstrutorUC {
 
-    private InstrutorDAO instrutorDAO;
+    private final InstrutorDAO instrutorDAO;
 
     public BuscarInstrutorUC(InstrutorDAO instrutorDAO) {
         this.instrutorDAO = instrutorDAO;

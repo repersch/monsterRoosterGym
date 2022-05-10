@@ -24,7 +24,7 @@ public class CriarInstrutorUC {
 
         String nome = instrutor.getNome();
 
-        if (instrutorDAO.findByNome(nome).isPresent()) {
+        if (instrutorDAO.findByAttribute("nome", nome).isPresent()) {
             throw new EntityAlreadyExistsException("Nome já cadastrado.");
         }
 

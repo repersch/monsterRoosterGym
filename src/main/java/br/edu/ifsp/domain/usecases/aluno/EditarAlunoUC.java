@@ -24,7 +24,7 @@ public class EditarAlunoUC {
 
         Integer id = aluno.getId();
 
-        if (alunoDAO.findOne(id).isEmpty()) {
+        if (alunoDAO.findById(id).isEmpty()) {
             throw new EntityNotFoundException("Aluno não encontrado.");
         }
 

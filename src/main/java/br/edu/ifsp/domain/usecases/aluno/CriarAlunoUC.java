@@ -25,7 +25,7 @@ public class CriarAlunoUC {
 
         String cpf = aluno.getCpf();
 
-        if (alunoDAO.findByCpf(cpf).isPresent()) {
+        if (alunoDAO.findByAttribute("cpf", cpf).isPresent()) {
             throw new EntityAlreadyExistsException("CPF já cadastrado.");
         }
 
