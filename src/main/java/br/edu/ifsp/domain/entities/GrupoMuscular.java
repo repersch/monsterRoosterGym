@@ -1,5 +1,7 @@
 package br.edu.ifsp.domain.entities;
 
+import java.util.Arrays;
+
 public enum GrupoMuscular {
     ABDOMEN ("Abdômen"),
     ANTEBRACO ("Antebraço"),
@@ -17,9 +19,15 @@ public enum GrupoMuscular {
         this.musculo = musculo;
     }
 
+    public static GrupoMuscular toEnum(String value) {
+        return Arrays.stream(GrupoMuscular.values())
+                .filter(c -> value.equals(c.toString()))
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
     @Override
     public String toString() {
         return musculo;
     }
-
 }

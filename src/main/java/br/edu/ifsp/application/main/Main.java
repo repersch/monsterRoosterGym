@@ -2,9 +2,12 @@ package br.edu.ifsp.application.main;
 
 import br.edu.ifsp.application.repository.DatabaseBuilder;
 import br.edu.ifsp.application.repository.SqliteAlunoDAO;
+import br.edu.ifsp.application.repository.SqliteExercicioDAO;
 import br.edu.ifsp.application.repository.SqliteInstrutorDAO;
 import br.edu.ifsp.application.repository.SqliteRegistroTreinoDAO;
 import br.edu.ifsp.domain.entities.Aluno;
+import br.edu.ifsp.domain.entities.Exercicio;
+import br.edu.ifsp.domain.entities.GrupoMuscular;
 import br.edu.ifsp.domain.entities.Instrutor;
 import br.edu.ifsp.domain.entities.RegistroTreino;
 import br.edu.ifsp.domain.entities.Treino;
@@ -12,6 +15,7 @@ import br.edu.ifsp.domain.usecases.aluno.AlunoDAO;
 import br.edu.ifsp.domain.usecases.aluno.BuscarAlunoUC;
 import br.edu.ifsp.domain.usecases.aluno.CriarAlunoUC;
 import br.edu.ifsp.domain.usecases.aluno.EditarAlunoUC;
+import br.edu.ifsp.domain.usecases.exercicio.*;
 import br.edu.ifsp.domain.usecases.instrutor.BuscarInstrutorUC;
 import br.edu.ifsp.domain.usecases.instrutor.CriarInstrutorUC;
 import br.edu.ifsp.domain.usecases.instrutor.InstrutorDAO;
@@ -30,6 +34,11 @@ public class Main {
     public static BuscarInstrutorUC buscarInstrutorUC;
 
     public static RegistrarInicioTreinoUC registrarInicioTreinoUC;
+
+    public static CriarExercicioUC criarExercicioUC;
+    public static BuscarExercicioUC buscarExercicioUC;
+    public static EditarExercicioUC editarExercicioUC;
+    public static DeletarExercicioUC deletarExercicioUC;
 
     public static void main(String[] args) {
         System.out.println("Configurando INJECTIONS");
@@ -89,6 +98,33 @@ public class Main {
         registrarInicioTreinoUC.salvar(registroTreino2);
         registrarInicioTreinoUC.salvar(registroTreino3);
 
+        System.out.println("-------------------- EXERCÍCIO ---------------------");
+        Exercicio exercicio1 = new Exercicio(1, "Supino Reto", GrupoMuscular.PEITORAL, "Utilizar halteres", true);
+        Exercicio exercicio2 = new Exercicio(2, "Elevação Lateral", GrupoMuscular.DELTOIDES, "Utilizar anilha", true);
+        Exercicio exercicio3 = new Exercicio(3, "Leg Press", GrupoMuscular.QUADRICEPS, "Ajustar inclinação em 45°", false);
+        Exercicio exercicio4 = new Exercicio(4, "Rosca Direta", GrupoMuscular.BICEPS, "Utilizar barra", false);
+
+        criarExercicioUC.salvar(exercicio1);
+        criarExercicioUC.salvar(exercicio2);
+        criarExercicioUC.salvar(exercicio3);
+        criarExercicioUC.salvar(exercicio4);
+
+        System.out.println("Busca por Id: " + buscarExercicioUC.buscarPorId(exercicio2.getId()));
+        System.out.println("Busca por Nome: " + buscarExercicioUC.buscarPorNome(exercicio1.getNome()));
+        System.out.println("Buscar Todos: " + buscarExercicioUC.buscarTodos());
+
+        editarExercicioUC.atualizar(new Exercicio(3, "Prancha Reta", GrupoMuscular.ABDOMEN, "Isometria de 60 segundos", true));
+        System.out.println("Buscar por ID depois de atualizar: " + buscarExercicioUC.buscarPorId(3));
+
+        deletarExercicioUC.remover(2);
+        System.out.println("Buscar Todos Deleção por Id: " + buscarExercicioUC.buscarTodos());
+
+        deletarExercicioUC.remover(exercicio4);
+        System.out.println("Buscar Todos Deleção por Exercicio: " + buscarExercicioUC.buscarTodos());
+
+
+
+
 
     }
 
@@ -106,6 +142,13 @@ public class Main {
 
         RegistroTreinoDAO registroTreinoDAO = new SqliteRegistroTreinoDAO();
         registrarInicioTreinoUC = new RegistrarInicioTreinoUC(registroTreinoDAO);
+
+        ExercicioDAO exercicioDAO = new SqliteExercicioDAO();
+        criarExercicioUC = new CriarExercicioUC(exercicioDAO);
+        editarExercicioUC = new EditarExercicioUC(exercicioDAO);
+        buscarExercicioUC = new BuscarExercicioUC(exercicioDAO);
+        deletarExercicioUC = new DeletarExercicioUC(exercicioDAO);
+
 
 
     }

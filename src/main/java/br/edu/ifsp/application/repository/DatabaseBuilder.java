@@ -1,5 +1,7 @@
 package br.edu.ifsp.application.repository;
 
+import br.edu.ifsp.domain.entities.GrupoMuscular;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -24,6 +26,7 @@ public class DatabaseBuilder {
             statement.addBatch(createAlunoTable());
             statement.addBatch(createInstrutorTable());
             statement.addBatch(createRegistroTreinoTable());
+            statement.addBatch(createExercicioTable());
 //            statement.addBatch(createTransactionTable());
             statement.executeBatch();
 
@@ -81,6 +84,19 @@ public class DatabaseBuilder {
         builder.append("FOREIGN KEY(aluno) REFERENCES Aluno(id)\n");
         builder.append("); \n");
 
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
+    private String createExercicioTable() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE Exercicio(\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
+        builder.append("nome TEXT NOT NULL UNIQUE,\n");
+        builder.append("grupo_muscular TEXT NOT NULL,\n");
+        builder.append("descricao TEXT NOT NULL,\n");
+        builder.append("em_uso INTEGER NOT NULL");
+        builder.append("); \n");
         System.out.println(builder.toString());
         return builder.toString();
     }
