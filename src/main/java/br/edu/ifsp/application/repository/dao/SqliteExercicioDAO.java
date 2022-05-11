@@ -1,5 +1,6 @@
-package br.edu.ifsp.application.repository;
+package br.edu.ifsp.application.repository.dao;
 
+import br.edu.ifsp.application.repository.utils.ConnectionFactory;
 import br.edu.ifsp.domain.entities.Exercicio;
 import br.edu.ifsp.domain.entities.GrupoMuscular;
 import br.edu.ifsp.domain.usecases.exercicio.ExercicioDAO;

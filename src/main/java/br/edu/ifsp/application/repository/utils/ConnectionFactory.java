@@ -1,4 +1,4 @@
-package br.edu.ifsp.application.repository;
+package br.edu.ifsp.application.repository.utils;
 
 import org.sqlite.SQLiteDataSource;
 

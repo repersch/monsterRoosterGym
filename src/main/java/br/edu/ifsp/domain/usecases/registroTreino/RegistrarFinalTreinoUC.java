@@ -5,15 +5,15 @@ import br.edu.ifsp.domain.entities.RegistroTreino;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
-public class RegistrarInicioTreinoUC {
+public class RegistrarFinalTreinoUC {
 
     private final RegistroTreinoDAO registroTreinoDAO;
 
-    public RegistrarInicioTreinoUC(RegistroTreinoDAO registroTreinoDAO) {
+    public RegistrarFinalTreinoUC(RegistroTreinoDAO registroTreinoDAO) {
         this.registroTreinoDAO = registroTreinoDAO;
     }
 
-    public RegistroTreino iniciarTreino(RegistroTreino registroTreino) {
+    public boolean finalizarTreino(RegistroTreino registroTreino) {
 
         Validator<RegistroTreino> validator = new RegistroTreinoValidator();
         Notification notification = validator.validar(registroTreino);
@@ -22,9 +22,9 @@ public class RegistrarInicioTreinoUC {
             throw new IllegalArgumentException(notification.mensagemDeErro());
         }
 
-        registroTreino.setEstadoRegistroTreino(EstadoRegistroTreino.INICIADO);
-        Integer id = registroTreinoDAO.create(registroTreino);
-
-        return registroTreinoDAO.findById(id).get();
+        registroTreino.setEstadoRegistroTreino(EstadoRegistroTreino.FINALIZADO);
+        return registroTreinoDAO.update(registroTreino);
     }
+
+
 }

@@ -22,6 +22,10 @@ public class CriarInstrutorUC {
             throw new IllegalArgumentException(notification.mensagemDeErro());
         }
 
+        if (notification.possuiErros()) {
+            throw new IllegalArgumentException(notification.mensagemDeErro());
+        }
+
         String nome = instrutor.getNome();
 
         if (instrutorDAO.findByAttribute("nome", nome).isPresent()) {

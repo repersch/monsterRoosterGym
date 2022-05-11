@@ -1,16 +1,11 @@
 package br.edu.ifsp.application.main;
 
-import br.edu.ifsp.application.repository.DatabaseBuilder;
-import br.edu.ifsp.application.repository.SqliteAlunoDAO;
-import br.edu.ifsp.application.repository.SqliteExercicioDAO;
-import br.edu.ifsp.application.repository.SqliteInstrutorDAO;
-import br.edu.ifsp.application.repository.SqliteRegistroTreinoDAO;
-import br.edu.ifsp.domain.entities.Aluno;
-import br.edu.ifsp.domain.entities.Exercicio;
-import br.edu.ifsp.domain.entities.GrupoMuscular;
-import br.edu.ifsp.domain.entities.Instrutor;
-import br.edu.ifsp.domain.entities.RegistroTreino;
-import br.edu.ifsp.domain.entities.Treino;
+import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
+import br.edu.ifsp.application.repository.dao.SqliteAlunoDAO;
+import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
+import br.edu.ifsp.application.repository.dao.SqliteInstrutorDAO;
+import br.edu.ifsp.application.repository.dao.SqliteRegistroTreinoDAO;
+import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.aluno.AlunoDAO;
 import br.edu.ifsp.domain.usecases.aluno.BuscarAlunoUC;
 import br.edu.ifsp.domain.usecases.aluno.CriarAlunoUC;
@@ -19,10 +14,13 @@ import br.edu.ifsp.domain.usecases.exercicio.*;
 import br.edu.ifsp.domain.usecases.instrutor.BuscarInstrutorUC;
 import br.edu.ifsp.domain.usecases.instrutor.CriarInstrutorUC;
 import br.edu.ifsp.domain.usecases.instrutor.InstrutorDAO;
+import br.edu.ifsp.domain.usecases.registroTreino.BuscarRegistroTreinoUC;
+import br.edu.ifsp.domain.usecases.registroTreino.RegistrarFinalTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
 
@@ -34,6 +32,8 @@ public class Main {
     public static BuscarInstrutorUC buscarInstrutorUC;
 
     public static RegistrarInicioTreinoUC registrarInicioTreinoUC;
+    public static RegistrarFinalTreinoUC registrarFinalTreinoUC;
+    public static BuscarRegistroTreinoUC buscarRegistroTreinoUC;
 
     public static CriarExercicioUC criarExercicioUC;
     public static BuscarExercicioUC buscarExercicioUC;
@@ -72,6 +72,17 @@ public class Main {
 
         System.out.println("Buscar por ID depois de atualizar: " + buscarAlunoUC.buscarPorId(1));
 
+        Aluno aluno3 = new Aluno("Paola Bracho", "145.987.204-41", "paola@mail.com",
+                "16985274535", "feminino", LocalDate.of(1985, 4, 15),
+                74.0, 1.56, "");
+
+        Aluno aluno4 = new Aluno("Jorjinho", "459.974.458-03", "jorjin@email.com",
+                "16996274856", "masculino", LocalDate.of(1993, 3, 26),
+                85.0, 1.87, "");
+
+        criarAlunoUC.salvar(aluno3);
+        criarAlunoUC.salvar(aluno4);
+
 
         System.out.println("-------------------- INSTRUTOR ---------------------");
 
@@ -90,13 +101,34 @@ public class Main {
 
         System.out.println("-------------------- Registro Treino ---------------------");
 
-        RegistroTreino registroTreino1 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(15), false, buscarAlunoUC.buscarPorCpf(aluno1.getCpf()).get());
-        RegistroTreino registroTreino2 = new RegistroTreino(LocalDate.now().minusDays(5), LocalDate.now().plusDays(30), false, buscarAlunoUC.buscarPorCpf(aluno2.getCpf()).get());
-        RegistroTreino registroTreino3 = new RegistroTreino(LocalDate.now().minusDays(3), LocalDate.now().plusDays(20), false, buscarAlunoUC.buscarPorCpf(aluno1.getCpf()).get());
+        RegistroTreino registroTreino1 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(15), EstadoRegistroTreino.INICIADO, buscarAlunoUC.buscarPorCpf(aluno1.getCpf()).get());
+        RegistroTreino registroTreino2 = new RegistroTreino(LocalDate.now().minusDays(5), LocalDate.now().plusDays(30), EstadoRegistroTreino.FINALIZADO, buscarAlunoUC.buscarPorCpf(aluno2.getCpf()).get());
+        RegistroTreino registroTreino3 = new RegistroTreino(LocalDate.now().minusDays(3), LocalDate.now().plusDays(20), EstadoRegistroTreino.INICIADO, buscarAlunoUC.buscarPorCpf(aluno1.getCpf()).get());
 
-        registrarInicioTreinoUC.salvar(registroTreino1);
-        registrarInicioTreinoUC.salvar(registroTreino2);
-        registrarInicioTreinoUC.salvar(registroTreino3);
+        System.out.println(registrarInicioTreinoUC.iniciarTreino(registroTreino1));
+        System.out.println(registrarInicioTreinoUC.iniciarTreino(registroTreino2));
+        System.out.println(registrarInicioTreinoUC.iniciarTreino(registroTreino3));
+
+        RegistroTreino registroTreino4 = new RegistroTreino(LocalDate.now().minusDays(7), LocalDate.now().plusDays(10), EstadoRegistroTreino.FINALIZADO, buscarAlunoUC.buscarPorCpf(aluno3.getCpf()).get());
+        RegistroTreino registroTreino5 = new RegistroTreino(LocalDate.now().minusDays(2), LocalDate.now().plusDays(3), EstadoRegistroTreino.INICIADO, buscarAlunoUC.buscarPorCpf(aluno2.getCpf()).get());
+        RegistroTreino registroTreino6 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(5), EstadoRegistroTreino.FINALIZADO, buscarAlunoUC.buscarPorCpf(aluno4.getCpf()).get());
+
+        System.out.println(registrarInicioTreinoUC.iniciarTreino(registroTreino4));
+        System.out.println(registrarInicioTreinoUC.iniciarTreino(registroTreino5));
+        System.out.println(registrarInicioTreinoUC.iniciarTreino(registroTreino6));
+
+        System.out.println(buscarRegistroTreinoUC.buscarTodos());
+
+        List<RegistroTreino> registroTreinoAluno1 = buscarRegistroTreinoUC.buscarPorAluno(1);
+        System.out.println(registroTreinoAluno1);
+
+        System.out.println(registrarFinalTreinoUC.finalizarTreino(buscarRegistroTreinoUC.buscarPorAluno(3).get(0)));
+        System.out.println(registrarFinalTreinoUC.finalizarTreino(buscarRegistroTreinoUC.buscarPorAluno(2).get(0)));
+
+        System.out.println(buscarRegistroTreinoUC.buscarPorAluno(buscarAlunoUC.buscarPorCpf(aluno3.getCpf()).get()));
+//        System.out.println(buscarRegistroTreinoUC.buscarPorId(registroTreino4.getId()));
+        System.out.println(buscarRegistroTreinoUC.buscarPorAluno(buscarAlunoUC.buscarPorCpf(aluno4.getCpf()).get()));
+
 
         System.out.println("-------------------- EXERCÍCIO ---------------------");
         Exercicio exercicio1 = new Exercicio(1, "Supino Reto", GrupoMuscular.PEITORAL, "Utilizar halteres", true);
@@ -142,6 +174,8 @@ public class Main {
 
         RegistroTreinoDAO registroTreinoDAO = new SqliteRegistroTreinoDAO();
         registrarInicioTreinoUC = new RegistrarInicioTreinoUC(registroTreinoDAO);
+        registrarFinalTreinoUC = new RegistrarFinalTreinoUC(registroTreinoDAO);
+        buscarRegistroTreinoUC = new BuscarRegistroTreinoUC(registroTreinoDAO);
 
         ExercicioDAO exercicioDAO = new SqliteExercicioDAO();
         criarExercicioUC = new CriarExercicioUC(exercicioDAO);

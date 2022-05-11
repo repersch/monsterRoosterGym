@@ -1,6 +1,6 @@
-package br.edu.ifsp.application.repository;
+package br.edu.ifsp.application.repository.utils;
 
-import br.edu.ifsp.domain.entities.GrupoMuscular;
+import br.edu.ifsp.application.repository.utils.ConnectionFactory;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -79,9 +79,9 @@ public class DatabaseBuilder {
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
         builder.append("inicio TEXT NOT NULL,\n");
         builder.append("fim TEXT,\n");
-        builder.append("finalizado INTEGER NOT NULL,\n");
-        builder.append("aluno INTEGER NOT NULL,\n");
-        builder.append("FOREIGN KEY(aluno) REFERENCES Aluno(id)\n");
+        builder.append("estado TEXT NOT NULL,\n");
+        builder.append("id_aluno INTEGER NOT NULL,\n");
+        builder.append("FOREIGN KEY(id_aluno) REFERENCES Aluno(id)\n");
         builder.append("); \n");
 
         System.out.println(builder.toString());
