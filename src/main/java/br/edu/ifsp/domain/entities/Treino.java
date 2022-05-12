@@ -39,10 +39,10 @@ public class Treino {
 
     @Override
     public String toString() {
-        return "Treino{" +
-                "id=" + getId() +
-                ", nome='" + getNome() + '\'' +
-                ", observacao='" + getObservacao() + '\'' +
-                '}';
+        return "\n\nTreino{" +
+                "\nid=" + getId() +
+                ", \nnome='" + getNome() + '\'' +
+                ", \nobservacao='" + getObservacao() + '\'' +
+                "}";
     }
 }
