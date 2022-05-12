@@ -36,6 +36,7 @@ public class DatabaseBuilder {
             statement.addBatch(createRegistroTreinoTable());
             statement.addBatch(createExercicioTable());
 //            statement.addBatch(createTransactionTable());
+            statement.addBatch(createTreinoTable());
             statement.executeBatch();
 
             System.out.println("Criando banco de dados...");
@@ -92,6 +93,17 @@ public class DatabaseBuilder {
         builder.append("grupo_muscular TEXT NOT NULL,\n");
         builder.append("descricao TEXT NOT NULL,\n");
         builder.append("em_uso INTEGER NOT NULL");
+        builder.append("); \n");
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
+    private String createTreinoTable() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE Treino(\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
+        builder.append("nome TEXT NOT NULL UNIQUE,\n");
+        builder.append("observacao TEXT NOT NULL");
         builder.append("); \n");
         System.out.println(builder.toString());
         return builder.toString();
