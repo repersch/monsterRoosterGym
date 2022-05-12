@@ -1,7 +1,6 @@
 package br.edu.ifsp.application.repository.utils;
 
-import br.edu.ifsp.application.repository.utils.ConnectionFactory;
-
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -10,45 +9,56 @@ import java.sql.Statement;
 public class DatabaseBuilder {
 
     public void buildDatabaseIfMissing() {
+        apagarBancoDeDados();
         if (isDatabaseMissing()) {
             System.out.println("Database is missing. Building database: \n");
-            buildTables();
+            criarTabelas();
         }
     }
 
     private boolean isDatabaseMissing() {
-        return !Files.exists(Paths.get("database.db"));
+        return !Files.exists(Paths.get("gym.db"));
+    }
+
+    private static void apagarBancoDeDados() {
+        System.out.println("Apagando banco de dados...");
+        try {
+            Files.deleteIfExists(Paths.get("gym.db"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // batch serve para executar várias sql de uma vez
-    private void buildTables() {
+    private void criarTabelas() {
         try (Statement statement = ConnectionFactory.createStatement()) {
-            statement.addBatch(createAlunoTable());
-            statement.addBatch(createInstrutorTable());
+            statement.addBatch(createUsuarioTable());
             statement.addBatch(createRegistroTreinoTable());
             statement.addBatch(createExercicioTable());
 //            statement.addBatch(createTransactionTable());
             statement.executeBatch();
 
-            System.out.println("Database successfully created.");
+            System.out.println("Criando banco de dados...");
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    private String createAlunoTable() {
+    private String createUsuarioTable() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("CREATE TABLE Aluno(\n");
+        builder.append("CREATE TABLE Usuario(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("nome TEXT NOT NULL, \n");
-        builder.append("cpf TEXT NOT NULL UNIQUE, \n");
         builder.append("email TEXT NOT NULL, \n");
-        builder.append("telefone TEXT NOT NULL, \n");
-        builder.append("genero TEXT NOT NULL, \n");
-        builder.append("data_nascimento DATE NOT NULL, \n");
-        builder.append("peso DOBLE NOT NULL, \n");
-        builder.append("altura DOUBLE NOT NULL, \n");
+        builder.append("senha TEXT NOT NULL, \n");
+        builder.append("isInstrutor INTEGER NOT NULL, \n");
+        builder.append("cpf TEXT, \n");
+        builder.append("telefone TEXT, \n");
+        builder.append("genero TEXT, \n");
+        builder.append("data_nascimento STRING, \n");
+        builder.append("peso DOBLE, \n");
+        builder.append("altura DOUBLE, \n");
         builder.append("observacao TEXT\n");
 //        builder.append("ultimoTreinoRealizado TEXT\n");
         builder.append("); \n");
@@ -57,20 +67,6 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-
-    private String createInstrutorTable() {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("CREATE TABLE Instrutor(\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
-        builder.append("nome TEXT NOT NULL,");
-        builder.append("email TEXT NOT NULL,");
-        builder.append("senha TEXT NOT NULL");
-        builder.append("); \n");
-
-        System.out.println(builder.toString());
-        return builder.toString();
-    }
 
     private String createRegistroTreinoTable() {
         StringBuilder builder = new StringBuilder();

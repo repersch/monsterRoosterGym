@@ -1,30 +1,24 @@
 package br.edu.ifsp.domain.entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
+public class Aluno extends Usuario {
 
-public class Aluno {
-    private Integer id;
-    private String nome;
     private String cpf;
-    private String email;
     private String telefone;
     private String genero;
     private LocalDate dataNascimento;
     private Double peso;
     private Double altura;
     private String observacoes;
-    private List<RegistroTreino> listaTreinos;
-//    private Treino ultimoTreinoRealizado;
+    private Treino ultimoTreinoRealizado;
 
     public Aluno() {
     }
 
-    public Aluno(String nome, String cpf, String email, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
-        this.nome = nome;
+    public Aluno(Integer id, String nome, String email, String senha, Boolean isInstrutor, String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
+        super(id, nome, email, senha, isInstrutor);
         this.cpf = cpf;
-        this.email = email;
         this.telefone = telefone;
         this.genero = genero;
         this.dataNascimento = dataNascimento;
@@ -34,34 +28,16 @@ public class Aluno {
 //        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
 
-
-    public Aluno(Integer id, String nome, String cpf, String email, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
-        this.id = id;
-        this.nome = nome;
+    public Aluno(String nome, String email, String senha, Boolean isInstrutor, String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
+        super(nome, email, senha, isInstrutor);
         this.cpf = cpf;
-        this.email = email;
         this.telefone = telefone;
         this.genero = genero;
         this.dataNascimento = dataNascimento;
         this.peso = peso;
         this.altura = altura;
         this.observacoes = observacoes;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+//        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
 
     public String getCpf() {
@@ -70,14 +46,6 @@ public class Aluno {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getTelefone() {
@@ -128,19 +96,25 @@ public class Aluno {
         this.observacoes = observacoes;
     }
 
+    public Treino getUltimoTreinoRealizado() {
+        return ultimoTreinoRealizado;
+    }
+
+    public void setUltimoTreinoRealizado(Treino ultimoTreinoRealizado) {
+        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
+    }
+
     @Override
     public String toString() {
-        return "Aluno{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", genero='" + genero + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", peso=" + peso +
-                ", altura=" + altura +
-                ", observacoes='" + observacoes + '\'' +
+        return "\n\nAluno{" +
+                "\ncpf='" + cpf + '\'' +
+                ", \ntelefone='" + telefone + '\'' +
+                ", \ngenero='" + genero + '\'' +
+                ", \ndataNascimento=" + dataNascimento +
+                ", \npeso=" + peso +
+                ", \naltura=" + altura +
+                ", \nobservacoes='" + observacoes + '\'' +
+                ", \nultimoTreinoRealizado=" + ultimoTreinoRealizado +
                 '}';
     }
 }

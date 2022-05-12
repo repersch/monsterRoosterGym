@@ -8,5 +8,5 @@ public class FichaTreino {
     private Boolean valido;
     private LocalDate dataInicio;
     private LocalDate validade;
-    private Instrutor instrutor;
+    private Usuario instrutor;
 }

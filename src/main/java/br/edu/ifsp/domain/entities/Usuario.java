@@ -1,26 +1,29 @@
 package br.edu.ifsp.domain.entities;
 
-public class Instrutor {
+public class Usuario {
 
     private Integer id;
     private String nome;
     private String email;
     private String senha;
+    private Boolean isInstrutor;
 
-    public Instrutor() {
+    public Usuario() {
     }
 
-    public Instrutor(Integer id, String nome, String email, String senha) {
+    public Usuario(Integer id, String nome, String email, String senha, Boolean isInstrutor) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.isInstrutor = isInstrutor;
     }
 
-    public Instrutor(String nome, String email, String senha) {
+    public Usuario(String nome, String email, String senha, Boolean isInstrutor) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.isInstrutor = isInstrutor;
     }
 
     public Integer getId() {
@@ -55,13 +58,22 @@ public class Instrutor {
         this.senha = senha;
     }
 
+    public Boolean getInstrutor() {
+        return isInstrutor;
+    }
+
+    public void setInstrutor(Boolean instrutor) {
+        isInstrutor = instrutor;
+    }
+
     @Override
     public String toString() {
-        return "Instrutor{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
+        return "\n\nUsuario{" +
+                "\nid=" + id +
+                ", \nnome='" + nome + '\'' +
+                ", \nemail='" + email + '\'' +
+                ", \nsenha='" + senha + '\'' +
+                ", \nisInstrutor=" + isInstrutor +
                 '}';
     }
 }

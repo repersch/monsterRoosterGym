@@ -1,21 +1,22 @@
 package br.edu.ifsp.domain.usecases.aluno;
 
 import br.edu.ifsp.domain.entities.Aluno;
+import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.utils.EntityNotFoundException;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
-public class EditarAlunoUC {
+public class EditarUsuarioUC {
 
-    private AlunoDAO alunoDAO;
+    private UsuarioDAO alunoDAO;
 
-    public EditarAlunoUC(AlunoDAO alunoDAO) {
+    public EditarUsuarioUC(UsuarioDAO alunoDAO) {
         this.alunoDAO = alunoDAO;
     }
 
     public boolean atualizar(Aluno aluno) {
 
-        Validator<Aluno> validator = new AlunoValidator();
+        Validator<Usuario> validator = new UsuarioValidator();
         Notification notificacao = validator.validar(aluno);
 
         if (notificacao.possuiErros()) {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static br.edu.ifsp.application.main.Main.buscarAlunoUC;
+import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
 
 public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
@@ -114,7 +114,7 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
     private RegistroTreino resultSetToEntity(ResultSet resultado) throws SQLException {
         int idAluno = resultado.getInt("id_aluno");
-        Aluno aluno = buscarAlunoUC.buscarPorId(idAluno).get();
+        Aluno aluno = (Aluno) buscarUsuarioUC.buscarPorId(idAluno).get();
 
         return new RegistroTreino(resultado.getInt("id"),
                 LocalDate.parse(resultado.getString("inicio")),
