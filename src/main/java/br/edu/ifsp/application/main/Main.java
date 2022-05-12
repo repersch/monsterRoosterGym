@@ -5,6 +5,7 @@ import br.edu.ifsp.application.repository.dao.SqliteRegistroTreinoDAO;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
 import br.edu.ifsp.domain.entities.Aluno;
+import br.edu.ifsp.domain.entities.Treino;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.aluno.BuscarUsuarioUC;
 import br.edu.ifsp.domain.usecases.aluno.CriarUsuarioUC;
@@ -15,6 +16,7 @@ import br.edu.ifsp.domain.usecases.registroTreino.BuscarRegistroTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarFinalTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
+import br.edu.ifsp.domain.usecases.treino.CriarTreinoUC;
 
 import java.time.LocalDate;
 
@@ -32,6 +34,8 @@ public class Main {
     public static BuscarExercicioUC buscarExercicioUC;
     public static EditarExercicioUC editarExercicioUC;
     public static DeletarExercicioUC deletarExercicioUC;
+
+    public static CriarTreinoUC criarTreinoUC;
 
     public static void main(String[] args) {
         System.out.println("Configurando INJECTIONS");
@@ -145,7 +149,15 @@ public class Main {
 //        deletarExercicioUC.remover(exercicio4);
 //        System.out.println("Buscar Todos Deleção por Exercicio: " + buscarExercicioUC.buscarTodos());
 //
-
+//        System.out.println("-------------------- TREINO ---------------------");
+//
+//        Treino treino1 = new Treino(1, "Rafael Costa", "algumaObs");
+//        Treino treino2 = new Treino(2, "Luiza Santos", "outraObs");
+//        Treino treino3 = new Treino(3, "Bernardo Moreira", "obsercacao");
+//
+//        criarTreinoUC.salvar(treino1);
+//        criarTreinoUC.salvar(treino2);
+//        criarTreinoUC.salvar(treino3);
 
 
 
@@ -170,6 +182,8 @@ public class Main {
         buscarExercicioUC = new BuscarExercicioUC(exercicioDAO);
         deletarExercicioUC = new DeletarExercicioUC(exercicioDAO);
 
+//        TreinoDAO treinoDAO = new SqliteTreinoDAO();
+//        criarTreinoUC = new CriarTreinoUC(treinoDAO);
 
 
     }
