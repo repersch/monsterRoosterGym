@@ -2,6 +2,7 @@ package br.edu.ifsp.application.main;
 
 import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
 import br.edu.ifsp.application.repository.dao.SqliteRegistroTreinoDAO;
+import br.edu.ifsp.application.repository.dao.SqliteTreinoDAO;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
 import br.edu.ifsp.domain.entities.Aluno;
@@ -16,7 +17,9 @@ import br.edu.ifsp.domain.usecases.registroTreino.BuscarRegistroTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarFinalTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
+import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
 import br.edu.ifsp.domain.usecases.treino.CriarTreinoUC;
+import br.edu.ifsp.domain.usecases.treino.TreinoDAO;
 
 import java.time.LocalDate;
 
@@ -36,6 +39,7 @@ public class Main {
     public static DeletarExercicioUC deletarExercicioUC;
 
     public static CriarTreinoUC criarTreinoUC;
+    public static BuscarTreinoUC buscarTreinoUC;
 
     public static void main(String[] args) {
         System.out.println("Configurando INJECTIONS");
@@ -149,16 +153,18 @@ public class Main {
 //        deletarExercicioUC.remover(exercicio4);
 //        System.out.println("Buscar Todos Deleção por Exercicio: " + buscarExercicioUC.buscarTodos());
 //
-//        System.out.println("-------------------- TREINO ---------------------");
-//
-//        Treino treino1 = new Treino(1, "Rafael Costa", "algumaObs");
-//        Treino treino2 = new Treino(2, "Luiza Santos", "outraObs");
-//        Treino treino3 = new Treino(3, "Bernardo Moreira", "obsercacao");
-//
-//        criarTreinoUC.salvar(treino1);
-//        criarTreinoUC.salvar(treino2);
-//        criarTreinoUC.salvar(treino3);
+        System.out.println("-------------------- TREINO ---------------------");
 
+        Treino treino1 = new Treino(1, "Rafael Costa", "algumaObs");
+        Treino treino2 = new Treino(2, "Luiza Santos", "outraObs");
+        Treino treino3 = new Treino(3, "Bernardo Moreira", "obsercacao");
+
+        criarTreinoUC.salvar(treino1);
+        criarTreinoUC.salvar(treino2);
+        criarTreinoUC.salvar(treino3);
+
+        // System.out.println("\n-----------Busca por Nome: " + buscarUsuarioUC.buscarPorNome(aluno2.getNome()));
+        System.out.println("\n-----------Buscar Todos Alunos: " + buscarTreinoUC.buscarTodos());
 
 
     }
@@ -182,10 +188,9 @@ public class Main {
         buscarExercicioUC = new BuscarExercicioUC(exercicioDAO);
         deletarExercicioUC = new DeletarExercicioUC(exercicioDAO);
 
-//        TreinoDAO treinoDAO = new SqliteTreinoDAO();
-//        criarTreinoUC = new CriarTreinoUC(treinoDAO);
-
-
+        TreinoDAO treinoDAO = new SqliteTreinoDAO();
+        criarTreinoUC = new CriarTreinoUC(treinoDAO);
+        buscarTreinoUC = new BuscarTreinoUC(treinoDAO);
     }
 
     private static void setupDatabase() {
