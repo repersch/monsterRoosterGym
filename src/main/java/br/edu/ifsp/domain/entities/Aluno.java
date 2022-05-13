@@ -107,7 +107,11 @@ public class Aluno extends Usuario {
     @Override
     public String toString() {
         return "\n\nAluno{" +
-                "\ncpf='" + cpf + '\'' +
+                "  \nnome='" + super.getNome() + '\'' +
+                ", \nemail='" + super.getEmail() + '\'' +
+                ", \nsenha='" + super.getSenha() + '\'' +
+                ", \nisInstrutor=" + super.getInstrutor() +
+                ", \ncpf='" + cpf + '\'' +
                 ", \ntelefone='" + telefone + '\'' +
                 ", \ngenero='" + genero + '\'' +
                 ", \ndataNascimento=" + dataNascimento +

@@ -108,6 +108,17 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
     @Override
     public boolean update(RegistroTreino registroTreino) {
+
+        String sql = "UPDATE Registro_Treino SET estado = ? WHERE id = ?";
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+
+            stmt.setString(1, registroTreino.getEstadoRegistroTreino().toString());
+            stmt.setInt(2, registroTreino.getId());
+            return stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

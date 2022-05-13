@@ -28,6 +28,7 @@ public class RegistroTreino {
         this.aluno = aluno;
     }
 
+
     public Integer getId() {
         return id;
     }

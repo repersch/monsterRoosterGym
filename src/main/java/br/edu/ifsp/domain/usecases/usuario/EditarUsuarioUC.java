@@ -1,4 +1,4 @@
-package br.edu.ifsp.domain.usecases.aluno;
+package br.edu.ifsp.domain.usecases.usuario;
 
 import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.Usuario;

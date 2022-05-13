@@ -3,7 +3,7 @@ package br.edu.ifsp.application.repository.dao;
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
 import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.Usuario;
-import br.edu.ifsp.domain.usecases.aluno.UsuarioDAO;
+import br.edu.ifsp.domain.usecases.usuario.UsuarioDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,8 +98,7 @@ public class SqliteUsuarioDAO implements UsuarioDAO {
             setDadosUsuario(usuario, stmt);
 
             stmt.setInt(12, usuario.getId());
-            stmt.execute();
-            return true;
+            return stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
