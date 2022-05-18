@@ -15,11 +15,10 @@ import java.util.Optional;
 public class SqliteTreinoDAO implements TreinoDAO {
     @Override
     public Integer create(Treino treino) {
-        String sql = "INSERT INTO Treino (id, nome, observacao) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Treino (nome, observacao) VALUES (?, ?)";
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setInt(1, treino.getId());
-            stmt.setString(2, treino.getNome());
-            stmt.setString(3, treino.getObservacao());
+            stmt.setString(1, treino.getNome());
+            stmt.setString(2, treino.getObservacao());
             stmt.executeUpdate();
             ResultSet resultado = stmt.getGeneratedKeys();
             return resultado.getInt(1);

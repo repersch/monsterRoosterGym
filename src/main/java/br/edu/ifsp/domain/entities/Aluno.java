@@ -106,19 +106,20 @@ public class Aluno extends Usuario {
 
     @Override
     public String toString() {
-        return "\n\nAluno{" +
-                "  \nnome='" + super.getNome() + '\'' +
-                ", \nemail='" + super.getEmail() + '\'' +
-                ", \nsenha='" + super.getSenha() + '\'' +
-                ", \nisInstrutor=" + super.getInstrutor() +
-                ", \ncpf='" + cpf + '\'' +
-                ", \ntelefone='" + telefone + '\'' +
-                ", \ngenero='" + genero + '\'' +
-                ", \ndataNascimento=" + dataNascimento +
-                ", \npeso=" + peso +
-                ", \naltura=" + altura +
-                ", \nobservacoes='" + observacoes + '\'' +
-                ", \nultimoTreinoRealizado=" + ultimoTreinoRealizado +
+        return "\nAluno{" +
+                "id=" + super.getId() +
+                ", nome='" + super.getNome() + '\'' +
+                ", email='" + super.getEmail() + '\'' +
+                ", senha='" + super.getSenha() + '\'' +
+                ", isInstrutor=" + super.getInstrutor() +
+                ", cpf='" + cpf + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", genero='" + genero + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", peso=" + peso +
+                ", altura=" + altura +
+                ", observacoes='" + observacoes + '\'' +
+                ", ultimoTreinoRealizado=" + ultimoTreinoRealizado +
                 '}';
     }
 }

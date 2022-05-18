@@ -9,7 +9,6 @@ public class CriarUsuarioUC {
 
     private UsuarioDAO usuarioDAO;
 
-
     public CriarUsuarioUC(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
     }

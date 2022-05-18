@@ -94,6 +94,7 @@ public class DatabaseBuilder {
         builder.append("descricao TEXT NOT NULL,\n");
         builder.append("em_uso INTEGER NOT NULL");
         builder.append("); \n");
+
         System.out.println(builder.toString());
         return builder.toString();
     }

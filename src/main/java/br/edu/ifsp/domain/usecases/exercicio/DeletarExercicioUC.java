@@ -14,13 +14,15 @@ public class DeletarExercicioUC {
         if (id == null || exercicioDAO.findById(id).isEmpty()) {
             throw new EntityNotFoundException("Exercício não encontrado.");
         }
+
+        if (exercicioDAO.findById(id).get().getEmUso()) {
+            throw new IllegalArgumentException("Exercício está em uso e não pode ser excluído.");
+        }
+
         return exercicioDAO.deleteById(id);
     }
 
     public boolean remover(Exercicio exercicio) {
-        if (exercicio == null || exercicioDAO.findById(exercicio.getId()).isEmpty()) {
-            throw new EntityNotFoundException("Exercício não encontrado.");
-        }
-        return exercicioDAO.delete(exercicio);
+        return remover(exercicio.getId());
     }
 }

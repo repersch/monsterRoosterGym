@@ -52,19 +52,7 @@ public class SqliteExercicioDAO implements ExercicioDAO {
 
     @Override
     public Optional<Exercicio> findById(Integer id) {
-        String sql = "SELECT * FROM Exercicio WHERE id = ?";
-        Exercicio exercicio = null;
-
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setInt(1, id);
-            ResultSet resultado = stmt.executeQuery();
-            if (resultado.next()) {
-                exercicio = resultSetToEntity(resultado);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(exercicio);
+        return findByAttribute("id", String.valueOf(id));
     }
 
     @Override

@@ -71,7 +71,7 @@ public class RegistroTreino {
 
     @Override
     public String toString() {
-        return "RegistroTreino{" +
+        return "\nRegistroTreino{" +
                 "id=" + id +
                 ", inicio=" + inicio +
                 ", fim=" + fim +

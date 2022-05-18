@@ -19,6 +19,7 @@ public class EditarExercicioUC {
         if (notificacao.possuiErros()) {
             throw  new IllegalArgumentException(notificacao.mensagemDeErro());
         }
+
         Integer id = exercicio.getId();
 
         if (exercicioDAO.findById(id).isEmpty()) {

@@ -68,12 +68,12 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "\n\nUsuario{" +
-                "\nid=" + id +
-                ", \nnome='" + nome + '\'' +
-                ", \nemail='" + email + '\'' +
-                ", \nsenha='" + senha + '\'' +
-                ", \nisInstrutor=" + isInstrutor +
+        return "\nUsuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", isInstrutor=" + isInstrutor +
                 '}';
     }
 }
