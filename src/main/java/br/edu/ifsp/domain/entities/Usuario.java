@@ -7,23 +7,26 @@ public class Usuario {
     private String email;
     private String senha;
     private Boolean isInstrutor;
+    private Aluno aluno;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nome, String email, String senha, Boolean isInstrutor) {
+    public Usuario(Integer id, String nome, String email, String senha, Boolean isInstrutor, Aluno aluno) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.isInstrutor = isInstrutor;
+        this.aluno = aluno;
     }
 
-    public Usuario(String nome, String email, String senha, Boolean isInstrutor) {
+    public Usuario(String nome, String email, String senha, Boolean isInstrutor, Aluno aluno) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.isInstrutor = isInstrutor;
+        this.aluno = aluno;
     }
 
     public Integer getId() {
@@ -66,6 +69,14 @@ public class Usuario {
         isInstrutor = instrutor;
     }
 
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
     @Override
     public String toString() {
         return "\nUsuario{" +
@@ -74,6 +85,7 @@ public class Usuario {
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 ", isInstrutor=" + isInstrutor +
+                ", aluno=" + ((aluno != null) ? aluno.toString() : null) +
                 '}';
     }
 }

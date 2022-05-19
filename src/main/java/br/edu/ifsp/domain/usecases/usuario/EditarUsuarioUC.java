@@ -14,21 +14,21 @@ public class EditarUsuarioUC {
         this.alunoDAO = alunoDAO;
     }
 
-    public boolean atualizar(Aluno aluno) {
+    public boolean atualizar(Usuario usuario) {
 
         Validator<Usuario> validator = new UsuarioValidator();
-        Notification notificacao = validator.validar(aluno);
+        Notification notificacao = validator.validar(usuario);
 
         if (notificacao.possuiErros()) {
            throw  new IllegalArgumentException(notificacao.mensagemDeErro());
         }
 
-        Integer id = aluno.getId();
+        Integer id = usuario.getId();
 
         if (alunoDAO.findById(id).isEmpty()) {
             throw new EntityNotFoundException("Aluno não encontrado.");
         }
 
-        return alunoDAO.update(aluno);
+        return alunoDAO.update(usuario);
     }
 }

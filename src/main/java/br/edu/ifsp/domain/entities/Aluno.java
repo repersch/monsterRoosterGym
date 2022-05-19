@@ -2,7 +2,7 @@ package br.edu.ifsp.domain.entities;
 
 import java.time.LocalDate;
 
-public class Aluno extends Usuario {
+public class Aluno {
 
     private String cpf;
     private String telefone;
@@ -16,20 +16,7 @@ public class Aluno extends Usuario {
     public Aluno() {
     }
 
-    public Aluno(Integer id, String nome, String email, String senha, Boolean isInstrutor, String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
-        super(id, nome, email, senha, isInstrutor);
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.genero = genero;
-        this.dataNascimento = dataNascimento;
-        this.peso = peso;
-        this.altura = altura;
-        this.observacoes = observacoes;
-//        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
-    }
-
-    public Aluno(String nome, String email, String senha, Boolean isInstrutor, String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
-        super(nome, email, senha, isInstrutor);
+    public Aluno(String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
         this.cpf = cpf;
         this.telefone = telefone;
         this.genero = genero;
@@ -106,13 +93,8 @@ public class Aluno extends Usuario {
 
     @Override
     public String toString() {
-        return "\nAluno{" +
-                "id=" + super.getId() +
-                ", nome='" + super.getNome() + '\'' +
-                ", email='" + super.getEmail() + '\'' +
-                ", senha='" + super.getSenha() + '\'' +
-                ", isInstrutor=" + super.getInstrutor() +
-                ", cpf='" + cpf + '\'' +
+        return "Aluno{" +
+                "cpf='" + cpf + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", genero='" + genero + '\'' +
                 ", dataNascimento=" + dataNascimento +

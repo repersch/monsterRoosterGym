@@ -1,9 +1,9 @@
 package br.edu.ifsp.application.repository.dao;
 
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
-import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.EstadoRegistroTreino;
 import br.edu.ifsp.domain.entities.RegistroTreino;
+import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
 
 import java.sql.PreparedStatement;
@@ -27,7 +27,7 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
             stmt.setString(1, registroTreino.getInicio().toString());
             stmt.setString(2, registroTreino.getFim().toString());
             stmt.setString(3, registroTreino.getEstadoRegistroTreino().name());
-            stmt.setInt(4, registroTreino.getAluno().getId());
+            stmt.setInt(4, registroTreino.getUsuario().getId());
 
             stmt.execute();
             ResultSet resultado = stmt.getGeneratedKeys();
@@ -125,7 +125,7 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
     private RegistroTreino resultSetToEntity(ResultSet resultado) throws SQLException {
         int idAluno = resultado.getInt("id_aluno");
-        Aluno aluno = (Aluno) buscarUsuarioUC.buscarPorId(idAluno).get();
+        Usuario aluno = buscarUsuarioUC.buscarPorId(idAluno).get();
 
         return new RegistroTreino(resultado.getInt("id"),
                 LocalDate.parse(resultado.getString("inicio")),
