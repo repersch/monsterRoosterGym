@@ -29,7 +29,7 @@ public class SqliteTreinoDAO implements TreinoDAO {
         }
         @Override
         public Optional<Treino> findByAttribute(String attribute, String key) {
-            String sql = "SELECT * FROM Treino WHERE " + attribute + " = ?" + key;
+            String sql = "SELECT * FROM Treino WHERE " + attribute + " = ?";
             Treino treino = null;
 
             try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {

@@ -177,16 +177,16 @@ public class Main {
 
         System.out.println("\n\n-------------------- TREINO ---------------------");
 
-//        Treino treino1 = new Treino("Rafael Costa", "algumaObs");
-//        Treino treino2 = new Treino("Luiza Santos", "outraObs");
-//        Treino treino3 = new Treino("Bernardo Moreira", "obsercacao");
-//
-//        criarTreinoUC.salvar(treino1);
-//        criarTreinoUC.salvar(treino2);
-//        criarTreinoUC.salvar(treino3);
-//
-//        System.out.println("\n---------------Busca por Nome: " + buscarTreinoUC.buscarPorNome(treino2.getNome()));
-//        System.out.println("\n---------------Buscar Todos Alunos: " + buscarTreinoUC.buscarTodos());
+        Treino treino1 = new Treino("Treino A", "Treino de segunda e quinta");
+        Treino treino2 = new Treino("Treino B", "Treino de terça e sexta");
+        Treino treino3 = new Treino("Treino C", "Treino de quarta e sábado");
+
+        criarTreinoUC.salvar(treino1);
+        criarTreinoUC.salvar(treino2);
+        criarTreinoUC.salvar(treino3);
+
+        System.out.println("\n---------------Busca por Nome: " + buscarTreinoUC.buscarPorNome(treino2.getNome()));
+        System.out.println("\n---------------Buscar Todos Treinos: " + buscarTreinoUC.buscarTodos());
 
     }
 
