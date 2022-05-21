@@ -48,10 +48,10 @@ public class Treino {
 
     @Override
     public String toString() {
-        return "\n\nTreino{" +
-                "\nid=" + getId() +
-                ", \nnome='" + getNome() + '\'' +
-                ", \nobservacao='" + getObservacao() + '\'' +
-                "}";
+        return "\nTreino{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", observacao='" + observacao + '\'' +
+                '}';
     }
 }

@@ -9,4 +9,8 @@ public interface RegistroTreinoDAO extends DAO<RegistroTreino, Integer> {
 
     List<RegistroTreino> findByIdAluno(Integer id_aluno);
 
+    List<RegistroTreino> findByIdTreino(Integer id_treino);
+
+    List<RegistroTreino> findByAttribute(String atributo, Integer chave);
+
 }

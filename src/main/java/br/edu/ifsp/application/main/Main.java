@@ -6,6 +6,7 @@ import br.edu.ifsp.application.repository.dao.SqliteTreinoDAO;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
 import br.edu.ifsp.domain.entities.*;
+import br.edu.ifsp.domain.usecases.autenticar.AutenticarUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.EditarUsuarioUC;
@@ -40,6 +41,8 @@ public class Main {
     public static CriarTreinoUC criarTreinoUC;
     public static BuscarTreinoUC buscarTreinoUC;
 
+    public static AutenticarUC autenticarUC;
+
     public static void main(String[] args) {
         System.out.println("Configurando INJECTIONS");
         configureInjection();
@@ -50,49 +53,54 @@ public class Main {
 
     private static void populateFakeDatabase() {
 
-        System.out.println("--------------- TESTES DE USUÁRIO - ALUNO ---------------\n");
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("--------------- TESTES DE USUÁRIO - ALUNO ------------------");
+        System.out.println("-----------------------------------------------------------\n");
 
         Usuario aluno1 = new Usuario("Renata Persch", "renata@mail.com", "senha", false, new Aluno("366.923.004-77",
                 "16985239632", "feminino", LocalDate.of(1990, 10, 30),
-                68.5, 1.76, ""));
+                68.5, 1.76, null, null));
 
         Usuario aluno2 = new Usuario("Hermione Granger", "mione@email.com", "senha", false, new Aluno("458.913.074-85",
                 "16996217598", "feminino", LocalDate.of(1992, 7, 13),
-                65.0, 1.62, "Alergica"));
+                65.0, 1.62, "Alergica", null));
 
         criarUsuarioUC.salvar(aluno1);
         criarUsuarioUC.salvar(aluno2);
+
 
         System.out.println("\n-----------Busca por Nome: " + buscarUsuarioUC.buscarPorNome(aluno2.getNome()));
         System.out.println("\n-----------Buscar por Id: " + buscarUsuarioUC.buscarPorId(1));
 
         editarUsuarioUC.atualizar(new Usuario(1,"Renata Persch Camacho", "renata_persch@mail.com", "senha",
                 false, new Aluno("366.923.004-77", "16985239632", "feminino", LocalDate.of(1990, 10, 30),
-                68.5, 1.76, "Cansada")));
+                68.5, 1.76, "Cansada", null)));
 
         System.out.println("\n-----------Buscar por ID depois de atualizar: " + buscarUsuarioUC.buscarPorId(1));
 
         Usuario aluno3 = new Usuario("Paola Bracho", "paola@mail.com", "senha", false, (new Aluno("145.987.204-41",
                 "16985274535", "feminino", LocalDate.of(1985, 4, 15),
-                74.0, 1.56, "")));
+                74.0, 1.56, null, null)));
 
         Usuario aluno4 = new Usuario("Jorjinho", "jorjin@email.com", "senha", false, new Aluno("459.974.458-03",
                 "16996274856", "masculino", LocalDate.of(1993, 3, 26),
-                85.0, 1.87, ""));
+                85.0, 1.87, null, null));
 
         criarUsuarioUC.salvar(aluno3);
         criarUsuarioUC.salvar(aluno4);
 
         Usuario aluno5 = new Usuario("Ana Maria", "jorjin@email.com", "senha", false, new Aluno("459.974.458-03",
                 "169955484856", "feminino", LocalDate.of(1995, 10, 11),
-                74.0, 1.66, ""));
+                74.0, 1.66, null, null));
 
         System.out.println("\n-----------Buscar Todos Alunos: " + buscarUsuarioUC.buscarTodosAlunos());
 
 //        System.out.println("---------------Testando erro: ");
 //        criarUsuarioUC.salvar(aluno5);
 
-        System.out.println("\n\n--------------- TESTES DE USUÁRIO - INSTRUTOR ---------------\n");
+        System.out.println("\n\n------------------------------------------------------------");
+        System.out.println("--------------- TESTES DE USUÁRIO - INSTRUTOR ---------------");
+        System.out.println("-------------------------------------------------------------\n");
 
         Usuario instrutor1 = new Usuario("Marcio SalvaVidas", "marcio@mail.com", "senha", true, null);
         Usuario instrutor2 = new Usuario("Guillermo Presegura", "gui@mail.com", "senha", true, null);
@@ -104,47 +112,30 @@ public class Main {
         System.out.println("\n---------------Buscar por nome: " + buscarUsuarioUC.buscarPorNome(instrutor1.getNome()));
         System.out.println("\n---------------Buscar por id: " + buscarUsuarioUC.buscarPorId(6));
 
-        System.out.println("\n\n--------------- TESTES DE USUÁRIO E INSTRUTOR ---------------\n");
+
+        System.out.println("\n\n-----------------------------------------------------------------");
+        System.out.println("--------------- TESTES DE USUÁRIO E INSTRUTOR ---------------------");
+        System.out.println("-----------------------------------------------------------------\n");
+
 
         System.out.println("\n---------------Buscando todos os ALUNOS: " + buscarUsuarioUC.buscarTodosAlunos());
         System.out.println("\n---------------Buscando todos os INSTRUTORES: " + buscarUsuarioUC.buscarTodosInstrutores());
 
 
+        System.out.println("\n\n--------------- TESTES DE AUTENTICAÇÃO ---------------\n");
 
-        System.out.println("\n\n-------------------- REGISTRO TREINO ---------------------");
+        System.out.println("\n---------------Autenticando aluno 2: " + autenticarUC.autenticar(aluno2.getEmail(), "senha"));
 
+        System.out.println("\n---------------Autenticando instrutor 2: " + autenticarUC.autenticar(instrutor1.getEmail(), "senha"));
 
-        RegistroTreino registroTreino1 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(15), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorId(1).get());
-        RegistroTreino registroTreino2 = new RegistroTreino(LocalDate.now().minusDays(5), LocalDate.now().plusDays(30), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get());
-        RegistroTreino registroTreino3 = new RegistroTreino(LocalDate.now().minusDays(3), LocalDate.now().plusDays(20), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorNome("Renata Persch Camacho").get());
-
-
-        System.out.println("\n---------------Registro treino 1: " + registrarInicioTreinoUC.iniciarTreino(registroTreino1));
-        System.out.println("\n---------------Registro treino 2: " + registrarInicioTreinoUC.iniciarTreino(registroTreino2));
-        System.out.println("\n---------------Registro treino 3: " + registrarInicioTreinoUC.iniciarTreino(registroTreino3));
-
-        RegistroTreino registroTreino4 = new RegistroTreino(LocalDate.now().minusDays(7), LocalDate.now().plusDays(10), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno3.getAluno().getCpf()).get());
-        RegistroTreino registroTreino5 = new RegistroTreino(LocalDate.now().minusDays(2), LocalDate.now().plusDays(3), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get());
-        RegistroTreino registroTreino6 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(5), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno4.getAluno().getCpf()).get());
-
-        System.out.println("\n---------------Registro Treino 4: " + registrarInicioTreinoUC.iniciarTreino(registroTreino4));
-        System.out.println("\n---------------Registro Treino 5: " + registrarInicioTreinoUC.iniciarTreino(registroTreino5));
-        System.out.println("\n---------------Registro Treino 6: " + registrarInicioTreinoUC.iniciarTreino(registroTreino6));
-
-        System.out.println("\n---------------Todos os Registro Treino: " + buscarRegistroTreinoUC.buscarTodos());
-
-//        List<RegistroTreino> registroTreinoAluno2 = buscarRegistroTreinoUC.buscarPorAluno(2);
-//        System.out.println("\n---------------Registros treino do Aluno 2: " + registroTreinoAluno2);
-
-//        System.out.println("\n---------------Registrar final treino do aluno 3: " + registrarFinalTreinoUC.finalizarTreino(buscarRegistroTreinoUC.buscarPorAluno(3).get(0)));
-//        System.out.println("\n---------------Registrar final treino do aluno 2: " + registrarFinalTreinoUC.finalizarTreino(buscarRegistroTreinoUC.buscarPorAluno(2).get(0)));
-
-//        System.out.println("\n---------------Registro treino do aluno 3: " + buscarRegistroTreinoUC.buscarPorAluno((Aluno) buscarUsuarioUC.buscarPorCpf(aluno3.getCpf()).get()));
-        System.out.println("\n---------------Registro treino 2: " + buscarRegistroTreinoUC.buscarPorId(2));
-//        System.out.println("\n---------------Registro treino do aluno 4: " + buscarRegistroTreinoUC.buscarPorAluno((Aluno) buscarUsuarioUC.buscarPorCpf(aluno4.getCpf()).get()));
+//        System.out.println("---------------Testando erro: ");
+//        System.out.println("\n---------------Autenticação com email errado: " + autenticarUC.autenticar("renata@mail.comm", "senha"));
+//        System.out.println("\n---------------Autenticação com senha errada: " + autenticarUC.autenticar(aluno4.getEmail(), "senhaa"));
 
 
-        System.out.println("\n\n-------------------- EXERCÍCIOS ---------------------");
+        System.out.println("\n\n-----------------------------------------------------------------");
+        System.out.println("------------------------- EXERCÍCIOS --------------------------");
+        System.out.println("-----------------------------------------------------------------\n");
 
 
         Exercicio exercicio1 = new Exercicio("Supino Reto", GrupoMuscular.PEITORAL, "Utilizar halteres", true);
@@ -175,7 +166,9 @@ public class Main {
         System.out.println("\n---------------Buscar Todos depois de excluir Exercicio 4: " + buscarExercicioUC.buscarTodos());
 
 
-        System.out.println("\n\n-------------------- TREINO ---------------------");
+        System.out.println("\n\n-----------------------------------------------------------------");
+        System.out.println("---------------------------- TREINO -----------------------------");
+        System.out.println("-------------------------------------------------------------------\n");
 
         Treino treino1 = new Treino("Treino A", "Treino de segunda e quinta");
         Treino treino2 = new Treino("Treino B", "Treino de terça e sexta");
@@ -185,18 +178,55 @@ public class Main {
         criarTreinoUC.salvar(treino2);
         criarTreinoUC.salvar(treino3);
 
+        System.out.println("\n---------------Busca por Id: " + buscarTreinoUC.buscarPorId(3));
         System.out.println("\n---------------Busca por Nome: " + buscarTreinoUC.buscarPorNome(treino2.getNome()));
         System.out.println("\n---------------Buscar Todos Treinos: " + buscarTreinoUC.buscarTodos());
+
+
+        System.out.println("\n\n-----------------------------------------------------------------");
+        System.out.println("------------------------ REGISTRO TREINO --------------------------");
+        System.out.println("-------------------------------------------------------------------\n");
+
+
+        RegistroTreino registroTreino1 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(15), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorId(1).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
+        RegistroTreino registroTreino2 = new RegistroTreino(LocalDate.now().minusDays(5), LocalDate.now().plusDays(30), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino3.getNome()).get());
+        RegistroTreino registroTreino3 = new RegistroTreino(LocalDate.now().minusDays(3), LocalDate.now().plusDays(20), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorNome("Renata Persch Camacho").get(), buscarTreinoUC.buscarPorNome(treino1.getNome()).get());
+
+
+        System.out.println("\n---------------Registro treino 1: " + registrarInicioTreinoUC.iniciarTreino(registroTreino1));
+        System.out.println("\n---------------Registro treino 2: " + registrarInicioTreinoUC.iniciarTreino(registroTreino2));
+        System.out.println("\n---------------Registro treino 3: " + registrarInicioTreinoUC.iniciarTreino(registroTreino3));
+
+        RegistroTreino registroTreino4 = new RegistroTreino(LocalDate.now().minusDays(7), LocalDate.now().plusDays(10), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno3.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino1.getNome()).get());
+        RegistroTreino registroTreino5 = new RegistroTreino(LocalDate.now().minusDays(2), LocalDate.now().plusDays(3), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino3.getNome()).get());
+        RegistroTreino registroTreino6 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(5), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno4.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
+
+        System.out.println("\n---------------Registro Treino 4: " + registrarInicioTreinoUC.iniciarTreino(registroTreino4));
+        System.out.println("\n---------------Registro Treino 5: " + registrarInicioTreinoUC.iniciarTreino(registroTreino5));
+        System.out.println("\n---------------Registro Treino 6: " + registrarInicioTreinoUC.iniciarTreino(registroTreino6));
+
+        System.out.println("\n---------------Todos os Registro Treino: " + buscarRegistroTreinoUC.buscarTodos());
+
+        List<RegistroTreino> registroTreinoAluno2 = buscarRegistroTreinoUC.buscarPorAluno(2);
+        System.out.println("\n---------------Registros treino do Aluno 2: " + registroTreinoAluno2);
+
+        System.out.println("\n---------------Registrar final treino do aluno 3: " + registrarFinalTreinoUC.finalizarTreino(buscarRegistroTreinoUC.buscarPorAluno(3).get(0)));
+        System.out.println("\n---------------Registrar final treino do aluno 2: " + registrarFinalTreinoUC.finalizarTreino(buscarRegistroTreinoUC.buscarPorAluno(2).get(0)));
+
+        System.out.println("\n---------------Registro treino do aluno 3: " + buscarRegistroTreinoUC.buscarPorAluno(buscarUsuarioUC.buscarPorCpf(aluno3.getAluno().getCpf()).get()));
+        System.out.println("\n---------------Registro treino 2: " + buscarRegistroTreinoUC.buscarPorId(2));
+        System.out.println("\n---------------Registro treino do aluno 4: " + buscarRegistroTreinoUC.buscarPorAluno(buscarUsuarioUC.buscarPorCpf(aluno4.getAluno().getCpf()).get()));
+
 
     }
 
 
     private static void configureInjection() {
 
-        UsuarioDAO alunoDAO = new SqliteUsuarioDAO();
-        criarUsuarioUC = new CriarUsuarioUC(alunoDAO);
-        editarUsuarioUC = new EditarUsuarioUC(alunoDAO);
-        buscarUsuarioUC = new BuscarUsuarioUC(alunoDAO);
+        UsuarioDAO usuarioDAO = new SqliteUsuarioDAO();
+        criarUsuarioUC = new CriarUsuarioUC(usuarioDAO);
+        editarUsuarioUC = new EditarUsuarioUC(usuarioDAO);
+        buscarUsuarioUC = new BuscarUsuarioUC(usuarioDAO);
 
         RegistroTreinoDAO registroTreinoDAO = new SqliteRegistroTreinoDAO();
         registrarInicioTreinoUC = new RegistrarInicioTreinoUC(registroTreinoDAO);
@@ -212,6 +242,8 @@ public class Main {
         TreinoDAO treinoDAO = new SqliteTreinoDAO();
         criarTreinoUC = new CriarTreinoUC(treinoDAO);
         buscarTreinoUC = new BuscarTreinoUC(treinoDAO);
+
+        autenticarUC = new AutenticarUC(usuarioDAO);
     }
 
     private static void setupDatabase() {

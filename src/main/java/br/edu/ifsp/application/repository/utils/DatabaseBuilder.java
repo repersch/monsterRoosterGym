@@ -60,8 +60,8 @@ public class DatabaseBuilder {
         builder.append("data_nascimento STRING, \n");
         builder.append("peso DOBLE, \n");
         builder.append("altura DOUBLE, \n");
-        builder.append("observacao TEXT\n");
-//        builder.append("ultimoTreinoRealizado TEXT\n");
+        builder.append("observacao TEXT,\n");
+        builder.append("id_treino INTEGER\n");
         builder.append("); \n");
 
         System.out.println(builder.toString());
@@ -78,7 +78,9 @@ public class DatabaseBuilder {
         builder.append("fim TEXT,\n");
         builder.append("estado TEXT NOT NULL,\n");
         builder.append("id_aluno INTEGER NOT NULL,\n");
+        builder.append("id_treino INTEGER NOT NULL,\n");
         builder.append("FOREIGN KEY(id_aluno) REFERENCES Aluno(id)\n");
+        builder.append("FOREIGN KEY(id_treino) REFERENCES Treino(id)\n");
         builder.append("); \n");
 
         System.out.println(builder.toString());

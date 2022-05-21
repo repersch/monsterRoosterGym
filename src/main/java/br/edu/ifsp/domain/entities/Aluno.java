@@ -16,7 +16,7 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
+    public Aluno(String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes, Treino ultimoTreinoRealizado) {
         this.cpf = cpf;
         this.telefone = telefone;
         this.genero = genero;
@@ -24,7 +24,7 @@ public class Aluno {
         this.peso = peso;
         this.altura = altura;
         this.observacoes = observacoes;
-//        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
+        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
 
     public String getCpf() {
