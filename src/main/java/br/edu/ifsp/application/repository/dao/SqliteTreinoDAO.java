@@ -2,7 +2,9 @@ package br.edu.ifsp.application.repository.dao;
 
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
 import br.edu.ifsp.domain.entities.Exercicio;
+import br.edu.ifsp.domain.entities.FichaTreino;
 import br.edu.ifsp.domain.entities.Treino;
+import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.treino.TreinoDAO;
 
 import java.sql.PreparedStatement;
@@ -12,14 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static br.edu.ifsp.application.main.Main.buscarFichaTreinoUC;
+import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
+
 public class SqliteTreinoDAO implements TreinoDAO {
 
     @Override
     public Integer create(Treino treino) {
-        String sql = "INSERT INTO Treino (nome, observacao) VALUES (?, ?)";
+        String sql = "INSERT INTO Treino (nome, observacao, id_ficha_treino) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, treino.getNome());
             stmt.setString(2, treino.getObservacao());
+            stmt.setInt(3, treino.getFichaTreino().getId());
             stmt.executeUpdate();
             ResultSet resultado = stmt.getGeneratedKeys();
             return resultado.getInt(1);
@@ -82,12 +88,14 @@ public class SqliteTreinoDAO implements TreinoDAO {
 
     @Override
     public boolean update (Treino treino){
-        String sql = "UPDATE Treino SET nome = ?, observacao = ? WHERE id = ?";
+        String sql = "UPDATE Treino SET nome = ?, observacao = ?, id_ficha_treino = ?" +
+                " WHERE id = ?";
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, treino.getNome());
             stmt.setString(2, treino.getObservacao());
-            stmt.setInt(3, treino.getId());
+            stmt.setInt(3, treino.getFichaTreino().getId());
+            stmt.setInt(4, treino.getId());
             stmt.execute();
             return true;
         } catch (SQLException e) {
@@ -97,10 +105,13 @@ public class SqliteTreinoDAO implements TreinoDAO {
     }
 
     private Treino resultSetToEntity(ResultSet resultado) throws SQLException {
+        Integer id_ficha_treino = resultado.getInt("id_ficha_treino");
+        FichaTreino fichaTreino = buscarFichaTreinoUC.buscarPorId(id_ficha_treino).get();
         return new Treino(
                 resultado.getInt("id"),
                 resultado.getString("nome"),
-                resultado.getString("observacao")
+                resultado.getString("observacao"),
+                fichaTreino
         );
     }
 }

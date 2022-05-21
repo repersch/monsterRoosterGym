@@ -1,25 +1,29 @@
 package br.edu.ifsp.domain.entities;
 
+import java.util.List;
+
 public class Treino {
 
     private Integer id;
     private String nome;
     private String observacao;
-    //private List<ExercicioTreino> exerciciosTreino;
+    private FichaTreino fichaTreino;
 
 
     public Treino() {
     }
 
-    public Treino(String nome, String observacao) {
+    public Treino(String nome, String observacao, FichaTreino fichaTreino) {
         this.nome = nome;
         this.observacao = observacao;
+        this.fichaTreino = fichaTreino;
     }
 
-    public Treino(Integer id, String nome, String observacao) {
+    public Treino(Integer id, String nome, String observacao, FichaTreino fichaTreino) {
         this.id = id;
         this.nome = nome;
         this.observacao = observacao;
+        this.fichaTreino = fichaTreino;
     }
 
     public Integer getId() {
@@ -46,6 +50,13 @@ public class Treino {
         this.observacao = observacao;
     }
 
+    public FichaTreino getFichaTreino() {
+        return fichaTreino;
+    }
+
+    public void setFichaTreino(FichaTreino fichaTreino) {
+        this.fichaTreino = fichaTreino;
+    }
 
     @Override
     public String toString() {
@@ -53,6 +64,7 @@ public class Treino {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", observacao='" + observacao + '\'' +
+                ", fichaTreino=" + fichaTreino +
                 '}';
     }
 }
