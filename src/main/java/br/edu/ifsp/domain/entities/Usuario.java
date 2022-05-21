@@ -79,13 +79,13 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "\nUsuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                ", isInstrutor=" + isInstrutor +
-                ", aluno=" + ((aluno != null) ? aluno.toString() : null) +
-                '}';
+        return "\nUsuário: [" +
+                "ID = " + id +
+                ", Nome = '" + nome + '\'' +
+                ", E-mail = '" + email + '\'' +
+                ", Senha = '" + senha + '\'' +
+                ", É Instrutor = " + isInstrutor +
+                ", Aluno = " + ((aluno != null) ? aluno.toString() : null) +
+                ']';
     }
 }

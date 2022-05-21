@@ -81,14 +81,14 @@ public class RegistroTreino {
 
     @Override
     public String toString() {
-        return "\nRegistroTreino{" +
-                "id=" + id +
-                ", inicio=" + inicio +
-                ", fim=" + fim +
-                ", estadoRegistroTreino=" + estadoRegistroTreino +
-                ", usuario=" + usuario +
-                ", ultimoTreinoRealizado=" + ultimoTreinoRealizado +
-                '}';
+        return "\nRegistroTreino: [" +
+                "ID = " + id +
+                ", Inicio = " + inicio +
+                ", Fim = " + fim +
+                ", EstadoRegistroTreino = " + estadoRegistroTreino +
+                ", Nome do aluno = " + usuario.getNome() +
+                ", Nome do ultimoTreinoRealizado = " + ultimoTreinoRealizado.getNome() +
+                ']';
     }
 }
 

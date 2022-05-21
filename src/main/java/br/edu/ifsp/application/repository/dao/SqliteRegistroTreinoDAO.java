@@ -55,7 +55,7 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
             stmt.setInt(1, key);
             ResultSet resultado = stmt.executeQuery();
 
-            if (resultado.next()) {
+            while (resultado.next()) {
                 registrosTreino.add(resultSetToEntity(resultado));
             }
         } catch (SQLException e) {

@@ -1,5 +1,5 @@
 package br.edu.ifsp.domain.usecases.treino;
-git
+
 import br.edu.ifsp.domain.entities.FichaTreino;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;

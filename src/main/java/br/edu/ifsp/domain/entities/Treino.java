@@ -1,7 +1,5 @@
 package br.edu.ifsp.domain.entities;
 
-import java.util.List;
-
 public class Treino {
 
     private Integer id;
@@ -60,11 +58,11 @@ public class Treino {
 
     @Override
     public String toString() {
-        return "\nTreino{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", observacao='" + observacao + '\'' +
-                ", fichaTreino=" + fichaTreino +
-                '}';
+        return "\nTreino: [" +
+                "ID = " + id +
+                ", Nome = '" + nome + '\'' +
+                ", Observação = '" + observacao + '\'' +
+                ", ID Ficha Treino = " + fichaTreino.getId() +
+                ']';
     }
 }

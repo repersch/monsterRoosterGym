@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.entities;
 
 public class ExercicioTreino {
+
     private Integer id;
     private Integer serie;
     private Double carga;
@@ -78,13 +79,13 @@ public class ExercicioTreino {
 
     @Override
     public String toString() {
-        return "\nExercicioTreino{" +
-                "id=" + id +
-                ", serie=" + serie +
-                ", carga=" + carga +
-                ", repeticao=" + repeticao +
-                ", treino=" + treino +
-                ", exercicio=" + exercicio +
-                '}';
+        return "\n\nExercicioTreino: [" +
+                "ID = " + id +
+                ", Série = " + serie +
+                ", Carga = " + carga +
+                ", Repetições = " + repeticao +
+                ", Treino = " + treino +
+                ", Exercício = " + exercicio +
+                ']';
     }
 }

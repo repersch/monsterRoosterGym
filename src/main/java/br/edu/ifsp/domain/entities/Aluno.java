@@ -84,14 +84,14 @@ public class Aluno {
 
     @Override
     public String toString() {
-        return "Aluno{" +
-                "cpf='" + cpf + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", genero='" + genero + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", peso=" + peso +
-                ", altura=" + altura +
-                ", observacoes='" + observacoes + '\'' +
-                '}';
+        return "Aluno: [" +
+                "CPF = '" + cpf + '\'' +
+                ", Telefone = '" + telefone + '\'' +
+                ", Gênero = '" + genero + '\'' +
+                ", Data de Nascimento = " + dataNascimento +
+                ", Peso = " + peso +
+                ", Altura = " + altura +
+                ", Observações = '" + observacoes + '\'' +
+                ']';
     }
 }

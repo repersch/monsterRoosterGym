@@ -3,13 +3,13 @@ package br.edu.ifsp.domain.entities;
 import java.time.LocalDate;
 
 public class FichaTreino {
+
     private Integer id;
     private Boolean valido;
     private LocalDate dataInicio;
     private LocalDate validade;
     private Usuario aluno;
     private Usuario instrutor;
-    //private Treino treino;
 
     public FichaTreino() {
     }
@@ -81,13 +81,13 @@ public class FichaTreino {
 
     @Override
     public String toString() {
-        return "\nFichaTreino{" +
-                "id=" + id +
-                ", valido=" + valido +
-                ", dataInicio=" + dataInicio +
-                ", validade=" + validade +
-                ", aluno=" + aluno +
-                ", instrutor=" + instrutor +
-                '}';
+        return "\nFichaTreino: [" +
+                "ID = " + id +
+                ", Válido = " + valido +
+                ", Data de Início = " + dataInicio +
+                ", Validade = " + validade +
+                ", Nome do aluno = " + aluno.getNome() +
+                ", Nome do instrutor = " + instrutor.getNome() +
+                ']';
     }
 }
