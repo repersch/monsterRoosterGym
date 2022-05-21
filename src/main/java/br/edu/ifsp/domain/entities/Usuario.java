@@ -26,7 +26,7 @@ public class Usuario {
         this.isInstrutor = isInstrutor;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

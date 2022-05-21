@@ -37,6 +37,8 @@ public class DatabaseBuilder {
             statement.addBatch(createExercicioTable());
 //            statement.addBatch(createTransactionTable());
             statement.addBatch(createTreinoTable());
+            statement.addBatch(createFichaTreinoTable());
+            statement.addBatch(createExercicioTreinoTable());
             statement.executeBatch();
 
             System.out.println("Criando banco de dados...");
@@ -108,6 +110,39 @@ public class DatabaseBuilder {
         System.out.println(builder.toString());
         return builder.toString();
     }
+
+    private String createFichaTreinoTable() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE FichaTreino(\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
+        builder.append("valido INTEGER NOT NULL,\n");
+        builder.append("dataInicio STRING,\n");
+        builder.append("validade STRING,\n");
+        builder.append("cpf_aluno STRING NOT NULL,\n");
+        builder.append("nome_instrutor STRING,");
+        builder.append("FOREIGN KEY(cpf_aluno) REFERENCES Usuario(cpf),\n");
+        builder.append("FOREIGN KEY(nome_instrutor) REFERENCES Usuario(nome)\n");
+        builder.append("); \n");
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
+    private String createExercicioTreinoTable() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE ExercicioTreino(\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
+        builder.append("serie INTEGER,\n");
+        builder.append("carga DOUBLE,\n");
+        builder.append("repeticao INTEGER,\n");
+        builder.append("id_treino INTEGER NOT NULL,\n");
+        builder.append("id_exercicio INTEGER NOT NULL,");
+        builder.append("FOREIGN KEY(id_treino) REFERENCES Treino(id),\n");
+        builder.append("FOREIGN KEY(id_exercicio) REFERENCES Exercicio(id)\n");
+        builder.append("); \n");
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
 
 //    private String createUserTable() {
 //        StringBuilder builder = new StringBuilder();

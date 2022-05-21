@@ -1,11 +1,16 @@
 package br.edu.ifsp.application.main;
 
-import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
-import br.edu.ifsp.application.repository.dao.SqliteRegistroTreinoDAO;
-import br.edu.ifsp.application.repository.dao.SqliteTreinoDAO;
-import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
+import br.edu.ifsp.application.repository.dao.*;
 import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
 import br.edu.ifsp.domain.entities.*;
+import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
+import br.edu.ifsp.domain.usecases.exercicioTreino.CriarExercicioTreinoUC;
+import br.edu.ifsp.domain.usecases.exercicioTreino.ExercicioTreinoDAO;
+import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.fichaTreino.CriarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.fichaTreino.EditarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.fichaTreino.FichaTreinoDAO;
+import br.edu.ifsp.domain.usecases.treino.EditarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.EditarUsuarioUC;
@@ -39,6 +44,14 @@ public class Main {
 
     public static CriarTreinoUC criarTreinoUC;
     public static BuscarTreinoUC buscarTreinoUC;
+    public static EditarTreinoUC editarTreinoUC;
+
+    public static CriarFichaTreinoUC criarFichaTreinoUC;
+    public static BuscarFichaTreinoUC buscarFichaTreinoUC;
+    public static EditarFichaTreinoUC editarFichaTreinoUC;
+
+    public static CriarExercicioTreinoUC criarExercicioTreinoUC;
+    public static BuscarExercicioTreinoUC buscarExercicioTreinoUC;
 
     public static void main(String[] args) {
         System.out.println("Configurando INJECTIONS");
@@ -159,7 +172,7 @@ public class Main {
 
         deletarExercicioUC.remover(exercicio4);
         System.out.println("Buscar Todos Deleção por Exercicio: " + buscarExercicioUC.buscarTodos());
-//
+
         System.out.println("\n\n\n-------------------- TREINO ---------------------");
 
         Treino treino1 = new Treino(1, "Rafael Costa", "algumaObs");
@@ -173,7 +186,29 @@ public class Main {
         // System.out.println("\n-----------Busca por Nome: " + buscarUsuarioUC.buscarPorNome(aluno2.getNome()));
         System.out.println("\n-----------Buscar Todos Alunos: " + buscarTreinoUC.buscarTodos());
 
+        System.out.println("\n\n\n-------------------- FICHA TREINO ---------------------");
 
+        FichaTreino fichaTreino1 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (Aluno) buscarUsuarioUC.buscarPorCpf(aluno5.getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor1.getNome()).get());
+        FichaTreino fichaTreino2 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (Aluno) buscarUsuarioUC.buscarPorCpf(aluno3.getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get());
+
+        criarFichaTreinoUC.salvar(fichaTreino1);
+        criarFichaTreinoUC.salvar(fichaTreino2);
+
+        System.out.println("\n-----------Buscar Ficha Treino por ID: " + buscarFichaTreinoUC.buscarPorId(1));
+        System.out.println("\n-----------Buscar Todas as Fichas Treino: " + buscarFichaTreinoUC.buscarTodos());
+
+        editarFichaTreinoUC.atualizar(new FichaTreino(1,true, LocalDate.now().minusDays(7), LocalDate.now().minusDays(7), (Aluno) buscarUsuarioUC.buscarPorCpf(aluno2.getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get()));
+        System.out.println("Buscar por ID depois de atualizar: " + buscarFichaTreinoUC.buscarPorId(1));
+
+        System.out.println("\n\n\n-------------------- EXERCICIO TREINO ---------------------");
+
+        System.out.println(buscarTreinoUC.buscarPorId(treino2.getId()).get());
+        System.out.println(buscarExercicioUC.buscarPorId(exercicio3.getId()).get());
+        ExercicioTreino exercicioTreino1 = new ExercicioTreino(1,5, 3.3, 5, (Treino) buscarTreinoUC.buscarPorId(treino2.getId()).get(), (Exercicio) buscarExercicioUC.buscarPorId(exercicio3.getId()).get());
+        System.out.println(exercicioTreino1);
+        criarExercicioTreinoUC.salvar(exercicioTreino1);
+        System.out.println(exercicioTreino1);
+        System.out.println("\n-----------Buscar Todos Exercicios Treino: " + buscarExercicioTreinoUC.buscarTodos());
     }
 
 
@@ -198,6 +233,16 @@ public class Main {
         TreinoDAO treinoDAO = new SqliteTreinoDAO();
         criarTreinoUC = new CriarTreinoUC(treinoDAO);
         buscarTreinoUC = new BuscarTreinoUC(treinoDAO);
+        editarTreinoUC = new EditarTreinoUC(treinoDAO);
+
+        FichaTreinoDAO fichaTreinoDAO = new SqliteFichaTreinoDAO();
+        criarFichaTreinoUC = new CriarFichaTreinoUC(fichaTreinoDAO);
+        buscarFichaTreinoUC = new BuscarFichaTreinoUC(fichaTreinoDAO);
+        editarFichaTreinoUC = new EditarFichaTreinoUC(fichaTreinoDAO);
+
+        ExercicioTreinoDAO exercicioTreinoDAO = new SqliteExercicioTreinoDAO();
+        criarExercicioTreinoUC = new CriarExercicioTreinoUC(exercicioTreinoDAO);
+        buscarExercicioTreinoUC = new BuscarExercicioTreinoUC(exercicioTreinoDAO);
     }
 
     private static void setupDatabase() {
