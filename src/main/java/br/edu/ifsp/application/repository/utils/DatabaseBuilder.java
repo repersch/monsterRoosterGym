@@ -60,7 +60,7 @@ public class DatabaseBuilder {
         builder.append("telefone TEXT, \n");
         builder.append("genero TEXT, \n");
         builder.append("data_nascimento STRING, \n");
-        builder.append("peso DOBLE, \n");
+        builder.append("peso DOUBLE, \n");
         builder.append("altura DOUBLE, \n");
         builder.append("observacao TEXT\n");
         builder.append("); \n");
@@ -107,7 +107,9 @@ public class DatabaseBuilder {
         builder.append("CREATE TABLE Treino(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
         builder.append("nome TEXT NOT NULL UNIQUE,\n");
-        builder.append("observacao TEXT NOT NULL");
+        builder.append("observacao TEXT NOT NULL,");
+        builder.append("id_ficha_treino INTEGER NOT NULL,\n");
+        builder.append("FOREIGN KEY(id_ficha_treino) REFERENCES FichaTreino(id)\n");
         builder.append("); \n");
         System.out.println(builder.toString());
         return builder.toString();

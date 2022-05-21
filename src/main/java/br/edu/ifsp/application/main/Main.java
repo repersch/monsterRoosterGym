@@ -178,14 +178,29 @@ public class Main {
         deletarExercicioUC.remover(buscarExercicioUC.buscarPorNome(exercicio4.getNome()).get());
         System.out.println("\n---------------Buscar Todos depois de excluir Exercicio 4: " + buscarExercicioUC.buscarTodos());
 
+        System.out.println("\n\n\n-------------------- FICHA TREINO ---------------------");
+
+        FichaTreino fichaTreino1 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (buscarUsuarioUC.buscarPorNome(aluno4.getNome()).get()), buscarUsuarioUC.buscarPorNome(instrutor1.getNome()).get());
+        FichaTreino fichaTreino2 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (buscarUsuarioUC.buscarPorNome(aluno3.getNome()).get()), buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get());
+
+        criarFichaTreinoUC.salvar(fichaTreino1);
+        criarFichaTreinoUC.salvar(fichaTreino2);
+
+        System.out.println("\n-----------Buscar Ficha Treino por ID: " + buscarFichaTreinoUC.buscarPorId(2));
+        System.out.println("\n-----------Buscar Todas as Fichas Treino: " + buscarFichaTreinoUC.buscarTodos());
+
+        editarFichaTreinoUC.atualizar(new FichaTreino(1,true, LocalDate.now().minusDays(7), LocalDate.now().minusDays(7), buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get()));
+        System.out.println("Buscar por ID depois de atualizar: " + buscarFichaTreinoUC.buscarPorId(1));
+
+
 
         System.out.println("\n\n-----------------------------------------------------------------");
         System.out.println("---------------------------- TREINO -----------------------------");
         System.out.println("-------------------------------------------------------------------\n");
 
-        Treino treino1 = new Treino("Treino A", "Treino de segunda e quinta");
-        Treino treino2 = new Treino("Treino B", "Treino de terça e sexta");
-        Treino treino3 = new Treino("Treino C", "Treino de quarta e sábado");
+        Treino treino1 = new Treino("Treino A", "Treino de segunda e quinta", buscarFichaTreinoUC.buscarPorId(1).get());
+        Treino treino2 = new Treino("Treino B", "Treino de terça e sexta", buscarFichaTreinoUC.buscarPorId(2).get());
+        Treino treino3 = new Treino("Treino C", "Treino de quarta e sábado", buscarFichaTreinoUC.buscarPorId(1).get());
 
         criarTreinoUC.salvar(treino1);
         criarTreinoUC.salvar(treino2);
@@ -230,19 +245,6 @@ public class Main {
         System.out.println("\n---------------Registro treino 2: " + buscarRegistroTreinoUC.buscarPorId(2));
         System.out.println("\n---------------Registro treino do aluno 4: " + buscarRegistroTreinoUC.buscarPorAluno(buscarUsuarioUC.buscarPorCpf(aluno4.getAluno().getCpf()).get()));
 
-        System.out.println("\n\n\n-------------------- FICHA TREINO ---------------------");
-
-        FichaTreino fichaTreino1 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (buscarUsuarioUC.buscarPorNome(aluno4.getNome()).get()), buscarUsuarioUC.buscarPorNome(instrutor1.getNome()).get());
-//        FichaTreino fichaTreino2 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (buscarUsuarioUC.buscarPorNome(aluno3.getNome()).get()), buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get());
-
-        criarFichaTreinoUC.salvar(fichaTreino1);
-//        criarFichaTreinoUC.salvar(fichaTreino2);
-
-        System.out.println("\n-----------Buscar Ficha Treino por ID: " + buscarFichaTreinoUC.buscarPorId(1));
-        System.out.println("\n-----------Buscar Todas as Fichas Treino: " + buscarFichaTreinoUC.buscarTodos());
-
-        editarFichaTreinoUC.atualizar(new FichaTreino(1,true, LocalDate.now().minusDays(7), LocalDate.now().minusDays(7), buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get()));
-        System.out.println("Buscar por ID depois de atualizar: " + buscarFichaTreinoUC.buscarPorId(1));
 
         System.out.println("\n\n\n-------------------- EXERCICIO TREINO ---------------------");
 
