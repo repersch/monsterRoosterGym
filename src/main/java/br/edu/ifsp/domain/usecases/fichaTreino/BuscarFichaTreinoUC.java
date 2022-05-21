@@ -2,6 +2,7 @@ package br.edu.ifsp.domain.usecases.fichaTreino;
 
 import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.FichaTreino;
+import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
 import java.util.List;
@@ -21,9 +22,9 @@ public class BuscarFichaTreinoUC {
         return fichaTreinoDAO.findById(id);
     }
 
-    public List<FichaTreino> buscarPorAluno (Aluno aluno) {
-        if (Validator.nuloOuVazio(aluno.getCpf())) {
-            throw new IllegalArgumentException("Aluno não pode ser nulo ou vazio.");
+    public List<FichaTreino> buscarPorAluno (Usuario aluno) {
+        if (aluno == null) {
+            throw new IllegalArgumentException("Aluno não pode ser nulo.");
         }
         return fichaTreinoDAO.findByAluno(aluno);
     }

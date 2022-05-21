@@ -11,12 +11,11 @@ public class Aluno {
     private Double peso;
     private Double altura;
     private String observacoes;
-    private Treino ultimoTreinoRealizado;
 
     public Aluno() {
     }
 
-    public Aluno(String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes, Treino ultimoTreinoRealizado) {
+    public Aluno(String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
         this.cpf = cpf;
         this.telefone = telefone;
         this.genero = genero;
@@ -24,7 +23,6 @@ public class Aluno {
         this.peso = peso;
         this.altura = altura;
         this.observacoes = observacoes;
-        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
 
     public String getCpf() {
@@ -83,13 +81,6 @@ public class Aluno {
         this.observacoes = observacoes;
     }
 
-    public Treino getUltimoTreinoRealizado() {
-        return ultimoTreinoRealizado;
-    }
-
-    public void setUltimoTreinoRealizado(Treino ultimoTreinoRealizado) {
-        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
-    }
 
     @Override
     public String toString() {
@@ -101,7 +92,6 @@ public class Aluno {
                 ", peso=" + peso +
                 ", altura=" + altura +
                 ", observacoes='" + observacoes + '\'' +
-                ", ultimoTreinoRealizado=" + ultimoTreinoRealizado +
                 '}';
     }
 }

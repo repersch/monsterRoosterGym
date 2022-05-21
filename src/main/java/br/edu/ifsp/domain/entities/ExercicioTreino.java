@@ -75,4 +75,16 @@ public class ExercicioTreino {
     public void setExercicio(Exercicio exercicio) {
         this.exercicio = exercicio;
     }
+
+    @Override
+    public String toString() {
+        return "\nExercicioTreino{" +
+                "id=" + id +
+                ", serie=" + serie +
+                ", carga=" + carga +
+                ", repeticao=" + repeticao +
+                ", treino=" + treino +
+                ", exercicio=" + exercicio +
+                '}';
+    }
 }

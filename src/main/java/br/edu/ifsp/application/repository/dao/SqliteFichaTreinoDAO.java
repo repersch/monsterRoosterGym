@@ -17,15 +17,15 @@ import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
 public class SqliteFichaTreinoDAO implements FichaTreinoDAO {
     @Override
     public Integer create(FichaTreino fichaTreino) {
-        String sql = "INSERT INTO FichaTreino (valido, dataInicio, validade, cpf_aluno, nome_instrutor)" +
+        String sql = "INSERT INTO FichaTreino (valido, dataInicio, validade, id_aluno, id_instrutor)" +
                 "VALUES (?, ?, ?, ?, ?)";
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setBoolean(1, fichaTreino.getValido());
             stmt.setString(2, fichaTreino.getDataInicio().toString());
             stmt.setString(3, fichaTreino.getValidade().toString());
-            stmt.setString(4, fichaTreino.getAluno().getCpf());
-            stmt.setString(5, fichaTreino.getInstrutor().getNome());
+            stmt.setInt(4, fichaTreino.getAluno().getId());
+            stmt.setInt(5, fichaTreino.getInstrutor().getId());
 
             stmt.execute();
             ResultSet resultado = stmt.getGeneratedKeys();
@@ -89,14 +89,15 @@ public class SqliteFichaTreinoDAO implements FichaTreinoDAO {
 
     @Override
     public boolean update(FichaTreino fichaTreino) {
-        String sql = "UPDATE FichaTreino SET valido = ?, dataInicio = ?, validade = ?, aluno = ?, instrutor = ?";
+        String sql = "UPDATE FichaTreino SET valido = ?, dataInicio = ?, validade = ?, id_aluno = ?, id_instrutor = ? WHERE id = ?";
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setBoolean(1, fichaTreino.getValido());
             stmt.setString(2, fichaTreino.getDataInicio().toString());
             stmt.setString(3, fichaTreino.getValidade().toString());
-            stmt.setString(4, fichaTreino.getAluno().toString());
-            stmt.setString(5, fichaTreino.getInstrutor().toString());
+            stmt.setInt(4, fichaTreino.getAluno().getId());
+            stmt.setInt(5, fichaTreino.getInstrutor().getId());
+            stmt.setInt(6, fichaTreino.getId());
 
             stmt.execute();
 
@@ -108,11 +109,12 @@ public class SqliteFichaTreinoDAO implements FichaTreinoDAO {
     }
 
     private FichaTreino resultSetToEntity(ResultSet resultado) throws SQLException {
-        String nome_instrutor = resultado.getString("nome_instrutor"); //id instrutor e id aluno
-        Usuario instrutor = (Usuario) buscarUsuarioUC.buscarPorNome(nome_instrutor).get();
 
-        String cpf_aluno = resultado.getString("cpf_aluno");
-        Aluno aluno = (Aluno) buscarUsuarioUC.buscarPorCpf(cpf_aluno).get();
+        Integer id_instrutor = resultado.getInt("id_instrutor"); //id instrutor e id aluno
+        Usuario instrutor = (Usuario) buscarUsuarioUC.buscarPorId(id_instrutor).get();
+
+        Integer id_aluno = resultado.getInt("id_aluno");
+        Usuario aluno = buscarUsuarioUC.buscarPorId(id_aluno).get();
 
         return new FichaTreino(
                 resultado.getInt("id"),
@@ -125,12 +127,14 @@ public class SqliteFichaTreinoDAO implements FichaTreinoDAO {
     }
 
     @Override
-    public List<FichaTreino> findByAluno (Aluno aluno) {
-        String sql = "SELECT * FROM FichaTreino WHERE aluno = ?";
+    public List<FichaTreino> findByAluno (Usuario aluno) {
+        String sql = "SELECT * FROM FichaTreino WHERE id_aluno = ?";
         List<FichaTreino> fichasTreino = new ArrayList<>();
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setInt(1, aluno.getId());
             ResultSet resultado = stmt.executeQuery();
+
             while (resultado.next()) {
                 FichaTreino fichaTreino = resultSetToEntity(resultado);
                 fichasTreino.add(fichaTreino);

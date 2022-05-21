@@ -7,14 +7,14 @@ public class FichaTreino {
     private Boolean valido;
     private LocalDate dataInicio;
     private LocalDate validade;
-    private Aluno aluno;
+    private Usuario aluno;
     private Usuario instrutor;
     //private Treino treino;
 
     public FichaTreino() {
     }
 
-    public FichaTreino(Integer id, Boolean valido, LocalDate dataInicio, LocalDate validade, Aluno aluno, Usuario instrutor) {
+    public FichaTreino(Integer id, Boolean valido, LocalDate dataInicio, LocalDate validade, Usuario aluno, Usuario instrutor) {
         this.id = id;
         this.valido = valido;
         this.dataInicio = dataInicio;
@@ -23,7 +23,7 @@ public class FichaTreino {
         this.instrutor = instrutor;
     }
 
-    public FichaTreino(Boolean valido, LocalDate dataInicio, LocalDate validade, Aluno aluno, Usuario instrutor) {
+    public FichaTreino(Boolean valido, LocalDate dataInicio, LocalDate validade, Usuario aluno, Usuario instrutor) {
         this.valido = valido;
         this.dataInicio = dataInicio;
         this.validade = validade;
@@ -47,11 +47,11 @@ public class FichaTreino {
         this.valido = valido;
     }
 
-    public Aluno getAluno() {
+    public Usuario getAluno() {
         return aluno;
     }
 
-    public void setAluno(Aluno aluno) {
+    public void setAluno(Usuario aluno) {
         this.aluno = aluno;
     }
 
@@ -81,11 +81,12 @@ public class FichaTreino {
 
     @Override
     public String toString() {
-        return "FichaTreino{" +
+        return "\nFichaTreino{" +
                 "id=" + id +
                 ", valido=" + valido +
                 ", dataInicio=" + dataInicio +
                 ", validade=" + validade +
+                ", aluno=" + aluno +
                 ", instrutor=" + instrutor +
                 '}';
     }

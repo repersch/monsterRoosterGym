@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ExercicioDAO extends DAO<Exercicio, Integer> {
+
     boolean deleteById(Integer key);
+
     boolean delete(Exercicio exercicio);
 
     Optional<Exercicio> findByAttribute(String atributo, String chave);
+
 }

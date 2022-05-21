@@ -1,12 +1,17 @@
 package br.edu.ifsp.application.main;
 
-import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
-import br.edu.ifsp.application.repository.dao.SqliteRegistroTreinoDAO;
-import br.edu.ifsp.application.repository.dao.SqliteTreinoDAO;
-import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
+import br.edu.ifsp.application.repository.dao.*;
 import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
 import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.autenticar.AutenticarUC;
+import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
+import br.edu.ifsp.domain.usecases.exercicioTreino.CriarExercicioTreinoUC;
+import br.edu.ifsp.domain.usecases.exercicioTreino.ExercicioTreinoDAO;
+import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.fichaTreino.CriarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.fichaTreino.EditarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.fichaTreino.FichaTreinoDAO;
+import br.edu.ifsp.domain.usecases.treino.EditarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.EditarUsuarioUC;
@@ -22,6 +27,7 @@ import br.edu.ifsp.domain.usecases.treino.TreinoDAO;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
 
@@ -67,39 +73,38 @@ public class Main {
 
         Usuario aluno1 = new Usuario("Renata Persch", "renata@mail.com", "senha", false, new Aluno("366.923.004-77",
                 "16985239632", "feminino", LocalDate.of(1990, 10, 30),
-                68.5, 1.76, null, null));
+                68.5, 1.76, null));
 
         Usuario aluno2 = new Usuario("Hermione Granger", "mione@email.com", "senha", false, new Aluno("458.913.074-85",
                 "16996217598", "feminino", LocalDate.of(1992, 7, 13),
-                65.0, 1.62, "Alergica", null));
+                65.0, 1.62, "Alergica"));
 
         criarUsuarioUC.salvar(aluno1);
         criarUsuarioUC.salvar(aluno2);
-
 
         System.out.println("\n-----------Busca por Nome: " + buscarUsuarioUC.buscarPorNome(aluno2.getNome()));
         System.out.println("\n-----------Buscar por Id: " + buscarUsuarioUC.buscarPorId(1));
 
         editarUsuarioUC.atualizar(new Usuario(1,"Renata Persch Camacho", "renata_persch@mail.com", "senha",
                 false, new Aluno("366.923.004-77", "16985239632", "feminino", LocalDate.of(1990, 10, 30),
-                68.5, 1.76, "Cansada", null)));
+                68.5, 1.76, "Cansada")));
 
         System.out.println("\n-----------Buscar por ID depois de atualizar: " + buscarUsuarioUC.buscarPorId(1));
 
         Usuario aluno3 = new Usuario("Paola Bracho", "paola@mail.com", "senha", false, (new Aluno("145.987.204-41",
                 "16985274535", "feminino", LocalDate.of(1985, 4, 15),
-                74.0, 1.56, null, null)));
+                74.0, 1.56, null)));
 
         Usuario aluno4 = new Usuario("Jorjinho", "jorjin@email.com", "senha", false, new Aluno("459.974.458-03",
                 "16996274856", "masculino", LocalDate.of(1993, 3, 26),
-                85.0, 1.87, null, null));
+                85.0, 1.87, null));
 
         criarUsuarioUC.salvar(aluno3);
         criarUsuarioUC.salvar(aluno4);
 
         Usuario aluno5 = new Usuario("Ana Maria", "jorjin@email.com", "senha", false, new Aluno("459.974.458-03",
                 "169955484856", "feminino", LocalDate.of(1995, 10, 11),
-                74.0, 1.66, null, null));
+                74.0, 1.66, null));
 
         System.out.println("\n-----------Buscar Todos Alunos: " + buscarUsuarioUC.buscarTodosAlunos());
 
@@ -227,23 +232,21 @@ public class Main {
 
         System.out.println("\n\n\n-------------------- FICHA TREINO ---------------------");
 
-        FichaTreino fichaTreino1 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (Aluno) buscarUsuarioUC.buscarPorCpf(aluno5.getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor1.getNome()).get());
-        FichaTreino fichaTreino2 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (Aluno) buscarUsuarioUC.buscarPorCpf(aluno3.getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get());
+        FichaTreino fichaTreino1 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (buscarUsuarioUC.buscarPorNome(aluno4.getNome()).get()), buscarUsuarioUC.buscarPorNome(instrutor1.getNome()).get());
+//        FichaTreino fichaTreino2 = new FichaTreino(true, LocalDate.now(), LocalDate.now(), (buscarUsuarioUC.buscarPorNome(aluno3.getNome()).get()), buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get());
 
         criarFichaTreinoUC.salvar(fichaTreino1);
-        criarFichaTreinoUC.salvar(fichaTreino2);
+//        criarFichaTreinoUC.salvar(fichaTreino2);
 
         System.out.println("\n-----------Buscar Ficha Treino por ID: " + buscarFichaTreinoUC.buscarPorId(1));
         System.out.println("\n-----------Buscar Todas as Fichas Treino: " + buscarFichaTreinoUC.buscarTodos());
 
-        editarFichaTreinoUC.atualizar(new FichaTreino(1,true, LocalDate.now().minusDays(7), LocalDate.now().minusDays(7), (Aluno) buscarUsuarioUC.buscarPorCpf(aluno2.getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get()));
+        editarFichaTreinoUC.atualizar(new FichaTreino(1,true, LocalDate.now().minusDays(7), LocalDate.now().minusDays(7), buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get()));
         System.out.println("Buscar por ID depois de atualizar: " + buscarFichaTreinoUC.buscarPorId(1));
 
         System.out.println("\n\n\n-------------------- EXERCICIO TREINO ---------------------");
 
-        System.out.println(buscarTreinoUC.buscarPorId(treino2.getId()).get());
-        System.out.println(buscarExercicioUC.buscarPorId(exercicio3.getId()).get());
-        ExercicioTreino exercicioTreino1 = new ExercicioTreino(1,5, 3.3, 5, (Treino) buscarTreinoUC.buscarPorId(treino2.getId()).get(), (Exercicio) buscarExercicioUC.buscarPorId(exercicio3.getId()).get());
+        ExercicioTreino exercicioTreino1 = new ExercicioTreino(1,5, 3.3, 5, buscarTreinoUC.buscarPorId(2).get(),buscarExercicioUC.buscarPorId(3).get());
         System.out.println(exercicioTreino1);
         criarExercicioTreinoUC.salvar(exercicioTreino1);
         System.out.println(exercicioTreino1);

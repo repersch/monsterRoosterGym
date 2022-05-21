@@ -25,6 +25,9 @@ public class CriarExercicioUC {
         if (exercicioDAO.findByAttribute("nome", nomeExercicio).isPresent()) {
             throw new EntityAlreadyExistsException("Exercício já cadastrado.");
         }
+
+        exercicio.setEmUso(false);
+
         return exercicioDAO.create(exercicio);
     }
 }

@@ -1,6 +1,5 @@
 package br.edu.ifsp.domain.usecases.usuario;
 
-import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.utils.EntityNotFoundException;
 import br.edu.ifsp.domain.usecases.utils.Notification;
@@ -8,10 +7,10 @@ import br.edu.ifsp.domain.usecases.utils.Validator;
 
 public class EditarUsuarioUC {
 
-    private UsuarioDAO alunoDAO;
+    private UsuarioDAO usuarioDAO;
 
     public EditarUsuarioUC(UsuarioDAO alunoDAO) {
-        this.alunoDAO = alunoDAO;
+        this.usuarioDAO = alunoDAO;
     }
 
     public boolean atualizar(Usuario usuario) {
@@ -25,10 +24,10 @@ public class EditarUsuarioUC {
 
         Integer id = usuario.getId();
 
-        if (alunoDAO.findById(id).isEmpty()) {
-            throw new EntityNotFoundException("Aluno não encontrado.");
+        if (usuarioDAO.findById(id).isEmpty()) {
+            throw new EntityNotFoundException("Usuário não encontrado.");
         }
 
-        return alunoDAO.update(usuario);
+        return usuarioDAO.update(usuario);
     }
 }

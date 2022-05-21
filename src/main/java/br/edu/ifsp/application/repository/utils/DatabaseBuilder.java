@@ -53,7 +53,7 @@ public class DatabaseBuilder {
         builder.append("CREATE TABLE Usuario(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("nome TEXT NOT NULL, \n");
-        builder.append("email TEXT NOT NULL, \n");
+        builder.append("email TEXT NOT NULL UNIQUE, \n");
         builder.append("senha TEXT NOT NULL, \n");
         builder.append("isInstrutor INTEGER NOT NULL, \n");
         builder.append("cpf TEXT, \n");
@@ -62,8 +62,7 @@ public class DatabaseBuilder {
         builder.append("data_nascimento STRING, \n");
         builder.append("peso DOBLE, \n");
         builder.append("altura DOUBLE, \n");
-        builder.append("observacao TEXT,\n");
-        builder.append("id_treino INTEGER\n");
+        builder.append("observacao TEXT\n");
         builder.append("); \n");
 
         System.out.println(builder.toString());
@@ -121,10 +120,10 @@ public class DatabaseBuilder {
         builder.append("valido INTEGER NOT NULL,\n");
         builder.append("dataInicio STRING,\n");
         builder.append("validade STRING,\n");
-        builder.append("cpf_aluno STRING NOT NULL,\n");
-        builder.append("nome_instrutor STRING,");
-        builder.append("FOREIGN KEY(cpf_aluno) REFERENCES Usuario(cpf),\n");
-        builder.append("FOREIGN KEY(nome_instrutor) REFERENCES Usuario(nome)\n");
+        builder.append("id_aluno STRING NOT NULL,\n");
+        builder.append("id_instrutor STRING,\n");
+        builder.append("FOREIGN KEY(id_aluno) REFERENCES Usuario(id),\n");
+        builder.append("FOREIGN KEY(id_instrutor) REFERENCES Usuario(id)\n");
         builder.append("); \n");
         System.out.println(builder.toString());
         return builder.toString();
