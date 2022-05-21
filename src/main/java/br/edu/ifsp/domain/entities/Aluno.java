@@ -2,7 +2,7 @@ package br.edu.ifsp.domain.entities;
 
 import java.time.LocalDate;
 
-public class Aluno extends Usuario {
+public class Aluno {
 
     private String cpf;
     private String telefone;
@@ -16,8 +16,7 @@ public class Aluno extends Usuario {
     public Aluno() {
     }
 
-    public Aluno(Integer id, String nome, String email, String senha, Boolean isInstrutor, String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
-        super(id, nome, email, senha, isInstrutor);
+    public Aluno(String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes, Treino ultimoTreinoRealizado) {
         this.cpf = cpf;
         this.telefone = telefone;
         this.genero = genero;
@@ -25,19 +24,7 @@ public class Aluno extends Usuario {
         this.peso = peso;
         this.altura = altura;
         this.observacoes = observacoes;
-//        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
-    }
-
-    public Aluno(String nome, String email, String senha, Boolean isInstrutor, String cpf, String telefone, String genero, LocalDate dataNascimento, Double peso, Double altura, String observacoes) {
-        super(nome, email, senha, isInstrutor);
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.genero = genero;
-        this.dataNascimento = dataNascimento;
-        this.peso = peso;
-        this.altura = altura;
-        this.observacoes = observacoes;
-//        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
+        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
 
     public String getCpf() {
@@ -106,19 +93,15 @@ public class Aluno extends Usuario {
 
     @Override
     public String toString() {
-        return "\n\nAluno{" +
-                "  \nnome='" + super.getNome() + '\'' +
-                ", \nemail='" + super.getEmail() + '\'' +
-                ", \nsenha='" + super.getSenha() + '\'' +
-                ", \nisInstrutor=" + super.getInstrutor() +
-                ", \ncpf='" + cpf + '\'' +
-                ", \ntelefone='" + telefone + '\'' +
-                ", \ngenero='" + genero + '\'' +
-                ", \ndataNascimento=" + dataNascimento +
-                ", \npeso=" + peso +
-                ", \naltura=" + altura +
-                ", \nobservacoes='" + observacoes + '\'' +
-                ", \nultimoTreinoRealizado=" + ultimoTreinoRealizado +
+        return "Aluno{" +
+                "cpf='" + cpf + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", genero='" + genero + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", peso=" + peso +
+                ", altura=" + altura +
+                ", observacoes='" + observacoes + '\'' +
+                ", ultimoTreinoRealizado=" + ultimoTreinoRealizado +
                 '}';
     }
 }

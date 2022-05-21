@@ -25,10 +25,7 @@ public class TreinoValidator extends Validator<Treino> {
             notification.addErro("Observacao é nula ou vazia");
             return notification;
         }
-        if (nuloOuVazio(Collections.singleton(treino.getId()))) {
-            notification.addErro("ID é nulo ou vazio.");
-            return notification;
-        }
+
         return notification;
     }
 }

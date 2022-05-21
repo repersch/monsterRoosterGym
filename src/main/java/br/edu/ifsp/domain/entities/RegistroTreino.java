@@ -8,26 +8,28 @@ public class RegistroTreino {
     private LocalDate inicio;
     private LocalDate fim;
     private EstadoRegistroTreino estadoRegistroTreino;
-    private Aluno aluno;
+    private Usuario usuario;
+    private Treino ultimoTreinoRealizado;
 
     public RegistroTreino() {
     }
 
-    public RegistroTreino(Integer id, LocalDate inicio, LocalDate fim, EstadoRegistroTreino estadoRegistroTreino, Aluno aluno) {
+    public RegistroTreino(Integer id, LocalDate inicio, LocalDate fim, EstadoRegistroTreino estadoRegistroTreino, Usuario usuario, Treino ultimoTreinoRealizado) {
         this.id = id;
         this.inicio = inicio;
         this.fim = fim;
         this.estadoRegistroTreino = estadoRegistroTreino;
-        this.aluno = aluno;
+        this.usuario = usuario;
+        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
 
-    public RegistroTreino(LocalDate inicio, LocalDate fim, EstadoRegistroTreino estadoRegistroTreino, Aluno aluno) {
+    public RegistroTreino(LocalDate inicio, LocalDate fim, EstadoRegistroTreino estadoRegistroTreino, Usuario usuario, Treino ultimoTreinoRealizado) {
         this.inicio = inicio;
         this.fim = fim;
         this.estadoRegistroTreino = estadoRegistroTreino;
-        this.aluno = aluno;
+        this.usuario = usuario;
+        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
-
 
     public Integer getId() {
         return id;
@@ -61,22 +63,31 @@ public class RegistroTreino {
         this.estadoRegistroTreino = estadoRegistroTreino;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Treino getUltimoTreinoRealizado() {
+        return ultimoTreinoRealizado;
+    }
+
+    public void setUltimoTreinoRealizado(Treino ultimoTreinoRealizado) {
+        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
     }
 
     @Override
     public String toString() {
-        return "RegistroTreino{" +
+        return "\nRegistroTreino{" +
                 "id=" + id +
                 ", inicio=" + inicio +
                 ", fim=" + fim +
-                ", finalizado=" + estadoRegistroTreino +
-                ", aluno=" + aluno +
+                ", estadoRegistroTreino=" + estadoRegistroTreino +
+                ", usuario=" + usuario +
+                ", ultimoTreinoRealizado=" + ultimoTreinoRealizado +
                 '}';
     }
 }

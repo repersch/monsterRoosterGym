@@ -1,7 +1,7 @@
 package br.edu.ifsp.domain.usecases.registroTreino;
 
-import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.RegistroTreino;
+import br.edu.ifsp.domain.entities.Usuario;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class BuscarRegistroTreinoUC {
         return registroTreinoDAO.findByIdAluno(id_aluno);
     }
 
-    public List<RegistroTreino> buscarPorAluno(Aluno aluno) {
+    public List<RegistroTreino> buscarPorAluno(Usuario aluno) {
         if (aluno == null) {
             throw new IllegalArgumentException("Aluno não pode ser nulo.");
         }

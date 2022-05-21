@@ -2,6 +2,7 @@ package br.edu.ifsp.application.repository.dao;
 
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
 import br.edu.ifsp.domain.entities.Aluno;
+import br.edu.ifsp.domain.entities.Treino;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.UsuarioDAO;
 
@@ -13,13 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static br.edu.ifsp.application.main.Main.buscarTreinoUC;
+
 public class SqliteUsuarioDAO implements UsuarioDAO {
 
     @Override
     public Integer create(Usuario usuario) {
         String sql = "INSERT INTO Usuario (nome, email, senha, isInstrutor, cpf, " +
-                "telefone, genero, data_nascimento, peso, altura, observacao)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "telefone, genero, data_nascimento, peso, altura, observacao, id_treino)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
 
@@ -90,28 +93,11 @@ public class SqliteUsuarioDAO implements UsuarioDAO {
     }
 
     @Override
-    public boolean update(Usuario usuario) {
-        String sql = "UPDATE Usuario SET nome = ?, email = ?, senha = ?, isInstrutor = ?, cpf = ?, " +
-                "telefone = ?, genero = ?, data_nascimento = ?, peso = ?, altura = ?, observacao = ? WHERE id = ?";
-
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            setDadosUsuario(usuario, stmt);
-
-            stmt.setInt(12, usuario.getId());
-            return stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
-    @Override
-    public List<Usuario> findAllInstrutores() {
-        String sql = "SELECT * FROM Usuario WHERE isInstrutor = 1";
+    public List<Usuario> findAll(String tipoUsuario) {
+        String sql = "SELECT * FROM Usuario WHERE isInstrutor = " + ((tipoUsuario.equalsIgnoreCase("aluno")) ? 0 : 1) + "";
         List<Usuario> usuarios = new ArrayList<>();
 
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {;
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Usuario usuario = getDadosUsuario(resultado);
@@ -120,56 +106,56 @@ public class SqliteUsuarioDAO implements UsuarioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return usuarios;
     }
 
     @Override
-    public List<Aluno> findAllAlunos() {
-        String sql = "SELECT * FROM Usuario WHERE isInstrutor = 0";
-        List<Aluno> alunos = new ArrayList<>();
+    public boolean update(Usuario usuario) {
+        String sql = "UPDATE Usuario SET nome = ?, email = ?, senha = ?, isInstrutor = ?, cpf = ?, " +
+                "telefone = ?, genero = ?, data_nascimento = ?, peso = ?, altura = ?, observacao = ?, id_treino = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {;
-            ResultSet resultado = stmt.executeQuery();
-            while (resultado.next()) {
-                Usuario aluno = getDadosUsuario(resultado);
-                alunos.add((Aluno) aluno);
-            }
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            setDadosUsuario(usuario, stmt);
+
+            stmt.setInt(13, usuario.getId());
+            return stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return alunos;
+        return false;
     }
 
     private Usuario getDadosUsuario(ResultSet resultado) throws SQLException {
 
-        if (resultado.getInt("isInstrutor") == 1) {
-            return new Usuario(
-                    resultado.getInt("id"),
-                    resultado.getString("nome"),
-                    resultado.getString("email"),
-                    resultado.getString("senha"),
-                    true
-            );
+        boolean isInstrutor = (resultado.getInt("isInstrutor") == 1) ? true : false;
+
+        Usuario usuario = new Usuario (
+            resultado.getInt("id"),
+            resultado.getString("nome"),
+            resultado.getString("email"),
+            resultado.getString("senha"),
+            isInstrutor,
+            null
+        );
+
+        if (!isInstrutor) {
+
+            Treino ultimoTreinoRealizado = buscarTreinoUC.buscarPorId(resultado.getInt("id_treino")).isPresent() ? buscarTreinoUC.buscarPorId(resultado.getInt("id_treino")).get() : null;
+
+            usuario.setAluno(new Aluno(
+                    resultado.getString("cpf"),
+                    resultado.getString("telefone"),
+                    resultado.getString("genero"),
+                    LocalDate.parse(resultado.getString("data_nascimento")),
+                    resultado.getDouble("peso"),
+                    resultado.getDouble("altura"),
+                    resultado.getString("observacao"),
+                    ultimoTreinoRealizado
+            ));
         }
 
-        return new Aluno(
-                resultado.getInt("id"),
-                resultado.getString("nome"),
-                resultado.getString("email"),
-                resultado.getString("senha"),
-                false,
-                resultado.getString("cpf"),
-                resultado.getString("telefone"),
-                resultado.getString("genero"),
-                LocalDate.parse(resultado.getString("data_nascimento")),
-                resultado.getDouble("peso"),
-                resultado.getDouble("altura"),
-                resultado.getString("observacao")
-                // falta colocar o ultimo treino realizado aqui
-        );
-    }
+        return usuario;
+}
 
     private void setDadosUsuario(Usuario usuario, PreparedStatement stmt) throws SQLException {
 
@@ -177,15 +163,17 @@ public class SqliteUsuarioDAO implements UsuarioDAO {
         stmt.setString(2, usuario.getEmail());
         stmt.setString(3, usuario.getSenha());
         stmt.setInt(4, (usuario.getInstrutor()) ? 1 : 0);
-        if (usuario instanceof Aluno) {
-            stmt.setString(5, ((Aluno) usuario).getCpf());
-            stmt.setString(6, ((Aluno) usuario).getTelefone());
-            stmt.setString(7, ((Aluno) usuario).getGenero());
-            stmt.setString(8, ((Aluno) usuario).getDataNascimento().toString());
-            stmt.setDouble(9, ((Aluno) usuario).getPeso());
-            stmt.setDouble(10, ((Aluno) usuario).getAltura());
-            stmt.setString(11, ((Aluno) usuario).getObservacoes());
+        if (!usuario.getInstrutor()) {
+            stmt.setString(5, usuario.getAluno().getCpf());
+            stmt.setString(6, usuario.getAluno().getTelefone());
+            stmt.setString(7, usuario.getAluno().getGenero());
+            stmt.setString(8, usuario.getAluno().getDataNascimento().toString());
+            stmt.setDouble(9, usuario.getAluno().getPeso());
+            stmt.setDouble(10, usuario.getAluno().getAltura());
+            stmt.setString(11, usuario.getAluno().getObservacoes());
+            stmt.setInt(12, (usuario.getAluno().getUltimoTreinoRealizado()) != null ? usuario.getAluno().getUltimoTreinoRealizado().getId() : 0);
         }
     }
+
 
 }

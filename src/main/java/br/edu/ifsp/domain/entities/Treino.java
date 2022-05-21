@@ -6,6 +6,15 @@ public class Treino {
     private String observacao;
     //private List<ExercicioTreino> exerciciosTreino;
 
+
+    public Treino() {
+    }
+
+    public Treino(String nome, String observacao) {
+        this.nome = nome;
+        this.observacao = observacao;
+    }
+
     public Treino(Integer id, String nome, String observacao) {
         this.id = id;
         this.nome = nome;
@@ -39,10 +48,10 @@ public class Treino {
 
     @Override
     public String toString() {
-        return "\n\nTreino{" +
-                "\nid=" + getId() +
-                ", \nnome='" + getNome() + '\'' +
-                ", \nobservacao='" + getObservacao() + '\'' +
-                "}";
+        return "\nTreino{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", observacao='" + observacao + '\'' +
+                '}';
     }
 }

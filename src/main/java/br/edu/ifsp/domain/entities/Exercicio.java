@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.entities;
 
+
 public class Exercicio {
     private Integer id;
     private String nome;
@@ -67,7 +68,7 @@ public class Exercicio {
 
     @Override
     public String toString() {
-        return "Exercicio{" +
+        return "\nExercicio{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", grupoMuscular=" + grupoMuscular +

@@ -1,6 +1,5 @@
 package br.edu.ifsp.domain.usecases.usuario;
 
-import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
@@ -40,11 +39,11 @@ public class BuscarUsuarioUC {
         }
 
         public List<Usuario> buscarTodosInstrutores () {
-            return usuarioDAO.findAllInstrutores();
+            return usuarioDAO.findAll("instrutor");
         }
 
-        public List<Aluno> buscarTodosAlunos () {
-            return usuarioDAO.findAllAlunos();
+        public List<Usuario> buscarTodosAlunos () {
+            return usuarioDAO.findAll("aluno");
         }
 
         public List<Usuario> buscarTodos() {

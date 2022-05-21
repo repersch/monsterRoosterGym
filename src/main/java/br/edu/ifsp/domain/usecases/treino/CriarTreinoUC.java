@@ -21,12 +21,6 @@ public class CriarTreinoUC {
             throw new IllegalArgumentException(notification.mensagemDeErro());
         }
 
-        Integer id = treino.getId();
-
-        if (treinoDAO.findById(id).isPresent()) {
-            throw new EntityAlreadyExistsException("Id já cadastrado");
-        }
-
         return treinoDAO.create(treino);
     }
 }

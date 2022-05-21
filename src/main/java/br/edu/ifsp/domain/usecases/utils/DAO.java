@@ -7,8 +7,6 @@ public interface DAO<T, K> {
 
     K create(T type);
 
-    Optional<T> findByAttribute(String attribute, String key);
-
     Optional<T> findById(K id);
 
     List<T> findAll();

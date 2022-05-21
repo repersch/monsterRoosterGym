@@ -1,9 +1,10 @@
 package br.edu.ifsp.application.repository.dao;
 
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
-import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.EstadoRegistroTreino;
 import br.edu.ifsp.domain.entities.RegistroTreino;
+import br.edu.ifsp.domain.entities.Treino;
+import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
 
 import java.sql.PreparedStatement;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static br.edu.ifsp.application.main.Main.buscarTreinoUC;
 import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
 
 public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
@@ -21,13 +23,14 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
     @Override
     public Integer create(RegistroTreino registroTreino) {
 
-        String sql = "INSERT INTO Registro_Treino (inicio, fim, estado, id_aluno) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Registro_Treino (inicio, fim, estado, id_aluno, id_treino) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, registroTreino.getInicio().toString());
             stmt.setString(2, registroTreino.getFim().toString());
             stmt.setString(3, registroTreino.getEstadoRegistroTreino().name());
-            stmt.setInt(4, registroTreino.getAluno().getId());
+            stmt.setInt(4, registroTreino.getUsuario().getId());
+            stmt.setInt(5, registroTreino.getUltimoTreinoRealizado().getId());
 
             stmt.execute();
             ResultSet resultado = stmt.getGeneratedKeys();
@@ -43,8 +46,23 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
     }
 
     @Override
-    public Optional<RegistroTreino> findByAttribute(String attribute, String key) {
-        return Optional.empty();
+    public List<RegistroTreino> findByAttribute(String attribute, Integer key) {
+
+        String sql = "SELECT * FROM registro_treino WHERE " + attribute + " = ?";
+        List<RegistroTreino> registrosTreino = new ArrayList<>();
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setInt(1, key);
+            ResultSet resultado = stmt.executeQuery();
+
+            if (resultado.next()) {
+                registrosTreino.add(resultSetToEntity(resultado));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return registrosTreino;
     }
 
     @Override
@@ -88,23 +106,12 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
     @Override
     public List<RegistroTreino> findByIdAluno(Integer id_aluno) {
-
-        String sql = "SELECT * FROM registro_treino WHERE id_aluno = ?";
-        List<RegistroTreino> registros = new ArrayList<>();
-
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setInt(1, id_aluno);
-            ResultSet resultado = stmt.executeQuery();
-
-            while (resultado.next()) {
-                registros.add(resultSetToEntity(resultado));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return registros;
+        return findByAttribute("id_aluno", id_aluno);
     }
 
+    public List<RegistroTreino> findByIdTreino(Integer id_treino) {
+        return findByAttribute("id_treino", id_treino);
+    }
 
     @Override
     public boolean update(RegistroTreino registroTreino) {
@@ -124,14 +131,15 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
 
     private RegistroTreino resultSetToEntity(ResultSet resultado) throws SQLException {
-        int idAluno = resultado.getInt("id_aluno");
-        Aluno aluno = (Aluno) buscarUsuarioUC.buscarPorId(idAluno).get();
+        Usuario aluno = buscarUsuarioUC.buscarPorId(resultado.getInt("id_aluno")).get();
+        Treino treino = buscarTreinoUC.buscarPorId(resultado.getInt("id_treino")).get();
 
         return new RegistroTreino(resultado.getInt("id"),
                 LocalDate.parse(resultado.getString("inicio")),
                 LocalDate.parse(resultado.getString("fim")),
                 EstadoRegistroTreino.toEnum(resultado.getString("estado")),
-                aluno
+                aluno,
+                treino
         );
     }
 
