@@ -11,7 +11,7 @@ import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.CriarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.EditarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.FichaTreinoDAO;
-import br.edu.ifsp.domain.usecases.treino.EditarTreinoUC;
+import br.edu.ifsp.domain.usecases.treino.*;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.EditarUsuarioUC;
@@ -21,9 +21,6 @@ import br.edu.ifsp.domain.usecases.registroTreino.BuscarRegistroTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarFinalTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
-import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
-import br.edu.ifsp.domain.usecases.treino.CriarTreinoUC;
-import br.edu.ifsp.domain.usecases.treino.TreinoDAO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -253,6 +250,15 @@ public class Main {
         criarExercicioTreinoUC.salvar(exercicioTreino1);
         System.out.println(exercicioTreino1);
         System.out.println("\n-----------Buscar Todos Exercicios Treino: " + buscarExercicioTreinoUC.buscarTodos());
+
+
+        System.out.println("\n\n\n-------------------- GERAR RELATORIO DE TREINO ---------------------");
+        Usuario usuarioRelatorio = buscarUsuarioUC.buscarPorId(1).get();
+        GerarRelatorioTreinoAluno relatorio1 = new GerarRelatorioTreinoAluno(usuarioRelatorio, buscarFichaTreinoUC.buscarPorId(usuarioRelatorio.getId()).get());
+
+        System.out.println(relatorio1);
+
+
     }
 
 
