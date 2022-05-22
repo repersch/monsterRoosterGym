@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface ExercicioTreinoDAO extends DAO<ExercicioTreino, Integer>  {
 
     Optional<ExercicioTreino> findByAttribute(String attribute, String key);
+
+    boolean updateExerciseLoad(Integer exercicioTreinoId, Double load);
 }

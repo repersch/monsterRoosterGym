@@ -106,6 +106,23 @@ public class SqliteExercicioTreinoDAO implements ExercicioTreinoDAO {
         return false;
     }
 
+    @Override
+    public boolean updateExerciseLoad(Integer exercicioTreinoId, Double load) {
+        String sql = "UPDATE ExercicioTreino SET carga = ? WHERE id = ?";
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setDouble(1, load);
+
+            stmt.setInt(2, exercicioTreinoId);
+
+            stmt.execute();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private ExercicioTreino resultSetToEntity(ResultSet resultado) throws SQLException {
         Integer id_treino = resultado.getInt("id_treino");
         Treino treino = (Treino) buscarTreinoUC.buscarPorId(id_treino).get();

@@ -4,6 +4,7 @@ import br.edu.ifsp.application.repository.dao.*;
 import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
 import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.autenticar.AutenticarUC;
+import br.edu.ifsp.domain.usecases.exercicioTreino.AlterarCargaExercicioTreinoUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.CriarExercicioTreinoUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.ExercicioTreinoDAO;
@@ -51,6 +52,7 @@ public class Main {
 
     public static CriarExercicioTreinoUC criarExercicioTreinoUC;
     public static BuscarExercicioTreinoUC buscarExercicioTreinoUC;
+    public static AlterarCargaExercicioTreinoUC alterarCargaExercicioTreinoUC;
 
     public static AutenticarUC autenticarUC;
 
@@ -260,6 +262,10 @@ public class Main {
         criarExercicioTreinoUC.salvar(exercicioTreino2);
         criarExercicioTreinoUC.salvar(exercicioTreino3);
 
+        alterarCargaExercicioTreinoUC.atualizarCargaExercicio(3, 16.8);
+        alterarCargaExercicioTreinoUC.atualizarCargaExercicio(2, 20.0);
+        alterarCargaExercicioTreinoUC.atualizarCargaExercicio(1, 15.5);
+
 
         System.out.println("\n-----------Buscar Todos Exercicios Treino: " + buscarExercicioTreinoUC.buscarTodos());
 
@@ -310,6 +316,7 @@ public class Main {
         ExercicioTreinoDAO exercicioTreinoDAO = new SqliteExercicioTreinoDAO();
         criarExercicioTreinoUC = new CriarExercicioTreinoUC(exercicioTreinoDAO);
         buscarExercicioTreinoUC = new BuscarExercicioTreinoUC(exercicioTreinoDAO);
+        alterarCargaExercicioTreinoUC = new AlterarCargaExercicioTreinoUC(exercicioTreinoDAO);
 
         autenticarUC = new AutenticarUC(usuarioDAO);
     }
