@@ -22,7 +22,6 @@ import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public class Main {
 
@@ -55,14 +54,12 @@ public class Main {
     public static AutenticarUC autenticarUC;
 
     public static void main(String[] args) {
-        System.out.println("Configurando INJECTIONS");
         configureInjection();
-        System.out.println("Setup DATABASE");
-        setupDatabase();
-        populateFakeDatabase();
+        criandoBancoDeDados();
+        testandoCasosDeUso();
     }
 
-    private static void populateFakeDatabase() {
+    private static void testandoCasosDeUso() {
 
         System.out.println("-----------------------------------------------------------");
         System.out.println("--------------- TESTES DE USUÁRIO - ALUNO ------------------");
@@ -190,7 +187,7 @@ public class Main {
         System.out.println("\n-----------Buscar Todas as Fichas Treino: " + buscarFichaTreinoUC.buscarTodos());
 
         editarFichaTreinoUC.atualizar(new FichaTreino(1,true, LocalDate.now().minusDays(7), LocalDate.now().minusDays(7), buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), (Usuario) buscarUsuarioUC.buscarPorNome(instrutor2.getNome()).get()));
-        System.out.println("Buscar por ID depois de atualizar: " + buscarFichaTreinoUC.buscarPorId(1));
+        System.out.println("\n-----------Buscar por ID depois de atualizar: " + buscarFichaTreinoUC.buscarPorId(1));
 
 
 
@@ -274,13 +271,11 @@ public class Main {
 
 
         editarExercicioTreinoUC.atualizar(new ExercicioTreino(3, 10, 10.5, 8, buscarTreinoUC.buscarPorId(1).get(), buscarExercicioUC.buscarPorId(3).get()));
-        System.out.println("\n---------------Exercício treino 3: " + buscarExercicioTreinoUC.buscarPorId(3));
+        System.out.println("\n---------------Exercício treino 3 depois de editado: " + buscarExercicioTreinoUC.buscarPorId(3));
 
         System.out.println("\n\n-----------------------------------------------------------");
         System.out.println("-------------------- GERAR RELATORIO DE TREINO ------------------");
         System.out.println("--------------------------------------------------------------\n");
-
-
 
         Usuario usuarioRelatorio = buscarUsuarioUC.buscarPorId(1).get();
         GerarRelatorioTreinoAluno relatorio1 = new GerarRelatorioTreinoAluno(usuarioRelatorio, buscarFichaTreinoUC.buscarPorId(usuarioRelatorio.getId()).get());
@@ -328,7 +323,7 @@ public class Main {
         autenticarUC = new AutenticarUC(usuarioDAO);
     }
 
-    private static void setupDatabase() {
+    private static void criandoBancoDeDados() {
         DatabaseBuilder dbBuilder = new DatabaseBuilder();
         dbBuilder.buildDatabaseIfMissing();
     }

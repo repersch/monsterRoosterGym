@@ -11,7 +11,6 @@ public class DatabaseBuilder {
     public void buildDatabaseIfMissing() {
         apagarBancoDeDados();
         if (isDatabaseMissing()) {
-            System.out.println("Database is missing. Building database: \n");
             criarTabelas();
         }
     }
@@ -21,7 +20,6 @@ public class DatabaseBuilder {
     }
 
     private static void apagarBancoDeDados() {
-        System.out.println("Apagando banco de dados...");
         try {
             Files.deleteIfExists(Paths.get("gym.db"));
         } catch (IOException e) {
@@ -29,25 +27,21 @@ public class DatabaseBuilder {
         }
     }
 
-    // batch serve para executar várias sql de uma vez
     private void criarTabelas() {
         try (Statement statement = ConnectionFactory.createStatement()) {
-            statement.addBatch(createUsuarioTable());
-            statement.addBatch(createRegistroTreinoTable());
-            statement.addBatch(createExercicioTable());
-//            statement.addBatch(createTransactionTable());
-            statement.addBatch(createTreinoTable());
-            statement.addBatch(createFichaTreinoTable());
-            statement.addBatch(createExercicioTreinoTable());
+            statement.addBatch(criarTabelaUsuario());
+            statement.addBatch(criarTabelaRegistroTreino());
+            statement.addBatch(criarTabelaExercicio());
+            statement.addBatch(criarTabelaTreino());
+            statement.addBatch(criarTabelaFichaTreino());
+            statement.addBatch(criarTabelaExercicioTreino());
             statement.executeBatch();
-
-            System.out.println("Criando banco de dados...");
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    private String createUsuarioTable() {
+    private String criarTabelaUsuario() {
         StringBuilder builder = new StringBuilder();
 
         builder.append("CREATE TABLE Usuario(\n");
@@ -70,7 +64,7 @@ public class DatabaseBuilder {
     }
 
 
-    private String createRegistroTreinoTable() {
+    private String criarTabelaRegistroTreino() {
         StringBuilder builder = new StringBuilder();
 
         builder.append("CREATE TABLE Registro_Treino(\n");
@@ -88,7 +82,8 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createExercicioTable() {
+    private String criarTabelaExercicio() {
+
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE Exercicio(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
@@ -102,7 +97,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createTreinoTable() {
+    private String criarTabelaTreino() {
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE Treino(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
@@ -115,7 +110,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createFichaTreinoTable() {
+    private String criarTabelaFichaTreino() {
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE FichaTreino(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
@@ -131,7 +126,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createExercicioTreinoTable() {
+    private String criarTabelaExercicioTreino() {
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE ExercicioTreino(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
@@ -147,38 +142,4 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-
-//    private String createUserTable() {
-//        StringBuilder builder = new StringBuilder();
-//
-//        builder.append("CREATE TABLE User(\n");
-//        builder.append("id TEXT NOT NULL PRIMARY KEY, \n");
-//        builder.append("name TEXT NOT NULL, \n");
-//        builder.append("email TEXT NOT NULL UNIQUE, \n");
-//        builder.append("phone TEXT NOT NULL, \n");
-//        builder.append("course TEXT, \n");
-//        builder.append("department TEXT\n");
-//        builder.append("); \n");
-//
-//        System.out.println(builder.toString());
-//        return builder.toString();
-//    }
-//
-//    private String createTransactionTable() {
-//        StringBuilder builder = new StringBuilder();
-//
-//        builder.append("CREATE TABLE BookTransaction(\n");
-//        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
-//        builder.append("user TEXT NOT NULL, \n");
-//        builder.append("book INTEGER NOT NULL, \n");
-//        builder.append("issue_date TEXT NOT NULL, \n");
-//        builder.append("due_date TEXT NOT NULL, \n");
-//        builder.append("return_date TEXT, \n");
-//        builder.append("FOREIGN KEY(user) REFERENCES User(id), \n");
-//        builder.append("FOREIGN KEY(book) REFERENCES Book(id)\n");
-//        builder.append("); \n");
-//
-//        System.out.println(builder.toString());
-//        return builder.toString();
-//    }
 }
