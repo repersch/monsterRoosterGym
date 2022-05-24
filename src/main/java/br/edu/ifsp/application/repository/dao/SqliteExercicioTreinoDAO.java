@@ -88,7 +88,8 @@ public class SqliteExercicioTreinoDAO implements ExercicioTreinoDAO {
 
     @Override
     public boolean update(ExercicioTreino exercicioTreino) {
-        String sql = "UPDATE ExercicioTreino SET serie = ?, carga = ?, repeticao = ?, id_treino = ?, id_exercicio = ?";
+        String sql = "UPDATE ExercicioTreino SET serie = ?, carga = ?, repeticao = ?, id_treino = ?, id_exercicio = ?" +
+                "WHERE id = ?";
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setInt(1, exercicioTreino.getSerie());
@@ -96,6 +97,8 @@ public class SqliteExercicioTreinoDAO implements ExercicioTreinoDAO {
             stmt.setInt(3, exercicioTreino.getRepeticao());
             stmt.setInt(4, exercicioTreino.getTreino().getId());
             stmt.setInt(5, exercicioTreino.getExercicio().getId());
+
+            stmt.setInt(6, exercicioTreino.getId());
 
             stmt.execute();
 

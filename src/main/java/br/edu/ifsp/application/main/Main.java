@@ -4,10 +4,7 @@ import br.edu.ifsp.application.repository.dao.*;
 import br.edu.ifsp.application.repository.utils.DatabaseBuilder;
 import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.autenticar.AutenticarUC;
-import br.edu.ifsp.domain.usecases.exercicioTreino.AlterarCargaExercicioTreinoUC;
-import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
-import br.edu.ifsp.domain.usecases.exercicioTreino.CriarExercicioTreinoUC;
-import br.edu.ifsp.domain.usecases.exercicioTreino.ExercicioTreinoDAO;
+import br.edu.ifsp.domain.usecases.exercicioTreino.*;
 import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.CriarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.EditarFichaTreinoUC;
@@ -52,6 +49,7 @@ public class Main {
 
     public static CriarExercicioTreinoUC criarExercicioTreinoUC;
     public static BuscarExercicioTreinoUC buscarExercicioTreinoUC;
+    public static EditarExercicioTreinoUC editarExercicioTreinoUC;
     public static AlterarCargaExercicioTreinoUC alterarCargaExercicioTreinoUC;
 
     public static AutenticarUC autenticarUC;
@@ -275,6 +273,9 @@ public class Main {
         System.out.println("\n-----------Buscar Todos Exercicios Treino: " + buscarExercicioTreinoUC.buscarTodos());
 
 
+        editarExercicioTreinoUC.atualizar(new ExercicioTreino(3, 10, 10.5, 8, buscarTreinoUC.buscarPorId(1).get(), buscarExercicioUC.buscarPorId(3).get()));
+        System.out.println("\n---------------Exercício treino 3: " + buscarExercicioTreinoUC.buscarPorId(3));
+
         System.out.println("\n\n-----------------------------------------------------------");
         System.out.println("-------------------- GERAR RELATORIO DE TREINO ------------------");
         System.out.println("--------------------------------------------------------------\n");
@@ -321,6 +322,7 @@ public class Main {
         ExercicioTreinoDAO exercicioTreinoDAO = new SqliteExercicioTreinoDAO();
         criarExercicioTreinoUC = new CriarExercicioTreinoUC(exercicioTreinoDAO);
         buscarExercicioTreinoUC = new BuscarExercicioTreinoUC(exercicioTreinoDAO);
+        editarExercicioTreinoUC = new EditarExercicioTreinoUC(exercicioTreinoDAO);
         alterarCargaExercicioTreinoUC = new AlterarCargaExercicioTreinoUC(exercicioTreinoDAO);
 
         autenticarUC = new AutenticarUC(usuarioDAO);
