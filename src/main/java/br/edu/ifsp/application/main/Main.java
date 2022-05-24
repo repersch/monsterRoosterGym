@@ -212,6 +212,11 @@ public class Main {
         System.out.println("\n---------------Busca por Nome: " + buscarTreinoUC.buscarPorNome(treino2.getNome()));
         System.out.println("\n---------------Buscar Todos Treinos: " + buscarTreinoUC.buscarTodos());
 
+        treino2 = buscarTreinoUC.buscarPorId(2).get();
+        treino2.setObservacao("Treino de segunda, quarta e sexta");
+        editarTreinoUC.editar(treino2);
+        System.out.println("\n---------------Buscar Treino 2 depois de editar: " + buscarTreinoUC.buscarPorId(2));
+
 
         System.out.println("\n\n-----------------------------------------------------------------");
         System.out.println("------------------------ REGISTRO TREINO --------------------------");
