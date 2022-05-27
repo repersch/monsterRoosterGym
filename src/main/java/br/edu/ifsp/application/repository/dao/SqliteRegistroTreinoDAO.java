@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +31,7 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
             stmt.setString(2, registroTreino.getFim().toString());
             stmt.setString(3, registroTreino.getEstadoRegistroTreino().name());
             stmt.setInt(4, registroTreino.getUsuario().getId());
-            stmt.setInt(5, registroTreino.getUltimoTreinoRealizado().getId());
+            stmt.setInt(5, registroTreino.getTreino().getId());
 
             stmt.execute();
             ResultSet resultado = stmt.getGeneratedKeys();
@@ -135,8 +136,8 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
         Treino treino = buscarTreinoUC.buscarPorId(resultado.getInt("id_treino")).get();
 
         return new RegistroTreino(resultado.getInt("id"),
-                LocalDate.parse(resultado.getString("inicio")),
-                LocalDate.parse(resultado.getString("fim")),
+                LocalDateTime.parse(resultado.getString("inicio")),
+                LocalDateTime.parse(resultado.getString("fim")),
                 EstadoRegistroTreino.toEnum(resultado.getString("estado")),
                 aluno,
                 treino

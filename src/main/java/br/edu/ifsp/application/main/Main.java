@@ -20,7 +20,9 @@ import br.edu.ifsp.domain.usecases.registroTreino.RegistrarFinalTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
@@ -218,18 +220,18 @@ public class Main {
         System.out.println("-------------------------------------------------------------------\n");
 
 
-        RegistroTreino registroTreino1 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(15), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorId(1).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
-        RegistroTreino registroTreino2 = new RegistroTreino(LocalDate.now().minusDays(5), LocalDate.now().plusDays(30), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
-        RegistroTreino registroTreino3 = new RegistroTreino(LocalDate.now().minusDays(3), LocalDate.now().plusDays(20), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorNome("Renata Persch Camacho").get(), buscarTreinoUC.buscarPorNome(treino1.getNome()).get());
+        RegistroTreino registroTreino1 = new RegistroTreino(LocalDateTime.now(), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorId(1).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
+        RegistroTreino registroTreino2 = new RegistroTreino(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
+        RegistroTreino registroTreino3 = new RegistroTreino(LocalDateTime.now().minusDays(3), LocalDateTime.now().plusHours(2), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorNome("Renata Persch Camacho").get(), buscarTreinoUC.buscarPorNome(treino1.getNome()).get());
 
 
         System.out.println("\n---------------Registro treino 1: " + registrarInicioTreinoUC.iniciarTreino(registroTreino1));
         System.out.println("\n---------------Registro treino 2: " + registrarInicioTreinoUC.iniciarTreino(registroTreino2));
         System.out.println("\n---------------Registro treino 3: " + registrarInicioTreinoUC.iniciarTreino(registroTreino3));
 
-        RegistroTreino registroTreino4 = new RegistroTreino(LocalDate.now().minusDays(7), LocalDate.now().plusDays(10), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno3.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino1.getNome()).get());
-        RegistroTreino registroTreino5 = new RegistroTreino(LocalDate.now().minusDays(2), LocalDate.now().plusDays(3), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino3.getNome()).get());
-        RegistroTreino registroTreino6 = new RegistroTreino(LocalDate.now(), LocalDate.now().plusDays(5), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno4.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
+        RegistroTreino registroTreino4 = new RegistroTreino(LocalDateTime.now().minusHours(2), LocalDateTime.now(), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno3.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino1.getNome()).get());
+        RegistroTreino registroTreino5 = new RegistroTreino(LocalDateTime.now().minusDays(2), LocalDateTime.now().minusDays(2).plusHours(2), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino3.getNome()).get());
+        RegistroTreino registroTreino6 = new RegistroTreino(LocalDateTime.now(), LocalDateTime.now().plusDays(5), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno4.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
 
         System.out.println("\n---------------Registro Treino 4: " + registrarInicioTreinoUC.iniciarTreino(registroTreino4));
         System.out.println("\n---------------Registro Treino 5: " + registrarInicioTreinoUC.iniciarTreino(registroTreino5));
@@ -253,9 +255,9 @@ public class Main {
         System.out.println("-----------------------------------------------------------\n");
 
 
-        ExercicioTreino exercicioTreino1 = new ExercicioTreino(5, 3.3, 5, buscarTreinoUC.buscarPorId(2).get(),buscarExercicioUC.buscarPorId(3).get());
-        ExercicioTreino exercicioTreino2 = new ExercicioTreino(2, 2.0, 4, buscarTreinoUC.buscarPorId(1).get(),buscarExercicioUC.buscarPorId(1).get());
-        ExercicioTreino exercicioTreino3 = new ExercicioTreino(7, 5.1, 3, buscarTreinoUC.buscarPorId(3).get(),buscarExercicioUC.buscarPorId(1).get());
+        ExercicioTreino exercicioTreino1 = new ExercicioTreino(5, 3.3, 5, buscarTreinoUC.buscarPorId(2).get(), buscarExercicioUC.buscarPorId(3).get());
+        ExercicioTreino exercicioTreino2 = new ExercicioTreino(2, 2.0, 4, buscarTreinoUC.buscarPorId(1).get(), buscarExercicioUC.buscarPorId(1).get());
+        ExercicioTreino exercicioTreino3 = new ExercicioTreino(7, 5.1, 3, buscarTreinoUC.buscarPorId(3).get(), buscarExercicioUC.buscarPorId(1).get());
 
 
         criarExercicioTreinoUC.salvar(exercicioTreino1);
@@ -273,6 +275,8 @@ public class Main {
         editarExercicioTreinoUC.atualizar(new ExercicioTreino(3, 10, 10.5, 8, buscarTreinoUC.buscarPorId(1).get(), buscarExercicioUC.buscarPorId(3).get()));
         System.out.println("\n---------------Exercício treino 3 depois de editado: " + buscarExercicioTreinoUC.buscarPorId(3));
 
+
+
         System.out.println("\n\n-----------------------------------------------------------");
         System.out.println("-------------------- GERAR RELATORIO DE TREINO ------------------");
         System.out.println("--------------------------------------------------------------\n");
@@ -281,7 +285,6 @@ public class Main {
         GerarRelatorioTreinoAluno relatorio1 = new GerarRelatorioTreinoAluno(usuarioRelatorio, buscarFichaTreinoUC.buscarPorId(usuarioRelatorio.getId()).get());
 
         System.out.println(relatorio1);
-
 
     }
 

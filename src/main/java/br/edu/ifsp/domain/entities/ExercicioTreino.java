@@ -84,8 +84,8 @@ public class ExercicioTreino {
                 ", Série = " + serie +
                 ", Carga = " + carga +
                 ", Repetições = " + repeticao +
-                ", Treino = " + treino +
-                ", Exercício = " + exercicio +
+                ", Nome do treino = " + treino.getNome() +
+                ", Nome do exercício = " + exercicio.getNome() +
                 ']';
     }
 }

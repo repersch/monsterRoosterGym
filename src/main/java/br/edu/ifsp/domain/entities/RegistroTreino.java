@@ -1,34 +1,34 @@
 package br.edu.ifsp.domain.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class RegistroTreino {
 
     private Integer id;
-    private LocalDate inicio;
-    private LocalDate fim;
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
     private EstadoRegistroTreino estadoRegistroTreino;
     private Usuario usuario;
-    private Treino ultimoTreinoRealizado;
+    private Treino treino;
 
     public RegistroTreino() {
     }
 
-    public RegistroTreino(Integer id, LocalDate inicio, LocalDate fim, EstadoRegistroTreino estadoRegistroTreino, Usuario usuario, Treino ultimoTreinoRealizado) {
+    public RegistroTreino(Integer id, LocalDateTime inicio, LocalDateTime fim, EstadoRegistroTreino estadoRegistroTreino, Usuario usuario, Treino treino) {
         this.id = id;
         this.inicio = inicio;
         this.fim = fim;
         this.estadoRegistroTreino = estadoRegistroTreino;
         this.usuario = usuario;
-        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
+        this.treino = treino;
     }
 
-    public RegistroTreino(LocalDate inicio, LocalDate fim, EstadoRegistroTreino estadoRegistroTreino, Usuario usuario, Treino ultimoTreinoRealizado) {
+    public RegistroTreino(LocalDateTime inicio, LocalDateTime fim, EstadoRegistroTreino estadoRegistroTreino, Usuario usuario, Treino treino) {
         this.inicio = inicio;
         this.fim = fim;
         this.estadoRegistroTreino = estadoRegistroTreino;
         this.usuario = usuario;
-        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
+        this.treino = treino;
     }
 
     public Integer getId() {
@@ -39,19 +39,19 @@ public class RegistroTreino {
         this.id = id;
     }
 
-    public LocalDate getInicio() {
+    public LocalDateTime getInicio() {
         return inicio;
     }
 
-    public void setInicio(LocalDate inicio) {
+    public void setInicio(LocalDateTime inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDate getFim() {
+    public LocalDateTime getFim() {
         return fim;
     }
 
-    public void setFim(LocalDate fim) {
+    public void setFim(LocalDateTime fim) {
         this.fim = fim;
     }
 
@@ -71,12 +71,12 @@ public class RegistroTreino {
         this.usuario = usuario;
     }
 
-    public Treino getUltimoTreinoRealizado() {
-        return ultimoTreinoRealizado;
+    public Treino getTreino() {
+        return treino;
     }
 
-    public void setUltimoTreinoRealizado(Treino ultimoTreinoRealizado) {
-        this.ultimoTreinoRealizado = ultimoTreinoRealizado;
+    public void setTreino(Treino treino) {
+        this.treino = treino;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class RegistroTreino {
                 ", Fim = " + fim +
                 ", EstadoRegistroTreino = " + estadoRegistroTreino +
                 ", Nome do aluno = " + usuario.getNome() +
-                ", Nome do ultimoTreinoRealizado = " + ultimoTreinoRealizado.getNome() +
+                ", Nome do treino = " + treino.getNome() +
                 ']';
     }
 }

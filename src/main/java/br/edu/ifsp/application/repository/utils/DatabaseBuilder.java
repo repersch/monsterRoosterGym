@@ -42,104 +42,104 @@ public class DatabaseBuilder {
     }
 
     private String criarTabelaUsuario() {
-        StringBuilder builder = new StringBuilder();
+        String sql = """
+                CREATE TABLE Usuario(
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT NOT NULL,
+                    email TEXT NOT NULL UNIQUE,
+                    senha TEXT NOT NULL,
+                    isInstrutor INTEGER NOT NULL,
+                    cpf TEXT,
+                    telefone TEXT,
+                    genero TEXT,
+                    data_nascimento STRING,
+                    peso DOUBLE,
+                    altura DOUBLE,
+                    observacao TEXT);
+                """;
 
-        builder.append("CREATE TABLE Usuario(\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
-        builder.append("nome TEXT NOT NULL, \n");
-        builder.append("email TEXT NOT NULL UNIQUE, \n");
-        builder.append("senha TEXT NOT NULL, \n");
-        builder.append("isInstrutor INTEGER NOT NULL, \n");
-        builder.append("cpf TEXT, \n");
-        builder.append("telefone TEXT, \n");
-        builder.append("genero TEXT, \n");
-        builder.append("data_nascimento STRING, \n");
-        builder.append("peso DOUBLE, \n");
-        builder.append("altura DOUBLE, \n");
-        builder.append("observacao TEXT\n");
-        builder.append("); \n");
-
-        System.out.println(builder.toString());
-        return builder.toString();
+        System.out.println(sql);
+        return sql;
     }
 
 
     private String criarTabelaRegistroTreino() {
-        StringBuilder builder = new StringBuilder();
+        String sql = """
+                CREATE TABLE Registro_Treino(
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    inicio TEXT NOT NULL,
+                    fim TEXT,
+                    estado TEXT NOT NULL,
+                    id_aluno INTEGER NOT NULL,
+                    id_treino INTEGER NOT NULL,
+                    FOREIGN KEY(id_aluno) REFERENCES Aluno(id),
+                    FOREIGN KEY(id_treino) REFERENCES Treino(id));
+                """;
 
-        builder.append("CREATE TABLE Registro_Treino(\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
-        builder.append("inicio TEXT NOT NULL,\n");
-        builder.append("fim TEXT,\n");
-        builder.append("estado TEXT NOT NULL,\n");
-        builder.append("id_aluno INTEGER NOT NULL,\n");
-        builder.append("id_treino INTEGER NOT NULL,\n");
-        builder.append("FOREIGN KEY(id_aluno) REFERENCES Aluno(id)\n");
-        builder.append("FOREIGN KEY(id_treino) REFERENCES Treino(id)\n");
-        builder.append("); \n");
-
-        System.out.println(builder.toString());
-        return builder.toString();
+        System.out.println(sql);
+        return sql;
     }
 
     private String criarTabelaExercicio() {
+        String sql = """
+                CREATE TABLE Exercicio(
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT NOT NULL UNIQUE,
+                    grupo_muscular TEXT NOT NULL,
+                    descricao TEXT NOT NULL,
+                    em_uso INTEGER NOT NULL);
+                """;
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE Exercicio(\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
-        builder.append("nome TEXT NOT NULL UNIQUE,\n");
-        builder.append("grupo_muscular TEXT NOT NULL,\n");
-        builder.append("descricao TEXT NOT NULL,\n");
-        builder.append("em_uso INTEGER NOT NULL");
-        builder.append("); \n");
-
-        System.out.println(builder.toString());
-        return builder.toString();
+        System.out.println(sql);
+        return sql;
     }
 
     private String criarTabelaTreino() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE Treino(\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
-        builder.append("nome TEXT NOT NULL UNIQUE,\n");
-        builder.append("observacao TEXT NOT NULL,");
-        builder.append("id_ficha_treino INTEGER NOT NULL,\n");
-        builder.append("FOREIGN KEY(id_ficha_treino) REFERENCES FichaTreino(id)\n");
-        builder.append("); \n");
-        System.out.println(builder.toString());
-        return builder.toString();
+        String sql = """
+                CREATE TABLE Treino(
+                     id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     nome TEXT NOT NULL UNIQUE,
+                     observacao TEXT NOT NULL,
+                     id_ficha_treino INTEGER NOT NULL,
+                     FOREIGN KEY(id_ficha_treino) REFERENCES FichaTreino(id));
+                """;
+
+        System.out.println(sql);
+        return sql;
     }
 
     private String criarTabelaFichaTreino() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE FichaTreino(\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
-        builder.append("valido INTEGER NOT NULL,\n");
-        builder.append("dataInicio STRING,\n");
-        builder.append("validade STRING,\n");
-        builder.append("id_aluno STRING NOT NULL,\n");
-        builder.append("id_instrutor STRING,\n");
-        builder.append("FOREIGN KEY(id_aluno) REFERENCES Usuario(id),\n");
-        builder.append("FOREIGN KEY(id_instrutor) REFERENCES Usuario(id)\n");
-        builder.append("); \n");
-        System.out.println(builder.toString());
-        return builder.toString();
+        String sql = """
+                CREATE TABLE FichaTreino(
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    valido INTEGER NOT NULL,
+                    dataInicio STRING,
+                    validade STRING,
+                    id_aluno STRING NOT NULL,
+                    id_instrutor STRING,
+                    FOREIGN KEY(id_aluno) REFERENCES Usuario(id),
+                    FOREIGN KEY(id_instrutor) REFERENCES Usuario(id));
+                """;
+
+        System.out.println(sql);
+        return sql;
     }
 
     private String criarTabelaExercicioTreino() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE ExercicioTreino(\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
-        builder.append("serie INTEGER,\n");
-        builder.append("carga DOUBLE,\n");
-        builder.append("repeticao INTEGER,\n");
-        builder.append("id_treino INTEGER NOT NULL,\n");
-        builder.append("id_exercicio INTEGER NOT NULL,");
-        builder.append("FOREIGN KEY(id_treino) REFERENCES Treino(id),\n");
-        builder.append("FOREIGN KEY(id_exercicio) REFERENCES Exercicio(id)\n");
-        builder.append("); \n");
-        System.out.println(builder.toString());
-        return builder.toString();
+        String sql = """
+                CREATE TABLE ExercicioTreino(
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        serie INTEGER,
+                        carga DOUBLE,
+                        repeticao INTEGER,
+                        id_treino INTEGER NOT NULL,
+                        id_exercicio INTEGER NOT NULL,
+                        FOREIGN KEY(id_treino) REFERENCES Treino(id),
+                        FOREIGN KEY(id_exercicio) REFERENCES Exercicio(id));
+                """;
+
+        System.out.println(sql);
+        return sql;
     }
 
 }
