@@ -32,11 +32,11 @@
       </Pane>
       <Accordion layoutX="59.0" layoutY="147.0" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" />
-      <TableView fx:id="tabelaExercicio" layoutX="82.0" layoutY="277.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
+      <TableView fx:id="tabelaFichaTreino" layoutX="82.0" layoutY="277.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
          <columns>
             <TableColumn fx:id="cIdFichaTreino" prefWidth="104.0" text="ID" />
             <TableColumn fx:id="cDataInicio" prefWidth="193.60003662109375" text="Data Início" />
-            <TableColumn fx:id="cvValidadeFichaTreino" prefWidth="208.00006103515625" text="Validade" />
+            <TableColumn fx:id="cValidadeFichaTreino" prefWidth="208.00006103515625" text="Validade" />
             <TableColumn fx:id="cInstrutorFichaTreino" maxWidth="1000.0" prefWidth="154.40008544921875" text="Instrutor" />
          </columns>
       </TableView>

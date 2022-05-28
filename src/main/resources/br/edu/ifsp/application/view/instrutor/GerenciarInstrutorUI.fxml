@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<AnchorPane fx:controller="br.edu.ifsp.application.controller.instrutor.GerenciarInstrutorUIController"
-            maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.GerenciarInstrutorUIController">
    <children>
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="296.0" layoutX="57.0" layoutY="63.0" rotate="-119.5" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="204.0" />
       <Label layoutX="105.0" layoutY="131.0" text="Nome">
@@ -28,15 +31,14 @@
          </font>
       </Label>
       <TextField fx:id="txtNomeInstrutor" layoutX="174.0" layoutY="134.0" prefHeight="25.0" prefWidth="405.0" />
-      <TextField fx:id="txtEmail" layoutX="174.0" layoutY="178.0" prefHeight="25.0" prefWidth="405.0" />
+      <TextField fx:id="txtEmailnstrutor" layoutX="174.0" layoutY="178.0" prefHeight="25.0" prefWidth="405.0" />
       <Label layoutX="190.0" layoutY="49.0" prefHeight="43.0" prefWidth="176.0" text="INSTRUTOR">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <ImageView fitHeight="84.0" fitWidth="103.0" layoutX="366.0" layoutY="29.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@../../imagem/instrutor.png"/>
+      <ImageView fitHeight="84.0" fitWidth="103.0" layoutX="366.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../imagem/instrutor.png" />
       </ImageView>
       <PasswordField fx:id="txtSenha" layoutX="174.0" layoutY="227.0" prefHeight="25.0" prefWidth="190.0" />
    </children>

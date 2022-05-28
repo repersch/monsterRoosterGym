@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("application/view/InstrutorUI"), 950, 700);
+        scene = new Scene(loadFXML("application/view/aluno/GerenciarInstrutorUI"), 950, 700);
         stage.setScene(scene);
         stage.show();
     }

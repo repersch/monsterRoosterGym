@@ -4,8 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,8 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.aluno.FichaTreinoUIController">
+<AnchorPane prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.aluno.DetalhesFichaTreinoUIController">
    <children>
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="398.0" layoutX="379.0" layoutY="233.0" rotate="152.5" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="365.0" />
       <Pane layoutX="616.0" layoutY="14.0" prefHeight="104.0" prefWidth="319.0">
@@ -33,26 +31,22 @@
       </Pane>
       <Accordion layoutX="59.0" layoutY="147.0" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" />
-      <TableView fx:id="tabelaExercicio" layoutX="82.0" layoutY="277.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
-         <columns>
-            <TableColumn fx:id="cIdFichaTreino" prefWidth="104.0" text="ID" />
-            <TableColumn fx:id="cDataInicio" prefWidth="193.60003662109375" text="Data Início" />
-            <TableColumn fx:id="cvValidadeFichaTreino" prefWidth="208.00006103515625" text="Validade" />
-            <TableColumn fx:id="cInstrutorFichaTreino" maxWidth="1000.0" prefWidth="154.40008544921875" text="Instrutor" />
-         </columns>
-      </TableView>
-      <Label layoutX="88.0" layoutY="148.0" prefHeight="74.0" prefWidth="340.0" text="FICHA TREINO">
+      <Label layoutX="88.0" layoutY="148.0" prefHeight="74.0" prefWidth="410.0" text="FICHA TREINO 01">
          <font>
             <Font size="50.0" />
          </font>
       </Label>
-      <ImageView fitHeight="104.0" fitWidth="96.0" layoutX="432.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="104.0" fitWidth="96.0" layoutX="500.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imagem/ficha_treino.png" />
          </image>
       </ImageView>
       <Button fx:id="btnDetalhesFichaTreino" layoutX="622.0" layoutY="605.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Detalhes" textFill="WHITE" />
-      <Button fx:id="btnIniciarTreino" layoutX="82.0" layoutY="605.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #dc4343;" text="Registrar Início Treino" textFill="WHITE" />
-      <Button fx:id="btnFinalizarTreino" layoutX="247.0" layoutY="605.0" mnemonicParsing="false" onAction="#registrarFinalTreino" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #dc4343;" text="Registrar Final Treino" textFill="WHITE" />
+      <ListView fx:id="listaTreinos" layoutX="82.0" layoutY="299.0" prefHeight="287.0" prefWidth="296.0" />
+      <Label layoutX="86.0" layoutY="271.0" text="TREINO">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

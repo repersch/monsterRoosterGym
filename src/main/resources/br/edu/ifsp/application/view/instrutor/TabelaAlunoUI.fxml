@@ -12,30 +12,28 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.ExercicioUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.TabelaAlunoUIController">
    <children>
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="398.0" layoutX="-58.0" layoutY="209.0" rotate="135.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="365.0" />
-      <TableView fx:id="tabelaExercicio" layoutX="250.0" layoutY="332.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
+      <TableView fx:id="tabelaAluno" layoutX="250.0" layoutY="332.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
          <columns>
-            <TableColumn fx:id="cNomeExercicio" prefWidth="432.7999572753906" text="Nome" />
-            <TableColumn fx:id="cGrupoMuscular" prefWidth="226.4000244140625" text="Grupo Muscular" />
+            <TableColumn fx:id="cNomeAluno" prefWidth="432.7999572753906" text="Nome" />
+            <TableColumn fx:id="cCpfAluno" prefWidth="226.4000244140625" text="CPF" />
          </columns>
       </TableView>
-      <TextField fx:id="txtBuscarExercicio" layoutX="250.0" layoutY="279.0" prefHeight="34.0" prefWidth="358.0" promptText="Buscar" />
+      <TextField fx:id="txtBuscarAluno" layoutX="250.0" layoutY="279.0" prefHeight="34.0" prefWidth="358.0" promptText="Buscar" />
       <Button fx:id="btnMenuAluno" layoutX="14.0" layoutY="293.0" mnemonicParsing="false" onAction="#telaAluno" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Aluno" textFill="WHITE" />
       <Button fx:id="btnMenuInstrutor" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#telaInstrutor" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Instrutor" textFill="WHITE" />
       <Button fx:id="btnMenuExercicio" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#telaExercicio" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Exercício" textFill="WHITE" />
       <Button fx:id="btnMenuRelatorio" layoutX="14.0" layoutY="467.0" mnemonicParsing="false" onAction="#telaRelatorio" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Relatório" textFill="WHITE" />
-      <Button fx:id="btnNovoExercicio" layoutX="790.0" layoutY="279.0" mnemonicParsing="false" onAction="#cadastrarNovoExercicio" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Criar" textFill="WHITE" />
+      <Button fx:id="btnNovoAluno" layoutX="790.0" layoutY="279.0" mnemonicParsing="false" onAction="#cadastrarNovoAluno" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Criar" textFill="WHITE" />
       <Label layoutX="250.0" layoutY="115.0" prefHeight="68.0" prefWidth="184.0" text="ALUNO">
          <font>
             <Font size="50.0" />
          </font>
       </Label>
       <ImageView fitHeight="120.0" fitWidth="180.0" layoutX="442.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../imagem/aluno.png" />
-         </image>
+         <Image url="@../../imagem/aluno.png" />
       </ImageView>
       <Pane layoutX="626.0" layoutY="24.0" prefHeight="104.0" prefWidth="319.0">
          <children>
@@ -45,9 +43,7 @@
                </font>
             </Label>
             <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../imagem/usuario.png" />
-               </image>
+               <Image url="@../../imagem/usuario.png" />
             </ImageView>
          </children>
       </Pane>
