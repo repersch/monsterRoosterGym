@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.GerenciarAlunoUIController">
+   <children>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="473.0" layoutX="290.0" layoutY="92.0" rotate="-119.5" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="325.0" />
+      <Label layoutX="155.0" layoutY="131.0" text="Nome">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="154.0" layoutY="224.0" text="Senha">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnCancelar" layoutX="583.0" layoutY="555.0" mnemonicParsing="false" onAction="#voltarParaCenaAnterior" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Cancelar" textFill="WHITE" />
+      <Button fx:id="btnSalvar" layoutX="443.0" layoutY="555.0" mnemonicParsing="false" onAction="#salvarAluno" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Salvar" textFill="WHITE" />
+      <Label layoutX="161.0" layoutY="176.0" text="Email">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNomeAluno" layoutX="224.0" layoutY="134.0" prefHeight="25.0" prefWidth="480.0" />
+      <TextField fx:id="txtEmailAluno" layoutX="224.0" layoutY="178.0" prefHeight="25.0" prefWidth="480.0" />
+      <Label layoutX="276.0" layoutY="56.0" prefHeight="43.0" prefWidth="176.0" text="ALUNO">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="84.0" fitWidth="103.0" layoutX="378.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../imagem/aluno.png" />
+      </ImageView>
+      <PasswordField fx:id="txtSenha" layoutX="224.0" layoutY="227.0" prefHeight="25.0" prefWidth="190.0" />
+      <Label layoutX="465.0" layoutY="224.0" text="CPF">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="420.0" layoutY="272.0" prefHeight="30.0" prefWidth="84.0" text="Telefone">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="273.0" prefHeight="30.0" prefWidth="157.0" text="Data Nascimento">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dpDataNascimento" layoutX="224.0" layoutY="276.0" prefHeight="25.0" prefWidth="190.0" />
+      <Label layoutX="164.0" layoutY="346.0" text="Peso">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="446.0" layoutY="346.0" text="Altura">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="397.0" text="Observações">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtObservacoes" layoutX="224.0" layoutY="397.0" prefHeight="112.0" prefWidth="480.0" />
+      <TextField fx:id="txtCpfAluno" layoutX="514.0" layoutY="227.0" prefHeight="25.0" prefWidth="190.0" />
+      <TextField fx:id="txtTelefone" layoutX="514.0" layoutY="276.0" prefHeight="25.0" prefWidth="190.0" />
+      <TextField fx:id="txtPeso" layoutX="224.0" layoutY="349.0" prefHeight="25.0" prefWidth="190.0" />
+      <TextField fx:id="txtAltura" layoutX="514.0" layoutY="349.0" prefHeight="25.0" prefWidth="190.0" />
+   </children>
+</AnchorPane>

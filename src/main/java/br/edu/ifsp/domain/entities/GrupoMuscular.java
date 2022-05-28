@@ -30,4 +30,8 @@ public enum GrupoMuscular {
     public String toString() {
         return musculo;
     }
+
+    public String getMusculo() {
+        return musculo;
+    }
 }

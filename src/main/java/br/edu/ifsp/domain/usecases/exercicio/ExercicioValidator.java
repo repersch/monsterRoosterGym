@@ -26,10 +26,6 @@ public class ExercicioValidator extends Validator<Exercicio> {
             notification.addErro("Descrição é nula ou vazia.");
             return notification;
         }
-        if (nuloOuVazio(exercicio.getEmUso().toString())) {
-            notification.addErro("Em uso é nulo ou vazio.");
-            return notification;
-        }
         return notification;
     }
 }

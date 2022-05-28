@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class DatabaseBuilder {
 
     public void buildDatabaseIfMissing() {
-        apagarBancoDeDados();
+//        apagarBancoDeDados();
         if (isDatabaseMissing()) {
             criarTabelas();
         }

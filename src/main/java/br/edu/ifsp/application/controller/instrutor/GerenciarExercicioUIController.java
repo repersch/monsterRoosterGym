@@ -1,10 +1,19 @@
 package br.edu.ifsp.application.controller.instrutor;
 
+import br.edu.ifsp.WindowLoader;
+import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
+import br.edu.ifsp.domain.entities.Exercicio;
+import br.edu.ifsp.domain.entities.GrupoMuscular;
+import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
+import br.edu.ifsp.domain.usecases.exercicio.CriarExercicioUC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class GerenciarExercicioUIController {
     @FXML
@@ -14,13 +23,51 @@ public class GerenciarExercicioUIController {
     @FXML
     private TextField txtNomeExercicio;
     @FXML
-    private TextField txtGrupoMuscular;
+    private ComboBox<GrupoMuscular> cbGrupoMuscular;
     @FXML
     private TextArea txtDescricaoExercicio;
 
-    public void voltarParaCenaAnterior(ActionEvent actionEvent) {
+    private Exercicio exercicio;
+
+    BuscarExercicioUC buscarExercicioUC;
+    CriarExercicioUC criarExercicioUC = new CriarExercicioUC(new SqliteExercicioDAO());
+
+    @FXML
+    private void initialize() {
+        cbGrupoMuscular.getItems().setAll(GrupoMuscular.values());
     }
 
-    public void salvarExercicio(ActionEvent actionEvent) {
+    private void carregarDadosDaViewNaEntidade() {
+        if (exercicio == null) {
+            exercicio = new Exercicio();
+        }
+
+        exercicio.setNome(txtNomeExercicio.getText());
+        exercicio.setGrupoMuscular(cbGrupoMuscular.getValue());
+        exercicio.setDescricao(txtDescricaoExercicio.getText());
     }
+
+
+    public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("application/view/TabelaExercicioUI");
+    }
+
+    public void salvarExercicio(ActionEvent actionEvent) throws IOException {
+        carregarDadosDaViewNaEntidade();
+        criarExercicioUC.salvar(exercicio);
+        voltarParaCenaAnterior(actionEvent);
+    }
+
+    public void carregarDadosDaEntidadeNaView(Exercicio exercicioSelecionado) {
+        if (exercicioSelecionado == null) {
+            throw  new IllegalArgumentException("Exercício não pode ser nulo.");
+        }
+
+        this.exercicio = exercicioSelecionado;
+        txtNomeExercicio.setText(exercicio.getNome());
+        txtDescricaoExercicio.setText(exercicio.getDescricao());
+        cbGrupoMuscular.setValue(exercicio.getGrupoMuscular());
+    }
+
+
 }
