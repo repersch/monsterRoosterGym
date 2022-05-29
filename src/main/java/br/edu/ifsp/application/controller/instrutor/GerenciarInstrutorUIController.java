@@ -1,6 +1,6 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.WindowLoader;
+import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC;
@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import static br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC.*;
 
 public class GerenciarInstrutorUIController {
     @FXML
@@ -24,12 +25,12 @@ public class GerenciarInstrutorUIController {
     @FXML
     private PasswordField txtSenha;
 
-    private Usuario instrutor;
+    public Usuario instrutor;
 
     CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
     }
 
     private void carregarDadosDaViewNaEntidade() {
@@ -51,12 +52,14 @@ public class GerenciarInstrutorUIController {
 
 
     public void carregarDadosDaEntidadeParaView(Usuario instrutorSelecionado) {
+        System.out.printf("Cheguei aqui: " + instrutorSelecionado);
         if (instrutorSelecionado == null) {
             throw new IllegalArgumentException("Instrutor não pode ser nulo.");
         }
         this.instrutor = instrutorSelecionado;
-        txtNomeInstrutor.setText(instrutor.getNome());
-        txtEmailnstrutor.setText(instrutor.getEmail());
+        txtNomeInstrutor.autosize();
+        txtNomeInstrutor.setText(instrutorSelecionado.getNome());
+        txtEmailnstrutor.setText(instrutorSelecionado.getEmail());
 
     }
 }

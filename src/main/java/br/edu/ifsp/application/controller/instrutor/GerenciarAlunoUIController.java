@@ -1,6 +1,6 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.WindowLoader;
+import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.Aluno;
 import br.edu.ifsp.domain.entities.Usuario;
@@ -40,7 +40,7 @@ public class GerenciarAlunoUIController {
     CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaAlunoUI");
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
     }
 
     public void carregarDadosDaViewNaEntidade() {

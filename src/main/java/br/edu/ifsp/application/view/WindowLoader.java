@@ -1,9 +1,11 @@
-package br.edu.ifsp;
+package br.edu.ifsp.application.view;
 
+import br.edu.ifsp.domain.entities.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,9 +19,12 @@ public class WindowLoader extends Application {
 
     private static Object controller;
 
+    private  static Usuario usuarioLogado;
+
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("application/view/instrutor/TabelaAlunoUI"), 950, 700);
+        Parent parent = loadFXML("AutenticacaoUI");
+        scene = new Scene(parent, 950, 700);
         stage.setScene(scene);
         stage.show();
     }

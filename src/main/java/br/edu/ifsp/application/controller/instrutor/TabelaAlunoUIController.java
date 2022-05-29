@@ -1,6 +1,6 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.WindowLoader;
+import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class TabelaAlunoUIController {
+    @FXML
+    public Button btnLogOut;
     @FXML
     private Button btnEditarAluno;
     @FXML
@@ -39,10 +41,11 @@ public class TabelaAlunoUIController {
     @FXML
     private Button btnNovoAluno;
     @FXML
-    private Label txtAlunoLogado1;
+    private Label txtAlunoLogado;
 
     private ObservableList<Usuario> alunos;
     public Usuario alunoSelecionado;
+    public Usuario usuarioLogado;
     BuscarUsuarioUC buscarUsuarioUC;
 
     @FXML
@@ -54,6 +57,8 @@ public class TabelaAlunoUIController {
         // precisa mudar para cpf
         cCpfAluno.setCellValueFactory(new PropertyValueFactory<>("email"));
 
+//        setUsuarioLogado(usuarioLogado.getNome());
+//        txtAlunoLogado.setText(usuarioLogado.getNome());
         carregarTabela();
         filtrarDadosDaTabela();
     }
@@ -89,30 +94,41 @@ public class TabelaAlunoUIController {
         tabelaAluno.setItems(dadosBuscados);
     }
 
+    public void setUsuarioLogado(String nome) {
+        this.usuarioLogado = buscarUsuarioUC.buscarPorNome(nome).isPresent() ? buscarUsuarioUC.buscarPorNome(nome).get() : null;
+    }
+
     public void selecionar(MouseEvent mouseEvent) {
+        this.alunoSelecionado = (Usuario) tabelaAluno.getSelectionModel().getSelectedItem();
     }
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaAlunoUI");
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/TabelaExercicioUI");
+        WindowLoader.setRoot("TabelaExercicioUI");
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("application/view/instrutor/TabelaRelatorioUI");
+//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
     }
 
     public void cadastrarNovoAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/GerenciarAlunoUI");
+        WindowLoader.setRoot("instrutor/GerenciarAlunoUI");
     }
 
     public void editarAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/GerenciarAlunoUI");
+        WindowLoader.setRoot("instrutor/GerenciarAlunoUI");
+    }
+
+
+    public void fazerLogOut(ActionEvent actionEvent) throws IOException {
+        this.usuarioLogado = null;
+        WindowLoader.setRoot("AutenticacaoUI");
     }
 }

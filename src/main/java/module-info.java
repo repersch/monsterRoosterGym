@@ -7,15 +7,16 @@ module br.edu.ifsp {
 
 
     opens br.edu.ifsp.application.view;
+    opens br.edu.ifsp.application.view.aluno;
+    opens br.edu.ifsp.application.view.instrutor;
     opens br.edu.ifsp.application.controller;
-    opens br.edu.ifsp.domain.entities;
+    opens br.edu.ifsp.domain.entities to java.base;
+    opens br.edu.ifsp.application.controller.instrutor;
+    opens br.edu.ifsp.application.controller.aluno;
 
-    opens br.edu.ifsp to javafx.fxml;
-    exports br.edu.ifsp;
-    exports br.edu.ifsp.application.controller;
-    exports br.edu.ifsp.application.controller.aluno;
-    opens br.edu.ifsp.application.controller.aluno to javafx.fxml;
-    exports br.edu.ifsp.application.controller.instrutor;
-    opens br.edu.ifsp.application.controller.instrutor to javafx.fxml;
     exports br.edu.ifsp.domain.entities;
+    exports br.edu.ifsp.application.view;
+    exports br.edu.ifsp.application.controller;
+    exports br.edu.ifsp.application.controller.instrutor;
+    exports br.edu.ifsp.application.controller.aluno;
 }

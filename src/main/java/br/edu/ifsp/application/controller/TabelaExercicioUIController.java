@@ -1,10 +1,9 @@
 package br.edu.ifsp.application.controller;
 
-import br.edu.ifsp.WindowLoader;
+import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.controller.instrutor.GerenciarExercicioUIController;
 import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
 import br.edu.ifsp.domain.entities.Exercicio;
-import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,6 +47,7 @@ public class TabelaExercicioUIController {
     private ObservableList<Exercicio> exercicios;
     private Exercicio exercicioSelecionado;
     BuscarExercicioUC buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
+    private Object usuarioLogado;
 
     @FXML
     public void initialize() {
@@ -67,18 +67,15 @@ public class TabelaExercicioUIController {
 
     public void selecionar(MouseEvent mouseEvent) {
         this.exercicioSelecionado = (Exercicio) tabelaExercicio.getSelectionModel().getSelectedItem();
-        if (exercicioSelecionado != null) {
-            txtBuscarExercicio.setText(exercicioSelecionado.getNome());
-        }
     }
 
     public void cadastrarNovoExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/GerenciarExercicioUI");
+        WindowLoader.setRoot("instrutor/GerenciarExercicioUI");
     }
 
     public void editarExercicio(ActionEvent actionEvent) throws IOException {
         if (exercicioSelecionado != null) {
-            WindowLoader.setRoot("application/view/instrutor/GerenciarExercicioUI");
+            WindowLoader.setRoot("instrutor/GerenciarExercicioUI");
             GerenciarExercicioUIController controller = (GerenciarExercicioUIController) WindowLoader.getController();
             controller.carregarDadosDaEntidadeNaView(exercicioSelecionado);
         }
@@ -107,22 +104,26 @@ public class TabelaExercicioUIController {
         tabelaExercicio.setItems(dadosBuscados);
     }
 
+    public void fazerLogOut(ActionEvent actionEvent) throws IOException {
+        this.usuarioLogado = null;
+        WindowLoader.setRoot("AutenticacaoUI");
+    }
 
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaAlunoUI");
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/TabelaExercicioUI");
+        WindowLoader.setRoot("TabelaExercicioUI");
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("application/view/instrutor/TabelaRelatorioUI");
+//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
     }
 
 }

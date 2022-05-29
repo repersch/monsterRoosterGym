@@ -1,6 +1,6 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.WindowLoader;
+import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
 import br.edu.ifsp.domain.entities.Exercicio;
 import br.edu.ifsp.domain.entities.GrupoMuscular;
@@ -49,7 +49,7 @@ public class GerenciarExercicioUIController {
 
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/TabelaExercicioUI");
+        WindowLoader.setRoot("TabelaExercicioUI");
     }
 
     public void salvarExercicio(ActionEvent actionEvent) throws IOException {

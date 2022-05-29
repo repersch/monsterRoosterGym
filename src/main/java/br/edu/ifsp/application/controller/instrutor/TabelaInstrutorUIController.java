@@ -1,6 +1,6 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.WindowLoader;
+import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
@@ -38,8 +38,9 @@ public class TabelaInstrutorUIController {
     private Button btnNovoInstrutor;
 
     private ObservableList<Usuario> instrutores;
-    private Usuario instrutorSelecionado;
+    public Usuario instrutorSelecionado;
     BuscarUsuarioUC buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+    public Usuario usuarioLogado;
 
     @FXML
     public void initialize() {
@@ -59,21 +60,18 @@ public class TabelaInstrutorUIController {
 
     public void selecionar(MouseEvent mouseEvent) {
         this.instrutorSelecionado = (Usuario) tabelaInstrutor.getSelectionModel().getSelectedItem();
-        if (instrutorSelecionado != null) {
-            txtBuscarInstrutor.setText(instrutorSelecionado.getNome());
-        }
     }
 
 
     public void cadastrarNovoInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/GerenciarInstrutorUI");
+        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI");
     }
 
     public void editarInstrutor(ActionEvent actionEvent) throws IOException {
-        if (instrutorSelecionado != null) {
-            WindowLoader.setRoot("application/view/instrutor/GerenciarInstrutorUI");
-            GerenciarInstrutorUIController controller = (GerenciarInstrutorUIController) WindowLoader.getController();
-            controller.carregarDadosDaEntidadeParaView(instrutorSelecionado);
+        if (this.instrutorSelecionado != null) {
+            WindowLoader.setRoot("instrutor/GerenciarInstrutorUI");
+            GerenciarInstrutorUIController controller = new GerenciarInstrutorUIController();
+            controller.carregarDadosDaEntidadeParaView(this.instrutorSelecionado);
         }
 
     }
@@ -100,23 +98,26 @@ public class TabelaInstrutorUIController {
         tabelaInstrutor.setItems(dadosBuscados);
     }
 
-
+    public void fazerLogOut(ActionEvent actionEvent) throws IOException {
+        this.usuarioLogado = null;
+        WindowLoader.setRoot("AutenticacaoUI");
+    }
 
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaAlunoUI");
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("application/view/TabelaExercicioUI");
+        WindowLoader.setRoot("TabelaExercicioUI");
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("application/view/instrutor/TabelaRelatorioUI");
+//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
     }
 
 }
