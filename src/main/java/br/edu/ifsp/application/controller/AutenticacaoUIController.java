@@ -1,5 +1,6 @@
 package br.edu.ifsp.application.controller;
 
+import br.edu.ifsp.application.controller.aluno.FichaTreinoUIController;
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.controller.instrutor.TabelaAlunoUIController;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
@@ -29,10 +30,12 @@ public class AutenticacaoUIController {
        usuarioAutenticado =  autenticarUC.autenticar(txtEmail.getText(), txtSenha.getText());
        if (usuarioAutenticado.getInstrutor()) {
            WindowLoader.setRoot("instrutor/TabelaAlunoUI");
-//           TabelaAlunoUIController tabelaAlunoUIController = (TabelaAlunoUIController) WindowLoader.getController();
-//           tabelaAlunoUIController.setUsuarioLogado(usuarioAutenticado.getNome());
+           TabelaAlunoUIController tabelaAlunoUIController = new TabelaAlunoUIController();
+           tabelaAlunoUIController.setUsuarioLogado(usuarioAutenticado);
        } else {
            WindowLoader.setRoot("aluno/FichaTreinoUI");
+           FichaTreinoUIController fichaTreinoUIController = new FichaTreinoUIController();
+           fichaTreinoUIController.setUsuarioLogado(usuarioAutenticado);
        }
     }
 

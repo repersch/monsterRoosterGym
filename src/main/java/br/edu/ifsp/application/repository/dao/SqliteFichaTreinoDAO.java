@@ -3,6 +3,7 @@ package br.edu.ifsp.application.repository.dao;
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
 import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.fichaTreino.FichaTreinoDAO;
+import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,12 @@ import java.util.Optional;
 import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
 
 public class SqliteFichaTreinoDAO implements FichaTreinoDAO {
+
+    private final BuscarUsuarioUC buscarUsuarioUC;
+    public SqliteFichaTreinoDAO() {
+        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+    }
+
     @Override
     public Integer create(FichaTreino fichaTreino) {
         String sql = "INSERT INTO FichaTreino (valido, dataInicio, validade, id_aluno, id_instrutor)" +
@@ -111,7 +118,7 @@ public class SqliteFichaTreinoDAO implements FichaTreinoDAO {
     private FichaTreino resultSetToEntity(ResultSet resultado) throws SQLException {
 
         Integer id_instrutor = resultado.getInt("id_instrutor"); //id instrutor e id aluno
-        Usuario instrutor = (Usuario) buscarUsuarioUC.buscarPorId(id_instrutor).get();
+        Usuario instrutor = buscarUsuarioUC.buscarPorId(id_instrutor).get();
 
         Integer id_aluno = resultado.getInt("id_aluno");
         Usuario aluno = buscarUsuarioUC.buscarPorId(id_aluno).get();

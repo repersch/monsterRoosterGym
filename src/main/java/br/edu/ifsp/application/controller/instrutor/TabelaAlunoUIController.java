@@ -48,6 +48,12 @@ public class TabelaAlunoUIController {
     public Usuario usuarioLogado;
     BuscarUsuarioUC buscarUsuarioUC;
 
+    public TabelaAlunoUIController() {
+        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+        // o aluno logado esta mockado, precisa arrumar um jeito de passar ele de uma tela para outra
+        usuarioLogado = buscarUsuarioUC.buscarPorId(2).get();
+    }
+
     @FXML
     private void initialize () {
         alunos = FXCollections.observableArrayList();
@@ -57,14 +63,12 @@ public class TabelaAlunoUIController {
         // precisa mudar para cpf
         cCpfAluno.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-//        setUsuarioLogado(usuarioLogado.getNome());
-//        txtAlunoLogado.setText(usuarioLogado.getNome());
+        txtAlunoLogado.setText(usuarioLogado.getNome());
         carregarTabela();
         filtrarDadosDaTabela();
     }
 
     private void carregarTabela() {
-        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
         List<Usuario> todosAlunos = buscarUsuarioUC.buscarTodosAlunos();
         alunos.clear();
         alunos.addAll(todosAlunos);
@@ -94,12 +98,15 @@ public class TabelaAlunoUIController {
         tabelaAluno.setItems(dadosBuscados);
     }
 
-    public void setUsuarioLogado(String nome) {
-        this.usuarioLogado = buscarUsuarioUC.buscarPorNome(nome).isPresent() ? buscarUsuarioUC.buscarPorNome(nome).get() : null;
+    public void setUsuarioLogado(Usuario usuario) {
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuário não pode ser nulo.");
+        }
+        this.usuarioLogado = usuario;
     }
 
     public void selecionar(MouseEvent mouseEvent) {
-        this.alunoSelecionado = (Usuario) tabelaAluno.getSelectionModel().getSelectedItem();
+        this.alunoSelecionado = tabelaAluno.getSelectionModel().getSelectedItem();
     }
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
