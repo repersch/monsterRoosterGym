@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.aluno.FichaTreinoUIController">
+<AnchorPane prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.aluno.FichaTreinoUIController">
    <children>
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="398.0" layoutX="379.0" layoutY="233.0" rotate="152.5" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="365.0" />
       <Accordion layoutX="59.0" layoutY="147.0" />
@@ -36,13 +36,14 @@
             <Image url="@../../imagem/ficha_treino.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnDetalhesFichaTreino" layoutX="622.0" layoutY="605.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Detalhes" textFill="WHITE" />
-      <Button fx:id="btnIniciarTreino" layoutX="82.0" layoutY="605.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #dc4343;" text="Registrar Início Treino" textFill="WHITE" />
-      <Button fx:id="btnFinalizarTreino" layoutX="247.0" layoutY="605.0" mnemonicParsing="false" onAction="#registrarFinalTreino" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #dc4343;" text="Registrar Final Treino" textFill="WHITE" />
-      <Button fx:id="btnLogOut" layoutX="24.0" layoutY="27.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: #dc4343;" text="Log Out" textFill="WHITE" />
+      <Button fx:id="btnDetalhesFichaTreino" layoutX="622.0" layoutY="605.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Detalhes"/>
+      <Button fx:id="btnIniciarTreino" layoutX="82.0" layoutY="605.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="40.0" prefWidth="138.0" text="Registrar Início Treino" />
+      <Button fx:id="btnFinalizarTreino" layoutX="247.0" layoutY="605.0" mnemonicParsing="false" onAction="#registrarFinalTreino" prefHeight="40.0" prefWidth="138.0" text="Registrar Final Treino" />
+      <Button fx:id="btnLogOut" layoutX="24.0" layoutY="27.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="25.0" prefWidth="61.0" text="Log Out" textFill="WHITE" />
+      <Button fx:id="btnCriarFichaTreino" layoutX="488.0" layoutY="605.0" mnemonicParsing="false" onAction="#criarFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Nova" />
       <Pane layoutX="640.0" layoutY="10.0" prefHeight="73.0" prefWidth="319.0">
          <children>
-            <Label fx:id="txtAlunoLogado" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="202.0">
+            <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
                <font>
                   <Font size="23.0" />
                </font>
@@ -54,6 +55,5 @@
             </ImageView>
          </children>
       </Pane>
-      <Button fx:id="btnCriarFichaTreino" layoutX="488.0" layoutY="605.0" mnemonicParsing="false" onAction="#criarFichaTreino" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Nova" textFill="WHITE" />
    </children>
 </AnchorPane>

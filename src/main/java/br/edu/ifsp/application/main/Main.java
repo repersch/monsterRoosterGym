@@ -323,7 +323,7 @@ public class Main {
         editarExercicioTreinoUC = new EditarExercicioTreinoUC(exercicioTreinoDAO);
         alterarCargaExercicioTreinoUC = new AlterarCargaExercicioTreinoUC(exercicioTreinoDAO);
 
-        autenticarUC = new AutenticarUC(usuarioDAO);
+        autenticarUC = new AutenticarUC(buscarUsuarioUC);
     }
 
     private static void criandoBancoDeDados() {

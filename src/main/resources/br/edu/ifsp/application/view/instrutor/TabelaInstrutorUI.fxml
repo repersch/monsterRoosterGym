@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.TabelaInstrutorUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.TabelaInstrutorUIController">
    <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="398.0" layoutX="-58.0" layoutY="209.0" rotate="135.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="365.0" />
    <TableView fx:id="tabelaInstrutor" layoutX="250.0" layoutY="332.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
       <columns>
@@ -20,11 +20,11 @@
       </columns>
    </TableView>
    <TextField fx:id="txtBuscarInstrutor" layoutX="250.0" layoutY="279.0" prefHeight="34.0" prefWidth="358.0" promptText="Buscar" />
-   <Button fx:id="btnMenuAluno" layoutX="14.0" layoutY="293.0" mnemonicParsing="false" onAction="#telaAluno" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Aluno" textFill="WHITE" />
-   <Button fx:id="btnMenuInstrutor" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#telaInstrutor" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Instrutor" textFill="WHITE" />
-   <Button fx:id="btnMenuExercicio" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#telaExercicio" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Exercício" textFill="WHITE" />
-   <Button fx:id="btnMenuRelatorio" layoutX="14.0" layoutY="467.0" mnemonicParsing="false" onAction="#telaRelatorio" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Relatório" textFill="WHITE" />
-   <Button fx:id="btnNovoInstrutor" layoutX="790.0" layoutY="279.0" mnemonicParsing="false" onAction="#cadastrarNovoInstrutor" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Criar" textFill="WHITE" />
+   <Button fx:id="btnMenuAluno" layoutX="14.0" layoutY="293.0" mnemonicParsing="false" onAction="#telaAluno" prefHeight="40.0" prefWidth="120.0" text="Aluno" />
+   <Button fx:id="btnMenuInstrutor" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#telaInstrutor" prefHeight="40.0" prefWidth="120.0" text="Instrutor" />
+   <Button fx:id="btnMenuExercicio" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#telaExercicio" prefHeight="40.0" prefWidth="120.0" text="Exercício" />
+   <Button fx:id="btnMenuRelatorio" layoutX="14.0" layoutY="467.0" mnemonicParsing="false" onAction="#telaRelatorio" prefHeight="40.0" prefWidth="120.0" text="Relatório" />
+   <Button fx:id="btnNovoInstrutor" layoutX="790.0" layoutY="279.0" mnemonicParsing="false" onAction="#cadastrarNovoInstrutor" prefHeight="40.0" prefWidth="120.0" text="Criar" />
    <Label layoutX="250.0" layoutY="115.0" prefHeight="74.0" prefWidth="271.0" text="INSTRUTOR">
       <font>
          <Font size="50.0" />
@@ -35,10 +35,10 @@
          <Image url="@../../imagem/instrutor.png" />
       </image>
    </ImageView>
-   <Button fx:id="btnEditarExercicio" layoutX="649.0" layoutY="279.0" mnemonicParsing="false" onAction="#editarInstrutor" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Editar" textFill="WHITE" />
+   <Button fx:id="btnEditarExercicio" layoutX="649.0" layoutY="279.0" mnemonicParsing="false" onAction="#editarInstrutor" prefHeight="40.0" prefWidth="120.0" text="Editar" />
    <Pane layoutX="630.0" prefHeight="73.0" prefWidth="319.0">
       <children>
-         <Label fx:id="txtAlunoLogado1" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="202.0" text="Nome do Usuário">
+         <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
             <font>
                <Font size="23.0" />
             </font>
@@ -50,5 +50,5 @@
          </ImageView>
       </children>
    </Pane>
-   <Button fx:id="btnLogOut" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: #dc4343;" text="Log Out" textFill="WHITE" />
+   <Button fx:id="btnLogOut" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="25.0" prefWidth="61.0" text="Log Out" />
 </AnchorPane>

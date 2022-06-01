@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.TabelaAlunoUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.TabelaAlunoUIController">
    <children>
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="398.0" layoutX="-58.0" layoutY="209.0" rotate="135.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="365.0" />
       <TableView fx:id="tabelaAluno" layoutX="250.0" layoutY="332.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
@@ -35,19 +35,21 @@
       <ImageView fitHeight="120.0" fitWidth="180.0" layoutX="442.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../imagem/aluno.png" />
       </ImageView>
-      <Pane layoutX="630.0" prefHeight="73.0" prefWidth="319.0">
+      <Button fx:id="btnEditarAluno" layoutX="649.0" layoutY="279.0" mnemonicParsing="false" onAction="#editarAluno" prefHeight="40.0" prefWidth="120.0" text="Editar" />
+      <Button fx:id="btnLogOut" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="25.0" prefWidth="61.0" text="Log Out" />
+      <Pane layoutX="640.0" layoutY="10.0" prefHeight="73.0" prefWidth="319.0">
          <children>
-            <Label fx:id="txtAlunoLogado" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="202.0" text="Nome do Usuário">
+            <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
                <font>
                   <Font size="23.0" />
                </font>
             </Label>
             <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../../imagem/usuario.png" />
+               <image>
+                  <Image url="@../../imagem/usuario.png" />
+               </image>
             </ImageView>
          </children>
       </Pane>
-      <Button fx:id="btnEditarAluno" layoutX="649.0" layoutY="279.0" mnemonicParsing="false" onAction="#editarAluno" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Editar" textFill="WHITE" />
-      <Button fx:id="btnLogOut" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: #dc4343;" text="Log Out" textFill="WHITE" />
    </children>
 </AnchorPane>

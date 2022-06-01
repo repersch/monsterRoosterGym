@@ -11,6 +11,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
+
 import static br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC.*;
 
 public class GerenciarInstrutorUIController {
@@ -29,8 +32,20 @@ public class GerenciarInstrutorUIController {
 
     CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
 
+    ResourceBundle rb = new ResourceBundle() {
+        @Override
+        protected Object handleGetObject(String key) {
+            return null;
+        }
+
+        @Override
+        public Enumeration<String> getKeys() {
+            return null;
+        }
+    };
+
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", rb);
     }
 
     private void carregarDadosDaViewNaEntidade() {

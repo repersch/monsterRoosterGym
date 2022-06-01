@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * JavaFX App
@@ -23,18 +24,18 @@ public class WindowLoader extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = loadFXML("AutenticacaoUI");
+        Parent parent = loadFXML("AutenticacaoUI", null);
         scene = new Scene(parent, 950, 700);
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public static void setRoot(String fxml, ResourceBundle rb) throws IOException {
+        scene.setRoot(loadFXML(fxml, rb));
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WindowLoader.class.getResource(fxml + ".fxml"));
+    private static Parent loadFXML(String fxml, ResourceBundle rb) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(WindowLoader.class.getResource(fxml + ".fxml"), rb);
         controller = fxmlLoader.getController();
         return fxmlLoader.load();
     }

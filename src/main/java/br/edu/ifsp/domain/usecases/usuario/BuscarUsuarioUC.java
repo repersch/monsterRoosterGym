@@ -50,4 +50,8 @@ public class BuscarUsuarioUC {
             return usuarioDAO.findAll();
         }
 
+        public Optional<Usuario> buscarPorEmail(String email) {
+            return usuarioDAO.findByAttribute("email", email);
+        }
+
 }

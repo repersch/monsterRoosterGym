@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.GerenciarInstrutorUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.GerenciarInstrutorUIController">
    <children>
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="296.0" layoutX="252.0" layoutY="210.0" rotate="-119.5" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="204.0" />
       <Label layoutX="300.0" layoutY="278.0" text="Nome">
@@ -23,8 +23,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancelar" layoutX="651.0" layoutY="485.0" mnemonicParsing="false" onAction="#voltarParaCenaAnterior" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Cancelar" textFill="WHITE" />
-      <Button fx:id="btnSalvar" layoutX="511.0" layoutY="485.0" mnemonicParsing="false" onAction="#salvarInstrutor" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Salvar" textFill="WHITE" />
+      <Button fx:id="btnCancelar" layoutX="651.0" layoutY="485.0" mnemonicParsing="false" onAction="#voltarParaCenaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar" />
+      <Button fx:id="btnSalvar" layoutX="511.0" layoutY="485.0" mnemonicParsing="false" onAction="#salvarInstrutor" prefHeight="40.0" prefWidth="120.0" text="Salvar" />
       <Label layoutX="306.0" layoutY="323.0" text="Email">
          <font>
             <Font size="20.0" />

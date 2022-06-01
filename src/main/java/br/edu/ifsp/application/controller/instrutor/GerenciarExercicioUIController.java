@@ -14,6 +14,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
 
 public class GerenciarExercicioUIController {
     @FXML
@@ -32,6 +34,18 @@ public class GerenciarExercicioUIController {
     BuscarExercicioUC buscarExercicioUC;
     CriarExercicioUC criarExercicioUC = new CriarExercicioUC(new SqliteExercicioDAO());
 
+    ResourceBundle rb = new ResourceBundle() {
+        @Override
+        protected Object handleGetObject(String key) {
+            return null;
+        }
+
+        @Override
+        public Enumeration<String> getKeys() {
+            return null;
+        }
+    };
+
     @FXML
     private void initialize() {
         cbGrupoMuscular.getItems().setAll(GrupoMuscular.values());
@@ -49,7 +63,7 @@ public class GerenciarExercicioUIController {
 
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI");
+        WindowLoader.setRoot("TabelaExercicioUI", rb);
     }
 
     public void salvarExercicio(ActionEvent actionEvent) throws IOException {

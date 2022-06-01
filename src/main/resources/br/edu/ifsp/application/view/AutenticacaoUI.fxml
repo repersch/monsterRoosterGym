@@ -11,8 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.edu.ifsp.application.controller.AutenticacaoUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.AutenticacaoUIController">
     <children>
         <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="417.0" layoutX="235.0" layoutY="169.0" rotate="-149.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="360.0" />
         <Label layoutX="314.0" layoutY="354.0" text="E-mail">
@@ -33,13 +32,13 @@
             </font>
         </Label>
         <ImageView fitHeight="232.0" fitWidth="691.0" layoutX="118.0" layoutY="14.0">
-            <Image url="@../imagem/logo.png"/>
+            <Image url="@../imagem/logo.png" />
         </ImageView>
-        <Button layoutX="516.0" layoutY="459.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="98.0" snapToPixel="false" style="-fx-background-color: #ce2a2a;" text="Entrar">
+        <Button layoutX="516.0" layoutY="459.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="98.0" snapToPixel="false" text="Entrar">
             <effect>
                 <ColorInput paint="#e3050500" />
             </effect>
         </Button>
-        <Button fx:id="btnEntrar" layoutX="495.0" layoutY="445.0" mnemonicParsing="false" onAction="#autenticar" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #dc4343;" text="Entrar" textFill="WHITE" />
+        <Button fx:id="btnEntrar" layoutX="495.0" layoutY="445.0" mnemonicParsing="false" onAction="#autenticar" prefHeight="40.0" prefWidth="120.0" text="Entrar" />
     </children>
 </AnchorPane>

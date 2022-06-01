@@ -11,6 +11,8 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
 
 public class GerenciarAlunoUIController {
     @FXML
@@ -39,8 +41,20 @@ public class GerenciarAlunoUIController {
     private Usuario aluno;
     CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
 
+    ResourceBundle rb = new ResourceBundle() {
+        @Override
+        protected Object handleGetObject(String key) {
+            return null;
+        }
+
+        @Override
+        public Enumeration<String> getKeys() {
+            return null;
+        }
+    };
+
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", rb);
     }
 
     public void carregarDadosDaViewNaEntidade() {

@@ -12,7 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.Enumeration;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class GerenciarFichaTreinoUIController {
 
@@ -37,6 +39,18 @@ public class GerenciarFichaTreinoUIController {
     BuscarUsuarioUC buscarUsuarioUC;
     Usuario aluno;
     Usuario instrutor;
+
+    ResourceBundle rb = new ResourceBundle() {
+        @Override
+        protected Object handleGetObject(String key) {
+            return null;
+        }
+
+        @Override
+        public Enumeration<String> getKeys() {
+            return null;
+        }
+    };
 
     public GerenciarFichaTreinoUIController() {
         buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());

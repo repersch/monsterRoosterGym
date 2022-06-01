@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -19,10 +20,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class FichaTreinoUIController {
+public class FichaTreinoUIController implements Initializable {
     @FXML
     public Button btnLogOut;
     @FXML
@@ -53,15 +57,44 @@ public class FichaTreinoUIController {
     BuscarFichaTreinoUC buscarFichaTreinoUC;
     BuscarUsuarioUC buscarUsuarioUC;
 
+    ResourceBundle rb = new ResourceBundle() {
+        @Override
+        protected Object handleGetObject(String key) {
+            return null;
+        }
+
+        @Override
+        public Enumeration<String> getKeys() {
+            return null;
+        }
+    };
+
     public FichaTreinoUIController() {
         buscarFichaTreinoUC = new BuscarFichaTreinoUC(new SqliteFichaTreinoDAO());
         buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
         // aluno está mockado aqui, não sei como fazer para passar o usuário de uma tela para outra
-        usuarioLogado = buscarUsuarioUC.buscarPorId(2).get();
+//        usuarioLogado = buscarUsuarioUC.buscarPorId(2).get();
     }
 
-    @FXML
-    public void initialize() {
+//    @FXML
+//    public void initialize() {
+//        fichasTreino = FXCollections.observableArrayList();
+//        tabelaFichaTreino.setItems(fichasTreino);
+//
+//        cIdFichaTreino.setCellValueFactory(new PropertyValueFactory<>("id"));
+//        cDataInicio.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
+//        cValidadeFichaTreino.setCellValueFactory(new PropertyValueFactory<>("validade"));
+//        // descobrir como faz pra aparecer só o nome do instrutor
+//        cInstrutorFichaTreino.setCellValueFactory(new PropertyValueFactory<>("instrutor"));
+//
+//        this.txtAlunoLogado.setText(usuarioLogado.getNome());
+//
+//        carregarTabela();
+//    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        usuarioLogado = (Usuario) resourceBundle.getObject("id");
         fichasTreino = FXCollections.observableArrayList();
         tabelaFichaTreino.setItems(fichasTreino);
 
@@ -88,7 +121,7 @@ public class FichaTreinoUIController {
     }
 
     public void telaDetalhesFichaTreino(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI");
+        WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", rb);
     }
 
     public void registrarInicioTreino(ActionEvent actionEvent) {
@@ -99,7 +132,7 @@ public class FichaTreinoUIController {
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
         this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI");
+        WindowLoader.setRoot("AutenticacaoUI", rb);
     }
 
     public void setUsuarioLogado(Usuario usuarioAutenticado) {
@@ -110,6 +143,8 @@ public class FichaTreinoUIController {
     }
 
     public void criarFichaTreino(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI");
+        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", rb);
     }
+
+
 }
