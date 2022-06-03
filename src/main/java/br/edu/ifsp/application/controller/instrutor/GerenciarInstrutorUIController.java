@@ -32,20 +32,8 @@ public class GerenciarInstrutorUIController {
 
     CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
 
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
-
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", rb);
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
     }
 
     private void carregarDadosDaViewNaEntidade() {

@@ -85,12 +85,12 @@ public class TabelaExercicioUIController {
     }
 
     public void cadastrarNovoExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarExercicioUI", rb);
+        WindowLoader.setRoot("instrutor/GerenciarExercicioUI");
     }
 
     public void editarExercicio(ActionEvent actionEvent) throws IOException {
         if (exercicioSelecionado != null) {
-            WindowLoader.setRoot("instrutor/GerenciarExercicioUI", rb);
+            WindowLoader.setRoot("instrutor/GerenciarExercicioUI");
             GerenciarExercicioUIController controller = (GerenciarExercicioUIController) WindowLoader.getController();
             controller.carregarDadosDaEntidadeNaView(exercicioSelecionado);
         }
@@ -121,20 +121,20 @@ public class TabelaExercicioUIController {
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
         this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI", rb);
+        WindowLoader.setRoot("AutenticacaoUI");
     }
 
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI", rb);
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", rb);
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", rb);
+        WindowLoader.setRoot("TabelaExercicioUI");
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {

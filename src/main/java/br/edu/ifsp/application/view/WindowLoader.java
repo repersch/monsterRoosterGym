@@ -1,15 +1,14 @@
 package br.edu.ifsp.application.view;
 
-import br.edu.ifsp.domain.entities.Usuario;
+import br.edu.ifsp.domain.entities.Dados;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -20,22 +19,27 @@ public class WindowLoader extends Application {
 
     private static Object controller;
 
-    private  static Usuario usuarioLogado;
-
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = loadFXML("AutenticacaoUI", null);
+        Parent parent = loadFXML("AutenticacaoUI");
         scene = new Scene(parent, 950, 700);
+        stage.setTitle("Autenticar");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void setRoot(String fxml, ResourceBundle rb) throws IOException {
-        scene.setRoot(loadFXML(fxml, rb));
+    public static void setRoot(String fxml, Dados userData) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+        notityAllListeners(fxml, userData);
     }
 
-    private static Parent loadFXML(String fxml, ResourceBundle rb) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WindowLoader.class.getResource(fxml + ".fxml"), rb);
+    public static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+        notityAllListeners(fxml, null);
+    }
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(WindowLoader.class.getResource(fxml + ".fxml"));
         controller = fxmlLoader.getController();
         return fxmlLoader.load();
     }
@@ -48,4 +52,21 @@ public class WindowLoader extends Application {
         return controller;
     }
 
+    //---------------------------------------------------------------------
+
+    private static ArrayList<OnChangeScreen> listeners = new ArrayList<>();
+    public static interface OnChangeScreen {
+        void onScreenChanged(String newScreen, Dados userData);
+    }
+
+    public static void addOnChngeScreenListener(OnChangeScreen newListener) {
+        listeners.add(newListener);
+    }
+
+    private static void notityAllListeners(String newScreen, Dados userData) {
+        for (OnChangeScreen l : listeners) {
+            l.onScreenChanged(newScreen, userData);
+        }
+
+    }
 }

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class FichaTreinoUIController implements Initializable {
+public class FichaTreinoUIController {
     @FXML
     public Button btnLogOut;
     @FXML
@@ -57,17 +57,6 @@ public class FichaTreinoUIController implements Initializable {
     BuscarFichaTreinoUC buscarFichaTreinoUC;
     BuscarUsuarioUC buscarUsuarioUC;
 
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
 
     public FichaTreinoUIController() {
         buscarFichaTreinoUC = new BuscarFichaTreinoUC(new SqliteFichaTreinoDAO());
@@ -76,25 +65,8 @@ public class FichaTreinoUIController implements Initializable {
 //        usuarioLogado = buscarUsuarioUC.buscarPorId(2).get();
     }
 
-//    @FXML
-//    public void initialize() {
-//        fichasTreino = FXCollections.observableArrayList();
-//        tabelaFichaTreino.setItems(fichasTreino);
-//
-//        cIdFichaTreino.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        cDataInicio.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
-//        cValidadeFichaTreino.setCellValueFactory(new PropertyValueFactory<>("validade"));
-//        // descobrir como faz pra aparecer só o nome do instrutor
-//        cInstrutorFichaTreino.setCellValueFactory(new PropertyValueFactory<>("instrutor"));
-//
-//        this.txtAlunoLogado.setText(usuarioLogado.getNome());
-//
-//        carregarTabela();
-//    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        usuarioLogado = (Usuario) resourceBundle.getObject("id");
+    @FXML
+    public void initialize() {
         fichasTreino = FXCollections.observableArrayList();
         tabelaFichaTreino.setItems(fichasTreino);
 
@@ -121,7 +93,7 @@ public class FichaTreinoUIController implements Initializable {
     }
 
     public void telaDetalhesFichaTreino(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", rb);
+        WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI");
     }
 
     public void registrarInicioTreino(ActionEvent actionEvent) {
@@ -132,7 +104,7 @@ public class FichaTreinoUIController implements Initializable {
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
         this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI", rb);
+        WindowLoader.setRoot("AutenticacaoUI");
     }
 
     public void setUsuarioLogado(Usuario usuarioAutenticado) {
@@ -143,7 +115,7 @@ public class FichaTreinoUIController implements Initializable {
     }
 
     public void criarFichaTreino(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", rb);
+        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI");
     }
 
 

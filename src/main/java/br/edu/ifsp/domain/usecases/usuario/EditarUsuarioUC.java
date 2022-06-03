@@ -19,7 +19,7 @@ public class EditarUsuarioUC {
         Notification notificacao = validator.validar(usuario);
 
         if (notificacao.possuiErros()) {
-           throw  new IllegalArgumentException(notificacao.mensagemDeErro());
+           throw new IllegalArgumentException(notificacao.mensagemDeErro());
         }
 
         Integer id = usuario.getId();

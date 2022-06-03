@@ -17,8 +17,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GerenciarFichaTreinoUIController {
-
-
     @FXML
     public TextField txtBuscarAluno;
     @FXML
@@ -39,18 +37,6 @@ public class GerenciarFichaTreinoUIController {
     BuscarUsuarioUC buscarUsuarioUC;
     Usuario aluno;
     Usuario instrutor;
-
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
 
     public GerenciarFichaTreinoUIController() {
         buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());

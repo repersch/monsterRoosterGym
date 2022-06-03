@@ -1,7 +1,11 @@
 package br.edu.ifsp.application.controller;
 
+import br.edu.ifsp.application.controller.aluno.FichaTreinoUIController;
+import br.edu.ifsp.application.controller.instrutor.TabelaAlunoUIController;
+import br.edu.ifsp.application.main.Main;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.view.WindowLoader;
+import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.autenticar.AutenticarUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
@@ -12,8 +16,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
 
 public class AutenticacaoUIController {
     @FXML
@@ -23,31 +25,35 @@ public class AutenticacaoUIController {
     @FXML
     private Button btnEntrar;
 
-    private static Usuario usuarioAutenticado;
+    private Usuario usuarioAutenticado;
+    private Dados dados;
     AutenticarUC autenticarUC = new AutenticarUC(new BuscarUsuarioUC(new SqliteUsuarioDAO()));
+
+//    @FXML
+//    protected void initialize() {
+//        WindowLoader.addOnChngeScreenListener(new WindowLoader.OnChangeScreen() {
+//
+//            @Override
+//            public void onScreenChanged(String newScreen, Object userData) {
+//
+//            }
+//        });
+//    }
+
+
 
     public void autenticar(ActionEvent actionEvent) throws IOException {
        usuarioAutenticado =  autenticarUC.autenticar(txtEmail.getText(), txtSenha.getText());
-
-        ResourceBundle recursos = new ResourceBundle() {
-            @Override
-            protected Object handleGetObject(String key) {
-                if (key.contains("id")) {
-                    return usuarioAutenticado;
-                }
-                return null;
-            }
-
-            @Override
-            public Enumeration<String> getKeys() {
-                return null;
-            }
-        };
+        dados = new Dados(usuarioAutenticado.getId(), null);
 
        if (usuarioAutenticado.getInstrutor()) {
-           WindowLoader.setRoot("instrutor/TabelaAlunoUI", recursos);
+           WindowLoader.setRoot("instrutor/TabelaAlunoUI", dados);
+//           TabelaAlunoUIController tabelaAlunoUIController = new TabelaAlunoUIController();
+//           tabelaAlunoUIController.setUsuarioAutenticado(usuarioAutenticado);
        } else {
-           WindowLoader.setRoot("aluno/FichaTreinoUI", recursos);
+           WindowLoader.setRoot("aluno/FichaTreinoUI", dados);
+//           FichaTreinoUIController fichaTreinoUIController = new FichaTreinoUIController();
+//           fichaTreinoUIController.setUsuarioLogado(usuarioAutenticado);
        }
     }
 

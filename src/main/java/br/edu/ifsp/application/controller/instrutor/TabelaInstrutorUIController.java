@@ -44,18 +44,6 @@ public class TabelaInstrutorUIController {
     BuscarUsuarioUC buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
     public Usuario usuarioLogado;
 
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
-
     @FXML
     public void initialize() {
         cNomeInstrutor.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -78,12 +66,12 @@ public class TabelaInstrutorUIController {
 
 
     public void cadastrarNovoInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", rb);
+        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI");
     }
 
     public void editarInstrutor(ActionEvent actionEvent) throws IOException {
         if (this.instrutorSelecionado != null) {
-            WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", rb);
+            WindowLoader.setRoot("instrutor/GerenciarInstrutorUI");
             GerenciarInstrutorUIController controller = new GerenciarInstrutorUIController();
             controller.carregarDadosDaEntidadeParaView(this.instrutorSelecionado);
         }
@@ -114,24 +102,24 @@ public class TabelaInstrutorUIController {
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
         this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI", rb);
+        WindowLoader.setRoot("AutenticacaoUI");
     }
 
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI", rb);
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", rb);
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", rb);
+        WindowLoader.setRoot("TabelaExercicioUI");
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI", rb);
+//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
     }
 
 }

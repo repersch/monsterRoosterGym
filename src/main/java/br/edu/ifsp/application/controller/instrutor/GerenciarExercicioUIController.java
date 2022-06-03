@@ -34,18 +34,6 @@ public class GerenciarExercicioUIController {
     BuscarExercicioUC buscarExercicioUC;
     CriarExercicioUC criarExercicioUC = new CriarExercicioUC(new SqliteExercicioDAO());
 
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
-
     @FXML
     private void initialize() {
         cbGrupoMuscular.getItems().setAll(GrupoMuscular.values());
@@ -63,7 +51,7 @@ public class GerenciarExercicioUIController {
 
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", rb);
+        WindowLoader.setRoot("TabelaExercicioUI");
     }
 
     public void salvarExercicio(ActionEvent actionEvent) throws IOException {

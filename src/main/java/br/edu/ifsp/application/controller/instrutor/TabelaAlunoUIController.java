@@ -1,7 +1,9 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.application.view.WindowLoader;
+import br.edu.ifsp.application.controller.AutenticacaoUIController;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
+import br.edu.ifsp.application.view.WindowLoader;
+import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.collections.FXCollections;
@@ -10,18 +12,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class TabelaAlunoUIController implements Initializable {
+public class TabelaAlunoUIController {
     @FXML
     public Button btnLogOut;
     @FXML
@@ -48,57 +46,42 @@ public class TabelaAlunoUIController implements Initializable {
     private Label txtAlunoLogado;
 
     private ObservableList<Usuario> alunos;
-    public Usuario alunoSelecionado;
-    public Usuario usuarioLogado;
+
+    private Dados dados;
+
+    public Usuario usuarioAutenticado;
     BuscarUsuarioUC buscarUsuarioUC;
 
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
-
     public TabelaAlunoUIController() {
-        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
-        // o aluno logado esta mockado, precisa arrumar um jeito de passar ele de uma tela para outra
-//        usuarioLogado = buscarUsuarioUC.buscarPorId(2).get();
+        this.buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        usuarioLogado = (Usuario) resourceBundle.getObject("id");
-        alunos = FXCollections.observableArrayList();
-        tabelaAluno.setItems(alunos);
 
-        cNomeAluno.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        // precisa mudar para cpf
-        cCpfAluno.setCellValueFactory(new PropertyValueFactory<>("email"));
+    @FXML
+    protected void initialize() {
+        WindowLoader.addOnChngeScreenListener(new WindowLoader.OnChangeScreen() {
 
-        txtAlunoLogado.setText(usuarioLogado.getNome());
-        carregarTabela();
-        filtrarDadosDaTabela();
+            @Override
+            public void onScreenChanged(String newScreen, Dados dados) {
+                alunos = FXCollections.observableArrayList();
+                tabelaAluno.setItems(alunos);
+                if (buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
+                    usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+                }
+
+                cNomeAluno.setCellValueFactory(new PropertyValueFactory<>("nome"));
+                // precisa mudar para cpf
+                cCpfAluno.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+                txtAlunoLogado.setText(usuarioAutenticado.getNome());
+
+                carregarTabela();
+                filtrarDadosDaTabela();
+            }
+        });
     }
 
-//    @FXML
-//    private void initialize () {
-//        usuarioLogado = (Usuario) resourceBundle.getObject("id");
-//        alunos = FXCollections.observableArrayList();
-//        tabelaAluno.setItems(alunos);
-//
-//        cNomeAluno.setCellValueFactory(new PropertyValueFactory<>("nome"));
-//        // precisa mudar para cpf
-//        cCpfAluno.setCellValueFactory(new PropertyValueFactory<>("email"));
-//
-//        txtAlunoLogado.setText(usuarioLogado.getNome());
-//        carregarTabela();
-//        filtrarDadosDaTabela();
-//    }
+
 
     private void carregarTabela() {
         List<Usuario> todosAlunos = buscarUsuarioUC.buscarTodosAlunos();
@@ -130,46 +113,36 @@ public class TabelaAlunoUIController implements Initializable {
         tabelaAluno.setItems(dadosBuscados);
     }
 
-    public void setUsuarioLogado(Usuario usuario) {
-        if (usuario == null) {
-            throw new IllegalArgumentException("Usuário não pode ser nulo.");
-        }
-        this.usuarioLogado = usuario;
-    }
-
-    public void selecionar(MouseEvent mouseEvent) {
-        this.alunoSelecionado = tabelaAluno.getSelectionModel().getSelectedItem();
-    }
-
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI", rb);
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", rb);
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI",  new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", rb);
+        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI", rb);
+//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
     }
 
     public void cadastrarNovoAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarAlunoUI", rb);
+        WindowLoader.setRoot("instrutor/GerenciarAlunoUI",  new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void editarAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarAlunoUI", rb);
+        Usuario alunoSelecionado = tabelaAluno.getSelectionModel().getSelectedItem();
+        dados = new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId());
+        WindowLoader.setRoot("instrutor/GerenciarAlunoUI",  dados);
     }
-
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-        this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI", rb);
+//        dados.setIdUsuarioAutenticado(null);
+//        dados.setIdAuxiliar(null);
+        WindowLoader.setRoot("AutenticacaoUI");
     }
-
 
 }

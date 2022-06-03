@@ -17,23 +17,11 @@ public class DetalhesFichaTreinoUIController {
 
     private Usuario usuarioLogado;
 
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
-
     public void telaDetalhesFichaTreino(ActionEvent actionEvent) {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
         this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI", rb);
+        WindowLoader.setRoot("AutenticacaoUI");
     }
 }
