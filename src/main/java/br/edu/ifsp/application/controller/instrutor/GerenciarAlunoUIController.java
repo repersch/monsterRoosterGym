@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class GerenciarAlunoUIController {
     @FXML
@@ -43,26 +42,27 @@ public class GerenciarAlunoUIController {
     private Usuario alunoSelecionado;
     private Usuario alunoCriadoOuModificado;
 
-    private CriarUsuarioUC criarUsuarioUC;
     private BuscarUsuarioUC buscarUsuarioUC;
 
 
     @FXML
     protected void initialize() {
-        WindowLoader.addOnChngeScreenListener(new WindowLoader.OnChangeScreen() {
+        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
 
             @Override
             public void onScreenChanged(String newScreen, Dados dados) {
                 buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
                 alunoCriadoOuModificado = new Usuario();
 
-                if (dados.getIdAuxiliar() != null && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {
+                if (dados.getIdAuxiliar() > 0
+                        && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {
                     alunoSelecionado = buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).get();
                     carregarDadosDaEntidadeNaView();
                     alunoCriadoOuModificado.setId(alunoSelecionado.getId());
                 }
 
-                if (dados.getIdUsuarioAutenticado() != null && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
+                if (dados.getIdUsuarioAutenticado() > 0
+                        && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
                 }
 
@@ -103,7 +103,7 @@ public class GerenciarAlunoUIController {
         carregarDadosDaViewNaEntidade();
 
         if (alunoSelecionado == null) {
-            criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
+            CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
             criarUsuarioUC.salvar(alunoCriadoOuModificado);
         } else {
             EditarUsuarioUC editarUsuarioUC = new EditarUsuarioUC(new SqliteUsuarioDAO());

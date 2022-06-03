@@ -1,6 +1,5 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.application.controller.AutenticacaoUIController;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.domain.entities.Dados;
@@ -14,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,9 +25,9 @@ public class TabelaAlunoUIController {
     @FXML
     private TableView<Usuario> tabelaAluno;
     @FXML
-    private TableColumn<Object, Object> cNomeAluno;
+    private TableColumn<Usuario, String> cNomeAluno;
     @FXML
-    private TableColumn<Object, Object> cCpfAluno;
+    private TableColumn<Usuario, String> cCpfAluno;
     @FXML
     private TextField txtBuscarAluno;
     @FXML
@@ -49,23 +47,22 @@ public class TabelaAlunoUIController {
 
     private Dados dados;
 
-    public Usuario usuarioAutenticado;
+    private Usuario usuarioAutenticado;
+    private Usuario alunoSelecionado;
     BuscarUsuarioUC buscarUsuarioUC;
-
-    public TabelaAlunoUIController() {
-        this.buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
-    }
-
 
     @FXML
     protected void initialize() {
-        WindowLoader.addOnChngeScreenListener(new WindowLoader.OnChangeScreen() {
-
+        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newScreen, Dados dados) {
+                buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+
                 alunos = FXCollections.observableArrayList();
                 tabelaAluno.setItems(alunos);
-                if (buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
+
+                if (dados.getIdUsuarioAutenticado() > 0
+                        && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
                 }
 
@@ -81,14 +78,11 @@ public class TabelaAlunoUIController {
         });
     }
 
-
-
     private void carregarTabela() {
         List<Usuario> todosAlunos = buscarUsuarioUC.buscarTodosAlunos();
         alunos.clear();
         alunos.addAll(todosAlunos);
     }
-
 
     private void filtrarDadosDaTabela() {
         FilteredList<Usuario> dadosFiltrados = new FilteredList<>(alunos, a -> true);
@@ -134,15 +128,32 @@ public class TabelaAlunoUIController {
     }
 
     public void editarAluno(ActionEvent actionEvent) throws IOException {
-        Usuario alunoSelecionado = tabelaAluno.getSelectionModel().getSelectedItem();
-        dados = new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId());
-        WindowLoader.setRoot("instrutor/GerenciarAlunoUI",  dados);
+        alunoSelecionado = tabelaAluno.getSelectionModel().getSelectedItem();
+        if (alunoSelecionado == null) {
+            showAlert("Erro!", "Selecione um aluno.", Alert.AlertType.ERROR);
+            return;
+        }
+        WindowLoader.setRoot("instrutor/GerenciarAlunoUI", new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId()));
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-//        dados.setIdUsuarioAutenticado(null);
-//        dados.setIdAuxiliar(null);
-        WindowLoader.setRoot("AutenticacaoUI");
+        WindowLoader.setRoot("AutenticacaoUI", new Dados(0));
     }
 
+    public void verFichaTreino(ActionEvent actionEvent) throws IOException {
+        alunoSelecionado = tabelaAluno.getSelectionModel().getSelectedItem();
+        if (alunoSelecionado == null) {
+            showAlert("Erro!", "Selecione um aluno.", Alert.AlertType.ERROR);
+            return;
+        }
+        WindowLoader.setRoot("aluno/TabelaFichaTreinoUi", new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId()));
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType type){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
 }

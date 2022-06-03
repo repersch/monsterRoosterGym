@@ -1,35 +1,37 @@
 package br.edu.ifsp.application.controller;
 
+import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.controller.instrutor.GerenciarExercicioUIController;
 import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
+import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.Exercicio;
+import br.edu.ifsp.domain.entities.GrupoMuscular;
+import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
+import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class TabelaExercicioUIController {
     @FXML
     public Button btnEditarExercicio;
     @FXML
-    private TableColumn cNomeExercicio;
+    public Label txtAlunoLogado;
     @FXML
-    private TableColumn cGrupoMuscular;
+    private TableColumn<Exercicio, String> cNomeExercicio;
+    @FXML
+    private TableColumn<GrupoMuscular, String> cGrupoMuscular;
     @FXML
     private TextField txtBuscarExercicio;
     @FXML
@@ -43,35 +45,40 @@ public class TabelaExercicioUIController {
     @FXML
     private Button btnNovoExercicio;
     @FXML
-    private TableView tabelaExercicio;
+    private TableView<Exercicio> tabelaExercicio;
 
 
     private ObservableList<Exercicio> exercicios;
     private Exercicio exercicioSelecionado;
-    BuscarExercicioUC buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
-    private Object usuarioLogado;
-
-
-    ResourceBundle rb = new ResourceBundle() {
-        @Override
-        protected Object handleGetObject(String key) {
-            return null;
-        }
-
-        @Override
-        public Enumeration<String> getKeys() {
-            return null;
-        }
-    };
+    private Usuario usuarioAutenticado;
+    private BuscarExercicioUC buscarExercicioUC;
+    private BuscarUsuarioUC buscarUsuarioUC;
 
     @FXML
-    public void initialize() {
-        cNomeExercicio.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        cGrupoMuscular.setCellValueFactory(new PropertyValueFactory<>("grupoMuscular"));
-        exercicios = FXCollections.observableArrayList();
-        tabelaExercicio.setItems(exercicios);
-        carregarTableView();
-        filtrarDadosDaTabela();
+    protected void initialize() {
+        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
+            @Override
+            public void onScreenChanged(String newScreen, Dados dados) {
+                buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
+                buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+
+                if (dados.getIdUsuarioAutenticado() > 0
+                        && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
+                    usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+                }
+
+                txtAlunoLogado.setText(usuarioAutenticado.getNome());
+
+                exercicios = FXCollections.observableArrayList();
+                tabelaExercicio.setItems(exercicios);
+
+                cNomeExercicio.setCellValueFactory(new PropertyValueFactory<>("nome"));
+                cGrupoMuscular.setCellValueFactory(new PropertyValueFactory<>("grupoMuscular"));
+
+                carregarTableView();
+                filtrarDadosDaTabela();
+            }
+        });
     }
 
     private void carregarTableView() {
@@ -80,20 +87,17 @@ public class TabelaExercicioUIController {
         exercicios.addAll(todosExercicios);
     }
 
-    public void selecionar(MouseEvent mouseEvent) {
-        this.exercicioSelecionado = (Exercicio) tabelaExercicio.getSelectionModel().getSelectedItem();
-    }
-
     public void cadastrarNovoExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarExercicioUI");
+        WindowLoader.setRoot("instrutor/GerenciarExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void editarExercicio(ActionEvent actionEvent) throws IOException {
-        if (exercicioSelecionado != null) {
-            WindowLoader.setRoot("instrutor/GerenciarExercicioUI");
-            GerenciarExercicioUIController controller = (GerenciarExercicioUIController) WindowLoader.getController();
-            controller.carregarDadosDaEntidadeNaView(exercicioSelecionado);
+        exercicioSelecionado = tabelaExercicio.getSelectionModel().getSelectedItem();
+        if (exercicioSelecionado == null) {
+            showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
+            return;
         }
+        WindowLoader.setRoot("instrutor/GerenciarExercicioUI", new Dados(usuarioAutenticado.getId(), exercicioSelecionado.getId()));
     }
 
     private void filtrarDadosDaTabela() {
@@ -120,25 +124,31 @@ public class TabelaExercicioUIController {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-        this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI");
+        WindowLoader.setRoot("AutenticacaoUI", new Dados(0,0));
     }
 
-
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI");
+        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
+//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI", new Dados(usuarioAutenticado.getId(), 0));
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType type){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
     }
 
 }

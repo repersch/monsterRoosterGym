@@ -23,7 +23,7 @@ public class WindowLoader extends Application {
     public void start(Stage stage) throws IOException {
         Parent parent = loadFXML("AutenticacaoUI");
         scene = new Scene(parent, 950, 700);
-        stage.setTitle("Autenticar");
+        stage.setTitle("Monster Rooster Gym");
         stage.setScene(scene);
         stage.show();
     }
@@ -59,7 +59,7 @@ public class WindowLoader extends Application {
         void onScreenChanged(String newScreen, Dados userData);
     }
 
-    public static void addOnChngeScreenListener(OnChangeScreen newListener) {
+    public static void addOnChangeScreenListener(OnChangeScreen newListener) {
         listeners.add(newListener);
     }
 

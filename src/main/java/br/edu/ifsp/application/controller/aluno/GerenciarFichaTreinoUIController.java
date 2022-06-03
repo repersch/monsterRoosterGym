@@ -73,4 +73,9 @@ public class GerenciarFichaTreinoUIController {
             showAlert("Erro!", "Instrutor não encontrado.", Alert.AlertType.ERROR);
         }
     }
+
+    public void criarFichaTreino(ActionEvent actionEvent) {
+
+    }
+
 }

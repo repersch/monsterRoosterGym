@@ -15,7 +15,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.TabelaAlunoUIController">
    <children>
       <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="398.0" layoutX="-58.0" layoutY="209.0" rotate="135.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="365.0" />
-      <TableView fx:id="tabelaAluno" layoutX="250.0" layoutY="332.0" onMouseClicked="#selecionar" prefHeight="310.0" prefWidth="660.0">
+      <TableView fx:id="tabelaAluno" layoutX="250.0" layoutY="332.0" prefHeight="310.0" prefWidth="660.0">
          <columns>
             <TableColumn fx:id="cNomeAluno" prefWidth="432.7999572753906" text="Nome" />
             <TableColumn fx:id="cCpfAluno" prefWidth="226.4000244140625" text="CPF" />
@@ -44,11 +44,11 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true"
-                       preserveRatio="true">
-               <Image url="@../../imagem/usuario.png"/>
+            <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../imagem/usuario.png" />
             </ImageView>
          </children>
       </Pane>
+      <Button fx:id="btnDetalhesFichaTreino" layoutX="790.0" layoutY="655.0" mnemonicParsing="false" onAction="#verFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Ficha Treino" />
    </children>
 </AnchorPane>

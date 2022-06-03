@@ -2,8 +2,11 @@ package br.edu.ifsp.application.controller.instrutor;
 
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
+import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.Usuario;
+import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC;
+import br.edu.ifsp.domain.usecases.usuario.EditarUsuarioUC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,10 +14,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
-
-import static br.edu.ifsp.domain.usecases.usuario.CriarUsuarioUC.*;
 
 public class GerenciarInstrutorUIController {
     @FXML
@@ -28,41 +27,64 @@ public class GerenciarInstrutorUIController {
     @FXML
     private PasswordField txtSenha;
 
-    public Usuario instrutor;
+    private Usuario instrutorParaSalvar = new Usuario();
+    private Usuario instrutorSelecionado;
+    private Usuario usuarioAutenticado;
+    private BuscarUsuarioUC buscarUsuarioUC;
 
-    CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
+    @FXML
+    protected void initialize() {
+        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
+            @Override
+            public void onScreenChanged(String newScreen, Dados dados) {
+                buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+
+                if (dados.getIdUsuarioAutenticado() > 0
+                        && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
+                    usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+                }
+                if (dados.getIdAuxiliar() > 0
+                        && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {
+                    instrutorSelecionado = buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).get();
+                    instrutorParaSalvar.setId(instrutorSelecionado.getId());
+                    carregarDadosDaEntidadeParaView();
+                }
+
+            }
+        });
+    }
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     private void carregarDadosDaViewNaEntidade() {
-        if (instrutor == null) {
-            instrutor = new Usuario();
-        }
-        instrutor.setNome(txtNomeInstrutor.getText());
-        instrutor.setEmail(txtEmailnstrutor.getText());
-        instrutor.setSenha(txtSenha.getText());
-        instrutor.setInstrutor(true);
-        instrutor.setAluno(null);
+        instrutorParaSalvar.setNome(txtNomeInstrutor.getText());
+        instrutorParaSalvar.setEmail(txtEmailnstrutor.getText());
+        instrutorParaSalvar.setSenha(txtSenha.getText());
+        instrutorParaSalvar.setInstrutor(true);
+        instrutorParaSalvar.setAluno(null);
     }
 
-    public void salvarInstrutor(ActionEvent actionEvent) throws IOException {
+    public void criarOuEditarInstrutor(ActionEvent actionEvent) throws IOException {
         carregarDadosDaViewNaEntidade();
-        criarUsuarioUC.salvar(instrutor);
+
+        if (instrutorSelecionado == null) {
+            CriarUsuarioUC criarUsuarioUC = new CriarUsuarioUC(new SqliteUsuarioDAO());
+            criarUsuarioUC.salvar(instrutorParaSalvar);
+        } else {
+            EditarUsuarioUC editarUsuarioUC = new EditarUsuarioUC(new SqliteUsuarioDAO());
+            editarUsuarioUC.atualizar(instrutorParaSalvar);
+        }
         voltarParaCenaAnterior(actionEvent);
     }
 
-
-    public void carregarDadosDaEntidadeParaView(Usuario instrutorSelecionado) {
-        System.out.printf("Cheguei aqui: " + instrutorSelecionado);
+    public void carregarDadosDaEntidadeParaView() {
         if (instrutorSelecionado == null) {
             throw new IllegalArgumentException("Instrutor não pode ser nulo.");
         }
-        this.instrutor = instrutorSelecionado;
-        txtNomeInstrutor.autosize();
         txtNomeInstrutor.setText(instrutorSelecionado.getNome());
         txtEmailnstrutor.setText(instrutorSelecionado.getEmail());
-
+        txtSenha.setText(instrutorSelecionado.getSenha());
     }
 }

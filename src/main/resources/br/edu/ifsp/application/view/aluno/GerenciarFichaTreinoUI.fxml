@@ -21,41 +21,43 @@
             <Image url="@../../imagem/ficha_treino.png" />
          </image>
       </ImageView>
-      <Label layoutX="181.0" layoutY="238.0" prefHeight="30.0" prefWidth="134.0" text="Data Início">
+      <Label layoutX="274.0" layoutY="237.0" prefHeight="30.0" prefWidth="134.0" text="Data Início">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBuscarAluno" layoutX="308.0" layoutY="353.0" prefHeight="25.0" prefWidth="174.0" />
-      <DatePicker fx:id="dpDataInicio" layoutX="308.0" layoutY="241.0" />
-      <Label layoutX="154.0" layoutY="292.0" prefHeight="30.0" prefWidth="134.0" text="Data Validade">
+      <TextField fx:id="txtBuscarAluno" layoutX="401.0" layoutY="352.0" prefHeight="25.0" prefWidth="174.0" />
+      <DatePicker fx:id="dpDataInicio" layoutX="401.0" layoutY="240.0" />
+      <Label layoutX="247.0" layoutY="291.0" prefHeight="30.0" prefWidth="134.0" text="Data Validade">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dpDataValidade" layoutX="308.0" layoutY="294.0" />
-      <Label layoutX="219.0" layoutY="350.0" prefHeight="30.0" prefWidth="58.0" text="Aluno">
+      <DatePicker fx:id="dpDataValidade" layoutX="401.0" layoutY="293.0" />
+      <Label layoutX="312.0" layoutY="349.0" prefHeight="30.0" prefWidth="58.0" text="Aluno">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="197.0" layoutY="399.0" prefHeight="30.0" prefWidth="80.0" text="Instrutor">
+      <Label layoutX="290.0" layoutY="443.0" prefHeight="30.0" prefWidth="80.0" text="Instrutor">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBuscarInstrutor" layoutX="308.0" layoutY="404.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button fx:id="btnBuscarAluno" layoutX="502.0" layoutY="353.0" mnemonicParsing="false" onAction="#buscarAluno" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #dc4343;" text="Buscar" textFill="WHITE" />
-      <Button fx:id="btnBuscarInstrutor" layoutX="502.0" layoutY="404.0" mnemonicParsing="false" onAction="#buscarInstrutor" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #dc4343;" text="Buscar" textFill="WHITE" />
-      <Label fx:id="lbNomeAluno" layoutX="647.0" layoutY="351.0" prefHeight="30.0" prefWidth="252.0">
+      <TextField fx:id="txtBuscarInstrutor" layoutX="401.0" layoutY="448.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button fx:id="btnBuscarAluno" layoutX="595.0" layoutY="352.0" mnemonicParsing="false" onAction="#buscarAluno" prefHeight="25.0" prefWidth="107.0" text="Buscar" />
+      <Button fx:id="btnBuscarInstrutor" layoutX="595.0" layoutY="448.0" mnemonicParsing="false" onAction="#buscarInstrutor" prefHeight="25.0" prefWidth="107.0" text="Buscar" />
+      <Label fx:id="lbNomeAluno" layoutX="401.0" layoutY="398.0" prefHeight="30.0" prefWidth="252.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lbNomeInstrutor" layoutX="647.0" layoutY="402.0" prefHeight="30.0" prefWidth="252.0">
+      <Label fx:id="lbNomeInstrutor" layoutX="401.0" layoutY="499.0" prefHeight="30.0" prefWidth="252.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <Button fx:id="btnCriarFichaTreino" layoutX="456.0" layoutY="574.0" mnemonicParsing="false" onAction="#criarFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Salvar" />
+      <Button fx:id="btnCancelar" layoutX="320.0" layoutY="574.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar" />
    </children>
 </AnchorPane>

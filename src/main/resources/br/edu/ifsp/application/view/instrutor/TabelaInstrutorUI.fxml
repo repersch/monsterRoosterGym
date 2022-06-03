@@ -30,23 +30,21 @@
          <Font size="50.0" />
       </font>
    </Label>
-   <ImageView fitHeight="120.0" fitWidth="180.0" layoutX="530.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../imagem/instrutor.png" />
-      </image>
+   <ImageView fitHeight="120.0" fitWidth="180.0" layoutX="530.0" layoutY="78.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../imagem/instrutor.png"/>
    </ImageView>
    <Button fx:id="btnEditarExercicio" layoutX="649.0" layoutY="279.0" mnemonicParsing="false" onAction="#editarInstrutor" prefHeight="40.0" prefWidth="120.0" text="Editar" />
    <Pane layoutX="630.0" prefHeight="73.0" prefWidth="319.0">
       <children>
-         <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
+         <Label fx:id="txtUsuarioLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
             <font>
                <Font size="23.0" />
             </font>
          </Label>
-         <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../imagem/usuario.png" />
-            </image>
+         <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../imagem/usuario.png"/>
          </ImageView>
       </children>
    </Pane>

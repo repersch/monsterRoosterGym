@@ -2,6 +2,7 @@ package br.edu.ifsp.application.controller.instrutor;
 
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
+import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.collections.FXCollections;
@@ -15,17 +16,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class TabelaInstrutorUIController {
     @FXML
-    private TableView tabelaInstrutor;
+    private TableView<Usuario> tabelaInstrutor;
     @FXML
-    private TableColumn cNomeInstrutor;
+    private TableColumn<Usuario, String> cNomeInstrutor;
     @FXML
-    private Label txtAlunoLogado;
+    private Label txtUsuarioLogado;
     @FXML
     private TextField txtBuscarInstrutor;
     @FXML
@@ -40,17 +39,31 @@ public class TabelaInstrutorUIController {
     private Button btnNovoInstrutor;
 
     private ObservableList<Usuario> instrutores;
-    public Usuario instrutorSelecionado;
-    BuscarUsuarioUC buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
-    public Usuario usuarioLogado;
+    private Usuario usuarioAutenticado;
+    private BuscarUsuarioUC buscarUsuarioUC;
+
 
     @FXML
-    public void initialize() {
-        cNomeInstrutor.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        instrutores = FXCollections.observableArrayList();
-        tabelaInstrutor.setItems(instrutores);
-        carregarTableView();
-        filtrarDadosDaTabela();
+    protected void initialize() {
+        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
+            @Override
+            public void onScreenChanged(String newScreen, Dados dados) {
+                buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+
+                if (dados.getIdUsuarioAutenticado() > 0
+                        && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
+                    usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+                }
+                txtUsuarioLogado.setText(usuarioAutenticado.getNome());
+
+                cNomeInstrutor.setCellValueFactory(new PropertyValueFactory<>("nome"));
+                instrutores = FXCollections.observableArrayList();
+
+                tabelaInstrutor.setItems(instrutores);
+                carregarTableView();
+                filtrarDadosDaTabela();
+            }
+        });
     }
 
     private void carregarTableView() {
@@ -59,23 +72,17 @@ public class TabelaInstrutorUIController {
         instrutores.addAll(todosInstrutores);
     }
 
-
-    public void selecionar(MouseEvent mouseEvent) {
-        this.instrutorSelecionado = (Usuario) tabelaInstrutor.getSelectionModel().getSelectedItem();
-    }
-
-
     public void cadastrarNovoInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI");
+        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void editarInstrutor(ActionEvent actionEvent) throws IOException {
-        if (this.instrutorSelecionado != null) {
-            WindowLoader.setRoot("instrutor/GerenciarInstrutorUI");
-            GerenciarInstrutorUIController controller = new GerenciarInstrutorUIController();
-            controller.carregarDadosDaEntidadeParaView(this.instrutorSelecionado);
+        Usuario instrutorSelecionado = tabelaInstrutor.getSelectionModel().getSelectedItem();
+        if (instrutorSelecionado == null) {
+            showAlert("Erro!", "Selecione um instrutor.", Alert.AlertType.ERROR);
+            return;
         }
-
+        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", new Dados(usuarioAutenticado.getId(), instrutorSelecionado.getId()));
     }
 
     private void filtrarDadosDaTabela() {
@@ -101,25 +108,32 @@ public class TabelaInstrutorUIController {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-        this.usuarioLogado = null;
-        WindowLoader.setRoot("AutenticacaoUI");
+        WindowLoader.setRoot("AutenticacaoUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI");
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI");
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI");
+        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
+//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI", new Dados(usuarioAutenticado.getId(), 0));
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType type){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
     }
 
 }

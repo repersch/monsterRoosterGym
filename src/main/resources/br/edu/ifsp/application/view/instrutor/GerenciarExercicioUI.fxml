@@ -40,5 +40,5 @@
    <ImageView fitHeight="90.0" fitWidth="110.0" layoutX="509.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../../imagem/exercicio.png" />
    </ImageView>
-   <ComboBox layoutX="307.0" layoutY="325.0" prefHeight="26.0" prefWidth="406.0" />
+   <ComboBox fx:id="cbGrupoMuscular" layoutX="307.0" layoutY="325.0" prefHeight="26.0" prefWidth="406.0" />
 </AnchorPane>
