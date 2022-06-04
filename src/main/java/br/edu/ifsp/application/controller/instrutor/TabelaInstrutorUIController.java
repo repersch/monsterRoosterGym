@@ -121,7 +121,7 @@ public class TabelaInstrutorUIController {
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {

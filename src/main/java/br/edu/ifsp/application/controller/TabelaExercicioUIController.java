@@ -88,7 +88,7 @@ public class TabelaExercicioUIController {
     }
 
     public void cadastrarNovoExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/GerenciarExercicioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void editarExercicio(ActionEvent actionEvent) throws IOException {

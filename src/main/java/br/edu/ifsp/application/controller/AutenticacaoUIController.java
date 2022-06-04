@@ -26,22 +26,11 @@ public class AutenticacaoUIController {
 
     private Usuario usuarioAutenticado;
     private Dados dados;
-    AutenticarUC autenticarUC;
-
-    @FXML
-    protected void initialize() {
-        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
-            @Override
-            public void onScreenChanged(String newScreen, Dados dados) {
-                autenticarUC = new AutenticarUC(new BuscarUsuarioUC(new SqliteUsuarioDAO()));
-                usuarioAutenticado =
-            }
-        });
-    }
+    AutenticarUC autenticarUC = new AutenticarUC(new BuscarUsuarioUC(new SqliteUsuarioDAO()));
 
     public void autenticar(ActionEvent actionEvent) throws IOException {
        usuarioAutenticado =  autenticarUC.autenticar(txtEmail.getText(), txtSenha.getText());
-       dados = new Dados(usuarioAutenticado.getId(), 0);
+       dados = new Dados(usuarioAutenticado.getId(), 0, 0);
 
        if (usuarioAutenticado.getInstrutor()) {
            WindowLoader.setRoot("instrutor/TabelaAlunoUI", dados);

@@ -108,15 +108,15 @@ public class TabelaAlunoUIController {
     }
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI",  new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI",  new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {
@@ -124,7 +124,7 @@ public class TabelaAlunoUIController {
     }
 
     public void cadastrarNovoAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarAlunoUI",  new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/GerenciarAlunoUI",  new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void editarAluno(ActionEvent actionEvent) throws IOException {
@@ -133,11 +133,11 @@ public class TabelaAlunoUIController {
             showAlert("Erro!", "Selecione um aluno.", Alert.AlertType.ERROR);
             return;
         }
-        WindowLoader.setRoot("instrutor/GerenciarAlunoUI", new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId()));
+        WindowLoader.setRoot("instrutor/GerenciarAlunoUI", new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId(), 0));
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("AutenticacaoUI", new Dados(0));
+        WindowLoader.setRoot("AutenticacaoUI", new Dados(0, 0, 0));
     }
 
     public void verFichaTreino(ActionEvent actionEvent) throws IOException {
@@ -146,7 +146,7 @@ public class TabelaAlunoUIController {
             showAlert("Erro!", "Selecione um aluno.", Alert.AlertType.ERROR);
             return;
         }
-        WindowLoader.setRoot("aluno/TabelaFichaTreinoUi", new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId()));
+        WindowLoader.setRoot("aluno/TabelaFichaTreinoUi", new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId(), 0));
     }
 
     private void showAlert(String title, String message, Alert.AlertType type){

@@ -55,6 +55,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Button fx:id="btnCancelar" layoutX="352.0" layoutY="605.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar" />
+      <Button fx:id="btnEditarFichaTreino" layoutX="352.0" layoutY="605.0" mnemonicParsing="false" onAction="#editarFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Editar" />
+      <Button fx:id="btnCancelar" layoutX="213.0" layoutY="605.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar" />
    </children>
 </AnchorPane>

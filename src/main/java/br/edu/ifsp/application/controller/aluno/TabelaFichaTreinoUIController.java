@@ -43,7 +43,7 @@ public class TabelaFichaTreinoUIController {
     private Button btnFinalizarTreino;
 
     private ObservableList<FichaTreino> fichasTreino;
-    private Usuario usuarioLogado;
+    private Usuario usuarioAutenticado;
     private Usuario usuarioSelecionado;
     private FichaTreino fichaTreinoSelecionada;
 
@@ -64,11 +64,12 @@ public class TabelaFichaTreinoUIController {
 
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
-                    usuarioLogado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+                    usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
                 }
                 if (dados.getIdAuxiliar() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {
                     usuarioSelecionado = buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).get();
+                    carregarDadosDaEntidadeNaView();
                 }
 
                 cIdFichaTreino.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -77,11 +78,15 @@ public class TabelaFichaTreinoUIController {
                 // descobrir como faz pra aparecer só o nome do instrutor
                 cInstrutorFichaTreino.setCellValueFactory(new PropertyValueFactory<>("instrutor"));
 
-                txtAlunoLogado.setText(usuarioLogado.getNome());
+                txtAlunoLogado.setText(usuarioAutenticado.getNome());
 
                 carregarTabela();
             }
         });
+    }
+
+    private void carregarDadosDaEntidadeNaView() {
+
     }
 
     private void carregarTabela() {
@@ -96,7 +101,7 @@ public class TabelaFichaTreinoUIController {
             showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
             return;
         }
-        WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioLogado.getId(), fichaTreinoSelecionada.getId()));
+        WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioAutenticado.getId(), usuarioSelecionado.getId(), fichaTreinoSelecionada.getId()));
     }
 
     public void registrarInicioTreino(ActionEvent actionEvent) {
@@ -106,16 +111,26 @@ public class TabelaFichaTreinoUIController {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("AutenticacaoUI", new Dados(0, 0));
+        WindowLoader.setRoot("AutenticacaoUI", new Dados(0, 0, 0));
+    }
+
+    public void editarFichaTreino(ActionEvent actionEvent) throws IOException {
+        fichaTreinoSelecionada = tabelaFichaTreino.getSelectionModel().getSelectedItem();
+        if (fichaTreinoSelecionada == null) {
+            showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
+            return;
+        }
+//        aqui eu envio a fichaTreino como idAuxiliar2, através dele é possível encontrar o usuário
+        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", new Dados(usuarioAutenticado.getId(), usuarioSelecionado.getId(), fichaTreinoSelecionada.getId()));
     }
 
     public void criarFichaTreino(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", new Dados(usuarioLogado.getId(), 0));
+        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", new Dados(usuarioAutenticado.getId(), usuarioSelecionado.getId(), 0));
     }
 
     public void voltarParaTelaAnterior(ActionEvent actionEvent) throws IOException {
-        if (usuarioLogado.getInstrutor()) {
-            WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioLogado.getId(), 0));
+        if (usuarioAutenticado.getInstrutor()) {
+            WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
         }
     }
 
@@ -126,4 +141,6 @@ public class TabelaFichaTreinoUIController {
         alert.setHeaderText(null);
         alert.showAndWait();
     }
+
+
 }

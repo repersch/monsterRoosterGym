@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.usecases.treino;
 
+import br.edu.ifsp.domain.entities.FichaTreino;
 import br.edu.ifsp.domain.entities.Treino;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
@@ -25,6 +26,17 @@ public class BuscarTreinoUC {
             throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
         }
         return treinoDAO.findByAttribute("nome", nome);
+    }
+
+    public List<Treino> buscarTreinosPorFichaTreino (Integer idFichaTreino) {
+        if (idFichaTreino == null) {
+            throw  new IllegalArgumentException("Id não pode ser nulo");
+        }
+        return treinoDAO.findByIdFichaTreino(idFichaTreino);
+    }
+
+    public List<Treino> buscarTreinosPorFichaTreino (FichaTreino fichaTreino) {
+        return buscarTreinosPorFichaTreino(fichaTreino.getId());
     }
 
     public List<Treino> buscarTodos() {

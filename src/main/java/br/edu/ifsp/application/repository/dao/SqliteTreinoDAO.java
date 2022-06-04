@@ -1,10 +1,9 @@
 package br.edu.ifsp.application.repository.dao;
 
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
-import br.edu.ifsp.domain.entities.Exercicio;
 import br.edu.ifsp.domain.entities.FichaTreino;
 import br.edu.ifsp.domain.entities.Treino;
-import br.edu.ifsp.domain.entities.Usuario;
+import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.treino.TreinoDAO;
 
 import java.sql.PreparedStatement;
@@ -15,9 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static br.edu.ifsp.application.main.Main.buscarFichaTreinoUC;
-import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
 
 public class SqliteTreinoDAO implements TreinoDAO {
+
+    private BuscarFichaTreinoUC buscarFichaTreinoUC;
 
     @Override
     public Integer create(Treino treino) {
@@ -50,6 +50,24 @@ public class SqliteTreinoDAO implements TreinoDAO {
             e.printStackTrace();
         }
         return Optional.ofNullable(treino);
+    }
+
+    @Override
+    public List<Treino> findByIdFichaTreino(Integer idFichaTreino) {
+        String sql = " SELECT * FROM Treino WHERE id_ficha_treino = ?";
+        List<Treino> treinos = new ArrayList<>();
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setInt(1, idFichaTreino);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Treino treino = resultSetToEntity(resultado);
+                treinos.add(treino);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return treinos;
     }
 
     @Override
@@ -105,13 +123,17 @@ public class SqliteTreinoDAO implements TreinoDAO {
     }
 
     private Treino resultSetToEntity(ResultSet resultado) throws SQLException {
+        buscarFichaTreinoUC = new BuscarFichaTreinoUC(new SqliteFichaTreinoDAO());
         Integer id_ficha_treino = resultado.getInt("id_ficha_treino");
-        FichaTreino fichaTreino = buscarFichaTreinoUC.buscarPorId(id_ficha_treino).get();
-        return new Treino(
-                resultado.getInt("id"),
-                resultado.getString("nome"),
-                resultado.getString("observacao"),
-                fichaTreino
-        );
+        if (buscarFichaTreinoUC.buscarPorId(id_ficha_treino).isPresent()) {
+            FichaTreino fichaTreino = buscarFichaTreinoUC.buscarPorId(id_ficha_treino).get();
+            return new Treino(
+                    resultado.getInt("id"),
+                    resultado.getString("nome"),
+                    resultado.getString("observacao"),
+                    fichaTreino
+            );
+        }
+        return null;
     }
 }

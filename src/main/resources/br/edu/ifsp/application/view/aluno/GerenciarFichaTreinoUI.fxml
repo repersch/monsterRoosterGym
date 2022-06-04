@@ -57,7 +57,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnCriarFichaTreino" layoutX="456.0" layoutY="574.0" mnemonicParsing="false" onAction="#criarFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Salvar" />
+      <Button fx:id="btnCriarFichaTreino" layoutX="456.0" layoutY="574.0" mnemonicParsing="false" onAction="#salvarFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Salvar" />
       <Button fx:id="btnCancelar" layoutX="320.0" layoutY="574.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar" />
    </children>
 </AnchorPane>

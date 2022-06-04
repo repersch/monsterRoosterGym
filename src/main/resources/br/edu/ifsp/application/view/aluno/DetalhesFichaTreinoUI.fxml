@@ -9,48 +9,36 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.edu.ifsp.application.controller.aluno.DetalhesFichaTreinoUIController">
-   <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="398.0" layoutX="379.0" layoutY="233.0"
-              rotate="152.5" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0"
-              width="365.0"/>
-   <Accordion layoutX="59.0" layoutY="147.0"/>
-   <ButtonBar prefHeight="40.0" prefWidth="200.0"/>
+<AnchorPane prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.aluno.DetalhesFichaTreinoUIController">
+   <Accordion layoutX="59.0" layoutY="147.0" />
+   <ButtonBar prefHeight="40.0" prefWidth="200.0" />
    <Label layoutX="88.0" layoutY="148.0" prefHeight="74.0" prefWidth="410.0" text="FICHA TREINO 01">
       <font>
-         <Font size="50.0"/>
+         <Font size="50.0" />
       </font>
    </Label>
-   <ImageView fitHeight="104.0" fitWidth="96.0" layoutX="500.0" layoutY="137.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../../imagem/ficha_treino.png"/>
+   <ImageView fitHeight="104.0" fitWidth="96.0" layoutX="500.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../imagem/ficha_treino.png" />
    </ImageView>
-   <Button fx:id="btnDetalhesFichaTreino" layoutX="622.0" layoutY="605.0" mnemonicParsing="false"
-           onAction="#telaDetalhesFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Detalhes"/>
-   <ListView fx:id="listaTreinos" layoutX="82.0" layoutY="299.0" prefHeight="287.0" prefWidth="296.0"/>
+   <Button fx:id="btnDetalhesFichaTreino" layoutX="622.0" layoutY="605.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Detalhes" />
+   <ListView fx:id="treinoListView" layoutX="82.0" layoutY="299.0" prefHeight="287.0" prefWidth="296.0" />
    <Label layoutX="86.0" layoutY="271.0" text="TREINO">
       <font>
-         <Font size="22.0"/>
+         <Font size="22.0" />
       </font>
    </Label>
-   <Button fx:id="btnLogOut" layoutX="24.0" layoutY="27.0" mnemonicParsing="false" onAction="#fazerLogOut"
-           prefHeight="25.0" prefWidth="61.0" text="Log Out"/>
+   <Button fx:id="btnLogOut" layoutX="24.0" layoutY="27.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="25.0" prefWidth="61.0" text="Log Out" />
    <Pane layoutX="640.0" layoutY="10.0" prefHeight="73.0" prefWidth="319.0">
-      <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0"
-             prefWidth="192.0">
+      <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
          <font>
-            <Font size="23.0"/>
+            <Font size="23.0" />
          </font>
       </Label>
-      <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@../../imagem/usuario.png"/>
+      <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../imagem/usuario.png" />
       </ImageView>
    </Pane>
-   <Button fx:id="btnCancelar" layoutX="480.0" layoutY="605.0" mnemonicParsing="false"
-           onAction="#voltarParaTelaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar"/>
+   <Button fx:id="btnCancelar" layoutX="480.0" layoutY="605.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar" />
 </AnchorPane>
