@@ -27,7 +27,7 @@ public class TabelaExercicioUIController {
     @FXML
     public Button btnEditarExercicio;
     @FXML
-    public Label txtAlunoLogado;
+    public Label txtUsuarioLogado;
     @FXML
     private TableColumn<Exercicio, String> cNomeExercicio;
     @FXML
@@ -67,7 +67,7 @@ public class TabelaExercicioUIController {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
                 }
 
-                txtAlunoLogado.setText(usuarioAutenticado.getNome());
+                txtUsuarioLogado.setText(usuarioAutenticado.getNome());
 
                 exercicios = FXCollections.observableArrayList();
                 tabelaExercicio.setItems(exercicios);

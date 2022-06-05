@@ -55,7 +55,7 @@ public class GerenciarInstrutorUIController {
     }
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     private void carregarDadosDaViewNaEntidade() {
