@@ -27,7 +27,7 @@ public class GerenciarInstrutorUIController {
     @FXML
     private PasswordField txtSenha;
 
-    private Usuario instrutorParaSalvar = new Usuario();
+    private Usuario instrutorParaSalvar;
     private Usuario instrutorSelecionado;
     private Usuario usuarioAutenticado;
     private BuscarUsuarioUC buscarUsuarioUC;
@@ -38,6 +38,7 @@ public class GerenciarInstrutorUIController {
             @Override
             public void onScreenChanged(String newScreen, Dados dados) {
                 buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+                instrutorParaSalvar = new Usuario();
 
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {

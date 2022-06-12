@@ -9,6 +9,7 @@ import br.edu.ifsp.domain.entities.GrupoMuscular;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
 import br.edu.ifsp.domain.usecases.exercicio.CriarExercicioUC;
+import br.edu.ifsp.domain.usecases.exercicio.EditarExercicioUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,13 +73,22 @@ public class GerenciarExercicioUIController {
 
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void salvarExercicio(ActionEvent actionEvent) throws IOException {
-        CriarExercicioUC criarExercicioUC = new CriarExercicioUC(new SqliteExercicioDAO());
         carregarDadosDaViewNaEntidade();
-        criarExercicioUC.salvar(exercicioParaSalvar);
+
+        if (exercicioSelecionado == null) {
+            CriarExercicioUC criarExercicioUC = new CriarExercicioUC(new SqliteExercicioDAO());
+            exercicioParaSalvar.setEmUso(false);
+            criarExercicioUC.salvar(exercicioParaSalvar);
+        } else {
+            EditarExercicioUC editarExercicioUC = new EditarExercicioUC(new SqliteExercicioDAO());
+            exercicioParaSalvar.setId(exercicioSelecionado.getId());
+            exercicioParaSalvar.setEmUso(exercicioSelecionado.getEmUso());
+            editarExercicioUC.atualizar(exercicioParaSalvar);
+        }
         voltarParaCenaAnterior(actionEvent);
     }
 

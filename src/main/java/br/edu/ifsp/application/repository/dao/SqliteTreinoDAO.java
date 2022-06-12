@@ -54,7 +54,7 @@ public class SqliteTreinoDAO implements TreinoDAO {
 
     @Override
     public List<Treino> findByIdFichaTreino(Integer idFichaTreino) {
-        String sql = " SELECT * FROM Treino WHERE id_ficha_treino = ?";
+        String sql = "SELECT * FROM Treino WHERE id_ficha_treino = ?";
         List<Treino> treinos = new ArrayList<>();
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {

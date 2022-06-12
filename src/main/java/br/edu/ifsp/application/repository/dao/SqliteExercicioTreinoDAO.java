@@ -2,7 +2,9 @@ package br.edu.ifsp.application.repository.dao;
 
 import br.edu.ifsp.application.repository.utils.ConnectionFactory;
 import br.edu.ifsp.domain.entities.*;
+import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.ExercicioTreinoDAO;
+import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +16,15 @@ import java.util.Optional;
 import static br.edu.ifsp.application.main.Main.*;
 
 public class SqliteExercicioTreinoDAO implements ExercicioTreinoDAO {
+
+    private BuscarTreinoUC buscarTreinoUC;
+    private BuscarExercicioUC buscarExercicioUC;
+
+    public SqliteExercicioTreinoDAO() {
+        buscarTreinoUC = new BuscarTreinoUC(new SqliteTreinoDAO());
+        buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
+    }
+
     @Override
     public Integer create(ExercicioTreino exercicioTreino) {
         String sql = "INSERT INTO ExercicioTreino (serie, carga, repeticao, id_treino, id_exercicio)" +
@@ -67,6 +78,24 @@ public class SqliteExercicioTreinoDAO implements ExercicioTreinoDAO {
             e.printStackTrace();
         }
         return Optional.ofNullable(exercicioTreino);
+    }
+
+    @Override
+    public List<ExercicioTreino> findByIdTreino(Integer idTreino) {
+        String sql = "SELECT * FROM ExercicioTreino WHERE id_treino = ?";
+        List<ExercicioTreino> exerciciosTreino = new ArrayList<>();
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setInt(1, idTreino);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                ExercicioTreino exercicioTreino = resultSetToEntity(resultado);
+                exerciciosTreino.add(exercicioTreino);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return exerciciosTreino;
     }
 
     @Override
@@ -128,10 +157,10 @@ public class SqliteExercicioTreinoDAO implements ExercicioTreinoDAO {
 
     private ExercicioTreino resultSetToEntity(ResultSet resultado) throws SQLException {
         Integer id_treino = resultado.getInt("id_treino");
-        Treino treino = (Treino) buscarTreinoUC.buscarPorId(id_treino).get();
+        Treino treino = buscarTreinoUC.buscarPorId(id_treino).get();
 
         Integer id_exercicio = resultado.getInt("id_exercicio");
-        Exercicio exercicio = (Exercicio) buscarExercicioUC.buscarPorId(id_exercicio).get();
+        Exercicio exercicio = buscarExercicioUC.buscarPorId(id_exercicio).get();
 
         return new ExercicioTreino(
                 resultado.getInt("id"),

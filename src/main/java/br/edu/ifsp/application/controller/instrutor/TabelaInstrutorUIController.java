@@ -73,7 +73,7 @@ public class TabelaInstrutorUIController {
     }
 
     public void cadastrarNovoInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void editarInstrutor(ActionEvent actionEvent) throws IOException {
@@ -82,7 +82,7 @@ public class TabelaInstrutorUIController {
             showAlert("Erro!", "Selecione um instrutor.", Alert.AlertType.ERROR);
             return;
         }
-        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", new Dados(usuarioAutenticado.getId(), instrutorSelecionado.getId()));
+        WindowLoader.setRoot("instrutor/GerenciarInstrutorUI", new Dados(usuarioAutenticado.getId(), instrutorSelecionado.getId(), 0));
     }
 
     private void filtrarDadosDaTabela() {
@@ -108,16 +108,16 @@ public class TabelaInstrutorUIController {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("AutenticacaoUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("AutenticacaoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {

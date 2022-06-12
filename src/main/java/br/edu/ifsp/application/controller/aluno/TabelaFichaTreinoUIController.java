@@ -24,6 +24,10 @@ public class TabelaFichaTreinoUIController {
     @FXML
     public Button btnCriarFichaTreino;
     @FXML
+    public Button btnEditarFichaTreino;
+    @FXML
+    public Button btnCancelar;
+    @FXML
     private Label txtAlunoLogado;
     @FXML
     private TableView<FichaTreino> tabelaFichaTreino;

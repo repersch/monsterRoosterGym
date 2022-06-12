@@ -97,7 +97,7 @@ public class TabelaExercicioUIController {
             showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
             return;
         }
-        WindowLoader.setRoot("instrutor/GerenciarExercicioUI", new Dados(usuarioAutenticado.getId(), exercicioSelecionado.getId()));
+        WindowLoader.setRoot("instrutor/GerenciarExercicioUI", new Dados(usuarioAutenticado.getId(), exercicioSelecionado.getId(), 0));
     }
 
     private void filtrarDadosDaTabela() {
@@ -124,19 +124,19 @@ public class TabelaExercicioUIController {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("AutenticacaoUI", new Dados(0,0));
+        WindowLoader.setRoot("AutenticacaoUI", new Dados(0,0, 0));
     }
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaInstrutor(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaInstrutorUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaExercicio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void telaRelatorio(ActionEvent actionEvent) {

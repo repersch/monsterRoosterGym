@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -22,93 +21,40 @@
                      <image>
                         <Image url="@../../imagem/aluno_icone.png" />
                      </image>
-                     <cursor>
-                        <Cursor fx:constant="CLOSED_HAND" />
-                     </cursor>
                   </ImageView>
                </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </Button>
             <Button fx:id="btnMenuInstrutor" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="220.0" mnemonicParsing="false" onAction="#telaInstrutor" prefHeight="92.0" prefWidth="143.0" text="INSTRUTOR">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../imagem/instrutor_icone.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="CLOSED_HAND" />
-                     </cursor>
+                     <Image url="@../../imagem/instrutor_icone.png" />
                   </ImageView>
                </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </Button>
             <Button fx:id="btnMenuExercicio" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="313.0" mnemonicParsing="false" onAction="#telaExercicio" prefHeight="92.0" prefWidth="143.0" text="EXERCÍCIO">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../imagem/haltere_icone.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="CLOSED_HAND" />
-                     </cursor>
+                     <Image url="@../../imagem/haltere_icone.png" />
                   </ImageView>
                </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </Button>
             <Button fx:id="btnMenuRelatorio" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="405.0" mnemonicParsing="false" onAction="#telaRelatorio" prefHeight="92.0" prefWidth="143.0" text="RELATÓRIO">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../imagem/relatorio_icone.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="CLOSED_HAND" />
-                     </cursor>
+                     <Image url="@../../imagem/relatorio_icone.png" />
                   </ImageView>
                </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </Button>
             <Button fx:id="btnLogOut" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="143.0" text="LogOut">
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../imagem/logout_icone.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="CLOSED_HAND" />
-                     </cursor>
+                     <Image url="@../../imagem/logout_icone.png" />
                   </ImageView>
                </graphic>
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="143.0" prefHeight="700.0" prefWidth="824.0">
+      <AnchorPane layoutX="143.0" prefHeight="700.0" prefWidth="809.0">
          <children>
             <TextField fx:id="txtBuscarInstrutor" layoutX="71.0" layoutY="265.0" prefHeight="34.0" prefWidth="412.0" promptText="Buscar" />
             <Button fx:id="btnNovoInstrutor" layoutX="643.0" layoutY="262.0" mnemonicParsing="false" onAction="#cadastrarNovoInstrutor" prefHeight="40.0" prefWidth="120.0" text="Criar" />
@@ -129,10 +75,10 @@
             </Pane>
             <TableView fx:id="tabelaInstrutor" layoutX="71.0" layoutY="324.0" prefHeight="284.0" prefWidth="695.0">
                <columns>
-                  <TableColumn fx:id="cNomeInstrutor" prefWidth="659.2000122070312" text="Nome" />
+                  <TableColumn fx:id="cNomeInstrutor" prefWidth="694.0" text="Nome" />
                </columns>
             </TableView>
-            <Label layoutX="71.0" layoutY="105.0" prefHeight="93.0" prefWidth="354.0" text="INSTRUTOR">
+            <Label layoutX="70.0" layoutY="110.0" prefHeight="93.0" prefWidth="354.0" text="INSTRUTOR">
                <font>
                   <Font size="64.0" />
                </font>

@@ -22,4 +22,8 @@ public class BuscarExercicioTreinoUC {
     public List<ExercicioTreino> buscarTodos() {
         return exercicioTreinoDAO.findAll();
     }
+
+    public List<ExercicioTreino> buscarExerciciosTreinoPorTreino(Integer idTreino) {
+        return exercicioTreinoDAO.findByIdTreino(idTreino);
+    }
 }

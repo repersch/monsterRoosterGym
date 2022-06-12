@@ -49,12 +49,12 @@ public class GerenciarFichaTreinoUIController {
     public void initialize() {
 
         buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+        buscarFichaTreinoUC = new BuscarFichaTreinoUC(new SqliteFichaTreinoDAO());
+        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
 
         WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newScreen, Dados dados) {
-                buscarFichaTreinoUC = new BuscarFichaTreinoUC(new SqliteFichaTreinoDAO());
-                buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
 
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
@@ -74,9 +74,6 @@ public class GerenciarFichaTreinoUIController {
                     txtBuscarInstrutor.setText(usuarioAutenticado.getNome());
                     lbNomeInstrutor.setText(usuarioAutenticado.getNome());
                 }
-
-
-
             }
         });
     }

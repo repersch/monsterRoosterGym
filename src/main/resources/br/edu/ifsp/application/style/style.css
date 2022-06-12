@@ -2,8 +2,8 @@
     -fx-cursor: hand;
     -fx-background-color: rgb(227, 114, 114);
     -fx-text-fill: white;
-
 }
+
 .button {
     -fx-background-color: #EE2E2E;
     -fx-text-fill: black;

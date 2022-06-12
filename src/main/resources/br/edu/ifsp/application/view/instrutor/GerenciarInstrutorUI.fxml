@@ -7,12 +7,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.instrutor.GerenciarInstrutorUIController">
    <children>
-      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ef240433" height="296.0" layoutX="252.0" layoutY="210.0" rotate="-119.5" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" width="204.0" />
       <Label layoutX="300.0" layoutY="278.0" text="Nome">
          <font>
             <Font size="20.0" />
@@ -32,14 +30,18 @@
       </Label>
       <TextField fx:id="txtNomeInstrutor" layoutX="369.0" layoutY="281.0" prefHeight="25.0" prefWidth="405.0" />
       <TextField fx:id="txtEmailnstrutor" layoutX="369.0" layoutY="325.0" prefHeight="25.0" prefWidth="405.0" />
-      <Label layoutX="385.0" layoutY="196.0" prefHeight="43.0" prefWidth="176.0" text="INSTRUTOR">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="84.0" fitWidth="103.0" layoutX="561.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../imagem/instrutor.png" />
-      </ImageView>
       <PasswordField fx:id="txtSenha" layoutX="369.0" layoutY="374.0" prefHeight="25.0" prefWidth="190.0" />
+      <AnchorPane fx:id="barraMenu" prefHeight="139.0" prefWidth="950.0">
+         <children>
+            <Label layoutX="241.0" layoutY="31.0" prefHeight="94.0" prefWidth="358.0" text="INSTRUTOR">
+               <font>
+                  <Font size="64.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="110.0" fitWidth="120.0" layoutX="599.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../imagem/instrutor.png" />
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

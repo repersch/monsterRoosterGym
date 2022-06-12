@@ -113,7 +113,7 @@ public class GerenciarAlunoUIController {
     }
 
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
 }
