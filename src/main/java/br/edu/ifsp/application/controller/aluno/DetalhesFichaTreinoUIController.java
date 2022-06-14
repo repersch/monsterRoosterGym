@@ -143,6 +143,7 @@ public class DetalhesFichaTreinoUIController {
         System.out.println(exerciciosTreino);
         tableViewExercicios.setItems(exerciciosTreino);
 
+        // precisa fazer aparecer o nome e o grupo muscular nas células da tabela
         cExercicio.setCellValueFactory(new PropertyValueFactory<>("exercicio"));
         cGrupoMuscular.setCellValueFactory(new PropertyValueFactory<>("exercicio"));
     }
