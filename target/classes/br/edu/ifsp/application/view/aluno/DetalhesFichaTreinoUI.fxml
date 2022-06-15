@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.aluno.DetalhesFichaTreinoUIController">
+   <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="700.0" prefWidth="950.0">
+      <children>
+         <TableView fx:id="tableViewTreino" layoutX="217.0" layoutY="249.0" onMouseClicked="#selecionarTreino" prefHeight="313.0" prefWidth="186.0">
+           <columns>
+             <TableColumn fx:id="cTreino" prefWidth="184.0" text="Treinos" />
+           </columns>
+         </TableView>
+         <Label layoutX="605.0" layoutY="246.0" text="Nome: ">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <Label layoutX="475.0" layoutY="246.0" text="ID: ">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <Label layoutX="475.0" layoutY="285.0" text="Observação: ">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <Label fx:id="txtIdTreino" layoutX="510.0" layoutY="246.0" prefHeight="30.0" prefWidth="81.0" style="-fx-background-color: white;">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <Label fx:id="txtObservacaoTreino" alignment="TOP_LEFT" layoutX="472.0" layoutY="315.0" prefHeight="73.0" prefWidth="403.0" style="-fx-background-color: white;">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <Label fx:id="txtNomeTreino" layoutX="670.0" layoutY="246.0" prefHeight="30.0" prefWidth="206.0" style="-fx-background-color: white;">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <TableView fx:id="tableViewExercicios" layoutX="472.0" layoutY="405.0" prefHeight="155.0" prefWidth="403.0">
+           <columns>
+             <TableColumn fx:id="cExercicio" prefWidth="247.0" text="Exercícios" />
+             <TableColumn fx:id="cGrupoMuscular" prefWidth="155.0" text="Grupo Muscular " />
+           </columns>
+         </TableView>
+         <Label fx:id="txtIdFichaTreino" layoutX="220.0" layoutY="102.0" prefHeight="110.0" prefWidth="505.0">
+            <font>
+               <Font size="64.0" />
+            </font>
+         </Label>
+         <AnchorPane fx:id="barraMenu" layoutX="-6.0" layoutY="-5.0" prefHeight="700.0" prefWidth="160.0">
+            <children>
+               <Button fx:id="btnLogOut1" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="168.0" text="LogOut">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../imagem/logout_icone.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button fx:id="btnAdicionarTreino" layoutX="-2.0" layoutY="148.0" mnemonicParsing="false" onAction="#adicionarTreinoNaFichaTreino" prefHeight="90.0" prefWidth="168.0" text="Adicionar Treino">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Button>
+               <Button fx:id="btnAdicionarExercicio" layoutX="-2.0" layoutY="238.0" mnemonicParsing="false" onAction="#adicionarExercicioNoTreino" prefHeight="90.0" prefWidth="168.0" text="Adicionar Exercício">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Button>
+               <Button fx:id="btnCancelar" layoutY="418.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="90.0" prefWidth="168.0" text="Cancelar">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Button>
+               <Button fx:id="btnDetalhesFichaTreino" layoutY="328.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="90.0" prefWidth="168.0" text="Detalhes">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Button>
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+   <Accordion layoutX="59.0" layoutY="147.0" />
+   <Pane layoutX="640.0" layoutY="10.0" prefHeight="73.0" prefWidth="319.0">
+      <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../imagem/usuario.png" />
+      </ImageView>
+   </Pane>
+</AnchorPane>

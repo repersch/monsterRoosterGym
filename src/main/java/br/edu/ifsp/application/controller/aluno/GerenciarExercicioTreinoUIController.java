@@ -64,6 +64,12 @@ public class GerenciarExercicioTreinoUIController {
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+
+                    if (!usuarioAutenticado.getInstrutor()) {
+                        cbNomeExercicio.setDisable(true);
+                        txtSeriesExercicioTreino.setDisable(true);
+                        txtRepeticoesExercicioTreino.setDisable(true);
+                    }
                 }
                 if (dados.getIdAuxiliar() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {

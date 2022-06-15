@@ -81,6 +81,13 @@ public class DetalhesFichaTreinoUIController {
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+
+                    if (!usuarioAutenticado.getInstrutor()) {
+                        btnDetalhesFichaTreino.setLayoutY(btnAdicionarTreino.getLayoutY());
+                        btnCancelar.setLayoutY(btnAdicionarExercicio.getLayoutY());
+                        btnAdicionarTreino.setVisible(false);
+                        btnAdicionarExercicio.setVisible(false);
+                    }
                 }
                 if (dados.getIdAuxiliar() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {

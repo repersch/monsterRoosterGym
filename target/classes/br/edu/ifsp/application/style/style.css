@@ -1,0 +1,61 @@
+.button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: rgb(227, 114, 114);
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: #EE2E2E;
+    -fx-text-fill: black;
+}
+
+.list-view {
+    -fx-background-color: #ef240433;
+}
+
+.table-view .column-header, .list-view,
+.table-view .column-header-background .filler {
+    -fx-background-color: #EE2E2E;
+    -fx-alignment: CENTER;
+}
+
+.table-view .list-view .column-header .label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+.table-view .cell{
+    -fx-alignment: center;
+    -fx-text-fill: #000000;
+}
+
+.table-row-cell:selected {
+   fx-background-color:  #ef240433;
+}
+.table-row-cell:selected .text {
+    -fx-font-weight: bold;
+}
+
+.list-view:hover {
+    -fx-background-color: #e71717;
+}
+
+#barraMenu {
+    -fx-background-color: #EE2E2E;
+}
+
+#faixaIconesMenu {
+    -fx-background-color: white;
+}
+
+#btnMenuAluno, #btnMenuExercicio, #btnMenuInstrutor, #btnMenuRelatorio, #btnLogOut {
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+
+#btnMenuAluno:hover, #btnMenuExercicio:hover, #btnMenuInstrutor:hover, #btnMenuRelatorio:hover, #btnLogOut:hover {
+    /*-fx-font-size: 17px;*/
+}
+
+

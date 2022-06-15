@@ -69,7 +69,7 @@ public class TabelaAlunoUIController {
                 }
 
                 cNomeAluno.setCellValueFactory(new PropertyValueFactory<>("nome"));
-                // precisa mudar para cpf
+                //TODO precisa mudar para cpf
                 cCpfAluno.setCellValueFactory(new PropertyValueFactory<>("email"));
 
                 txtAlunoLogado.setText(usuarioAutenticado.getNome());

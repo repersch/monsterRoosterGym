@@ -69,6 +69,17 @@ public class TabelaFichaTreinoUIController {
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
+
+                    if (usuarioAutenticado.getInstrutor()) {
+                        btnIniciarTreino.setVisible(false);
+                        btnFinalizarTreino.setVisible(false);
+                    }
+
+                    else {
+                        btnCancelar.setLayoutX(btnCriarFichaTreino.getLayoutX());
+                        btnCriarFichaTreino.setVisible(false);
+                        btnEditarFichaTreino.setVisible(false);
+                    }
                 }
                 if (dados.getIdAuxiliar() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {
