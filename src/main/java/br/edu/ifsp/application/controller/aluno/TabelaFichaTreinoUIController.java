@@ -41,10 +41,6 @@ public class TabelaFichaTreinoUIController {
     private TableColumn<Usuario, String> cInstrutorFichaTreino;
     @FXML
     private Button btnDetalhesFichaTreino;
-    @FXML
-    private Button btnIniciarTreino;
-    @FXML
-    private Button btnFinalizarTreino;
 
     private ObservableList<FichaTreino> fichasTreino;
     private Usuario usuarioAutenticado;
@@ -70,15 +66,10 @@ public class TabelaFichaTreinoUIController {
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
 
-                    if (usuarioAutenticado.getInstrutor()) {
-                        btnIniciarTreino.setVisible(false);
-                        btnFinalizarTreino.setVisible(false);
-                    }
-
-                    else {
-                        btnCancelar.setLayoutX(btnCriarFichaTreino.getLayoutX());
+                    if (!usuarioAutenticado.getInstrutor()) {
                         btnCriarFichaTreino.setVisible(false);
                         btnEditarFichaTreino.setVisible(false);
+                        btnCancelar.setLayoutX(btnCriarFichaTreino.getLayoutX());
                     }
                 }
                 if (dados.getIdAuxiliar() > 0
@@ -117,12 +108,6 @@ public class TabelaFichaTreinoUIController {
             return;
         }
         WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioAutenticado.getId(), usuarioSelecionado.getId(), fichaTreinoSelecionada.getId()));
-    }
-
-    public void registrarInicioTreino(ActionEvent actionEvent) {
-    }
-
-    public void registrarFinalTreino(ActionEvent actionEvent) {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {

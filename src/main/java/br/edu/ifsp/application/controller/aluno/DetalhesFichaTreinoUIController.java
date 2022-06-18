@@ -45,6 +45,10 @@ public class DetalhesFichaTreinoUIController {
     @FXML
     public Button btnAdicionarTreino;
     @FXML
+    private Button btnIniciarTreino;
+    @FXML
+    private Button btnFinalizarTreino;
+    @FXML
     public TableColumn cExercicio;
     @FXML
     public TableColumn cGrupoMuscular;
@@ -83,10 +87,14 @@ public class DetalhesFichaTreinoUIController {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
 
                     if (!usuarioAutenticado.getInstrutor()) {
-                        btnDetalhesFichaTreino.setLayoutY(btnAdicionarTreino.getLayoutY());
-                        btnCancelar.setLayoutY(btnAdicionarExercicio.getLayoutY());
                         btnAdicionarTreino.setVisible(false);
                         btnAdicionarExercicio.setVisible(false);
+                        btnIniciarTreino.setLayoutY(btnAdicionarTreino.getLayoutY());
+                        btnFinalizarTreino.setLayoutY(btnAdicionarExercicio.getLayoutY());
+                    }
+                    else {
+                        btnIniciarTreino.setVisible(false);
+                        btnFinalizarTreino.setVisible(false);
                     }
                 }
                 if (dados.getIdAuxiliar() > 0
@@ -120,6 +128,12 @@ public class DetalhesFichaTreinoUIController {
         WindowLoader.setRoot("aluno/GerenciarExercicioTreinoUi", new Dados(usuarioAutenticado.getId(),
                                                                                  alunoSelecionado.getId(),
                                                                                  exercicioTreinoSelecionado.getId()));
+    }
+
+    public void registrarInicioTreino(ActionEvent actionEvent) {
+    }
+
+    public void registrarFinalTreino(ActionEvent actionEvent) {
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {

@@ -51,30 +51,6 @@
       </Pane>
       <AnchorPane fx:id="barraMenu" layoutY="-1.0" prefHeight="703.0" prefWidth="160.0">
          <children>
-            <Button fx:id="btnIniciarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="260.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="92.0" prefWidth="160.0" text="INICIAR TREINO">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../imagem/play_icone.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnFinalizarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="352.0" mnemonicParsing="false" onAction="#registrarFinalTreino" prefHeight="92.0" prefWidth="160.0" text="FINALIZAR TREINO">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../imagem/stop_icone.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
             <Button fx:id="btnLogOut1" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="160.0" text="LogOut">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
