@@ -4,8 +4,10 @@ import br.edu.ifsp.application.repository.dao.*;
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
+import br.edu.ifsp.domain.usecases.exercicio.EditarExercicioUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
 import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.collections.FXCollections;
@@ -17,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class DetalhesFichaTreinoUIController {
 
@@ -59,6 +62,8 @@ public class DetalhesFichaTreinoUIController {
     private Usuario alunoSelecionado;
     private FichaTreino fichaTreinoSelecionada;
     private Treino treinoSelecionado;
+    private Treino treinoParaAdicionar;
+//    private RegistroTreino registroTreinoParaIniciarOuFinalizar;
     private ObservableList<Treino> treinos;
     private ObservableList<ExercicioTreino> exerciciosTreino;
 
@@ -67,6 +72,7 @@ public class DetalhesFichaTreinoUIController {
     private BuscarTreinoUC buscarTreinoUC;
     private BuscarExercicioTreinoUC buscarExercicioTreinoUC;
     private BuscarExercicioUC buscarExercicioUC;
+//    private RegistrarInicioTreinoUC registrarInicioTreinoUC;
 
 
     @FXML
@@ -131,9 +137,42 @@ public class DetalhesFichaTreinoUIController {
     }
 
     public void registrarInicioTreino(ActionEvent actionEvent) {
+        if (treinoSelecionado == null) {
+            showAlert("Erro!", "Selecione um treino.", Alert.AlertType.ERROR);
+            return;
+        }
+        System.out.println("Registrando início do treino...");
+//        RegistroTreino registroTreinoParaIniciarOuFinalizar = new RegistroTreino(
+//                treinoSelecionado.getId(),
+//                LocalDateTime.now(), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.INICIADO,
+//                usuarioAutenticado, treinoSelecionado);
+//        RegistrarInicioTreinoUC registrarInicioTreinoUC = new RegistrarInicioTreinoUC(new SqliteRegistroTreinoDAO());
+
+//        registroTreinoParaIniciarOuFinalizar.setId(treinoSelecionado.getId());
+//        registroTreinoParaIniciarOuFinalizar.setInicio(LocalDateTime.now());
+//        registroTreinoParaIniciarOuFinalizar.setFim(LocalDateTime.now().plusHours(1));
+//        registroTreinoParaIniciarOuFinalizar.setEstadoRegistroTreino(EstadoRegistroTreino.INICIADO);
+//        registroTreinoParaIniciarOuFinalizar.setUsuario(usuarioAutenticado);
+////        registroTreinoParaIniciarOuFinalizar.setUsuario(buscarUsuarioUC.buscarPorId(usuarioAutenticado.getId()).get());
+//        registroTreinoParaIniciarOuFinalizar.setTreino(treinoSelecionado);
+
+//        System.out.println("Registro Treino para Iniciar = " + registroTreinoParaIniciarOuFinalizar);
+
+//        registrarInicioTreinoUC.iniciarTreino(registroTreinoParaIniciarOuFinalizar);
+//        registrarInicioTreinoUC.iniciarTreino(registroTreinoParaIniciarOuFinalizar);
+//        RegistroTreino registroTreino1 = new RegistroTreino(LocalDateTime.now(), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorId(1).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
+//        RegistroTreino registroTreino2 = new RegistroTreino(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
+
+
+
+//        EditarExercicioUC editarExercicioUC = new EditarExercicioUC(new SqliteExercicioDAO());
+//        exercicioParaSalvar.setId(exercicioSelecionado.getId());
+//        exercicioParaSalvar.setEmUso(exercicioSelecionado.getEmUso());
+//        editarExercicioUC.atualizar(exercicioParaSalvar);
     }
 
     public void registrarFinalTreino(ActionEvent actionEvent) {
+        System.out.println("Registrando final de treino...");
     }
 
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
@@ -145,9 +184,13 @@ public class DetalhesFichaTreinoUIController {
     }
 
     public void adicionarExercicioNoTreino(ActionEvent actionEvent) {
+        System.out.println("Adicionando exercício no treino...");
     }
 
-    public void adicionarTreinoNaFichaTreino(ActionEvent actionEvent) {
+    public void adicionarTreinoNaFichaTreino(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("instrutor/GerenciarTreinoUI", new Dados(usuarioAutenticado.getId(),
+                alunoSelecionado.getId(),
+                fichaTreinoSelecionada.getId()));
     }
 
     public void selecionarTreino(MouseEvent mouseEvent) {
