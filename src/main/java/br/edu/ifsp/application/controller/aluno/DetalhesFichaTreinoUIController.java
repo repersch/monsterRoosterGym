@@ -62,7 +62,7 @@ public class DetalhesFichaTreinoUIController {
     private Usuario alunoSelecionado;
     private FichaTreino fichaTreinoSelecionada;
     private Treino treinoSelecionado;
-    private Treino treinoParaAdicionar;
+    private RegistroTreino registroTreinoParaSalvar;
 //    private RegistroTreino registroTreinoParaIniciarOuFinalizar;
     private ObservableList<Treino> treinos;
     private ObservableList<ExercicioTreino> exerciciosTreino;
@@ -141,34 +141,15 @@ public class DetalhesFichaTreinoUIController {
             showAlert("Erro!", "Selecione um treino.", Alert.AlertType.ERROR);
             return;
         }
-        System.out.println("Registrando início do treino...");
-//        RegistroTreino registroTreinoParaIniciarOuFinalizar = new RegistroTreino(
-//                treinoSelecionado.getId(),
-//                LocalDateTime.now(), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.INICIADO,
-//                usuarioAutenticado, treinoSelecionado);
-//        RegistrarInicioTreinoUC registrarInicioTreinoUC = new RegistrarInicioTreinoUC(new SqliteRegistroTreinoDAO());
+        registroTreinoParaSalvar = new RegistroTreino();
+        registroTreinoParaSalvar.setInicio(LocalDateTime.now());
+        registroTreinoParaSalvar.setFim(LocalDateTime.now().plusHours(1));
+        registroTreinoParaSalvar.setEstadoRegistroTreino(EstadoRegistroTreino.INICIADO);
+        registroTreinoParaSalvar.setUsuario(usuarioAutenticado);
+        registroTreinoParaSalvar.setTreino(treinoSelecionado);
 
-//        registroTreinoParaIniciarOuFinalizar.setId(treinoSelecionado.getId());
-//        registroTreinoParaIniciarOuFinalizar.setInicio(LocalDateTime.now());
-//        registroTreinoParaIniciarOuFinalizar.setFim(LocalDateTime.now().plusHours(1));
-//        registroTreinoParaIniciarOuFinalizar.setEstadoRegistroTreino(EstadoRegistroTreino.INICIADO);
-//        registroTreinoParaIniciarOuFinalizar.setUsuario(usuarioAutenticado);
-////        registroTreinoParaIniciarOuFinalizar.setUsuario(buscarUsuarioUC.buscarPorId(usuarioAutenticado.getId()).get());
-//        registroTreinoParaIniciarOuFinalizar.setTreino(treinoSelecionado);
-
-//        System.out.println("Registro Treino para Iniciar = " + registroTreinoParaIniciarOuFinalizar);
-
-//        registrarInicioTreinoUC.iniciarTreino(registroTreinoParaIniciarOuFinalizar);
-//        registrarInicioTreinoUC.iniciarTreino(registroTreinoParaIniciarOuFinalizar);
-//        RegistroTreino registroTreino1 = new RegistroTreino(LocalDateTime.now(), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.INICIADO, buscarUsuarioUC.buscarPorId(1).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
-//        RegistroTreino registroTreino2 = new RegistroTreino(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusHours(1), EstadoRegistroTreino.FINALIZADO, buscarUsuarioUC.buscarPorCpf(aluno2.getAluno().getCpf()).get(), buscarTreinoUC.buscarPorNome(treino2.getNome()).get());
-
-
-
-//        EditarExercicioUC editarExercicioUC = new EditarExercicioUC(new SqliteExercicioDAO());
-//        exercicioParaSalvar.setId(exercicioSelecionado.getId());
-//        exercicioParaSalvar.setEmUso(exercicioSelecionado.getEmUso());
-//        editarExercicioUC.atualizar(exercicioParaSalvar);
+        RegistrarInicioTreinoUC registrarInicioTreinoUC = new RegistrarInicioTreinoUC(new SqliteRegistroTreinoDAO());
+        registrarInicioTreinoUC.iniciarTreino(registroTreinoParaSalvar);
     }
 
     public void registrarFinalTreino(ActionEvent actionEvent) {
