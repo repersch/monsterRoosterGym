@@ -1,22 +1,31 @@
 package br.edu.ifsp.application.controller.instrutor;
 
 import br.edu.ifsp.application.repository.dao.SqliteFichaTreinoDAO;
+import br.edu.ifsp.application.repository.dao.SqliteTreinoDAO;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.FichaTreino;
+import br.edu.ifsp.domain.entities.Treino;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
+import br.edu.ifsp.domain.usecases.treino.CriarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 
 public class GerenciarTreinoUIController {
+    @FXML
+    public TextField txtNomeTreino;
+    @FXML
+    public TextArea txtObservacaoTreino;
     @FXML
     public Button btnCancelar;
     @FXML
@@ -25,6 +34,7 @@ public class GerenciarTreinoUIController {
     private Usuario usuarioAutenticado;
     private Usuario alunoSelecionado;
     private FichaTreino fichaTreinoSelecionada;
+    private Treino treinoParaSalvar;
 
     private BuscarUsuarioUC buscarUsuarioUC;
     private BuscarFichaTreinoUC buscarFichaTreinoUC;
@@ -54,12 +64,25 @@ public class GerenciarTreinoUIController {
         });
     }
 
+    public void salvarTreino(ActionEvent actionEvent) throws IOException {
+        carregarDadosDaViewNaEntidade();
+
+        CriarTreinoUC criarTreinoUC = new CriarTreinoUC(new SqliteTreinoDAO());
+        criarTreinoUC.salvar(treinoParaSalvar);
+
+        voltarParaCenaAnterior(actionEvent);
+    }
+
     public void voltarParaCenaAnterior(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioAutenticado.getId(),
                 alunoSelecionado.getId(),
                 fichaTreinoSelecionada.getId()));
     }
 
-    public void salvarTreino(ActionEvent actionEvent) {
+    private void carregarDadosDaViewNaEntidade() {
+        treinoParaSalvar = new Treino();
+        treinoParaSalvar.setNome(txtNomeTreino.getText());
+        treinoParaSalvar.setObservacao(txtObservacaoTreino.getText());
+        treinoParaSalvar.setFichaTreino(fichaTreinoSelecionada);
     }
 }
