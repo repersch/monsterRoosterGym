@@ -123,8 +123,8 @@ public class TabelaAlunoUIController {
         WindowLoader.setRoot("TabelaExercicioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
-    public void telaRelatorio(ActionEvent actionEvent) {
-//        WindowLoader.setRoot("instrutor/TabelaRelatorioUI");
+    public void telaRelatorio(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("instrutor/RelatorioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     public void cadastrarNovoAluno(ActionEvent actionEvent) throws IOException {
