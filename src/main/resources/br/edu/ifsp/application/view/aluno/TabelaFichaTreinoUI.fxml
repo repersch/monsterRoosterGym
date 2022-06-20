@@ -16,12 +16,12 @@
    <children>
       <AnchorPane layoutX="159.0" prefHeight="702.0" prefWidth="800.0">
          <children>
-            <Label layoutX="70.0" layoutY="110.0" prefHeight="93.0" prefWidth="425.0" text="FICHA TREINO">
+            <Label layoutX="70.0" layoutY="60.0" prefHeight="93.0" prefWidth="425.0" text="FICHA TREINO">
                <font>
                   <Font size="64.0" />
                </font>
             </Label>
-            <TableView fx:id="tabelaFichaTreino" layoutX="78.0" layoutY="265.0" prefHeight="310.0" prefWidth="660.0">
+            <TableView fx:id="tabelaFichaTreino" layoutX="70.0" layoutY="368.0" prefHeight="277.0" prefWidth="660.0">
                <columns>
                   <TableColumn fx:id="cIdFichaTreino" prefWidth="104.0" text="ID" />
                   <TableColumn fx:id="cDataInicio" prefWidth="193.60003662109375" text="Data Início" />
@@ -29,6 +29,56 @@
                   <TableColumn fx:id="cInstrutorFichaTreino" maxWidth="1000.0" prefWidth="154.40008544921875" text="Instrutor" />
                </columns>
             </TableView>
+            <Label layoutX="133.0" layoutY="204.0" text="Nome: ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="84.0" layoutY="305.0" text="Observação: ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="111.0" layoutY="254.0" text="Telefone: ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="551.0" layoutY="204.0" text="Peso:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="539.0" layoutY="254.0" text="Altura:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNome" layoutX="198.0" layoutY="202.0" prefHeight="34.0" prefWidth="319.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbTelefone" layoutX="197.0" layoutY="252.0" prefHeight="34.0" prefWidth="239.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbPeso" layoutX="609.0" layoutY="202.0" prefHeight="34.0" prefWidth="139.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbAltura" layoutX="609.0" layoutY="252.0" prefHeight="34.0" prefWidth="139.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbObservacao" layoutX="197.0" layoutY="303.0" prefHeight="34.0" prefWidth="541.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Accordion layoutX="59.0" layoutY="147.0" />
@@ -47,7 +97,7 @@
       </Pane>
       <AnchorPane fx:id="barraMenu" layoutY="-1.0" prefHeight="703.0" prefWidth="139.0">
          <children>
-            <Button fx:id="btnLogOut1" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="160.0" text="LogOut">
+            <Button fx:id="btnLogOut" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="160.0" text="LogOut">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>

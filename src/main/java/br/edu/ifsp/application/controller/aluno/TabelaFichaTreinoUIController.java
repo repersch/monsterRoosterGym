@@ -32,6 +32,16 @@ public class TabelaFichaTreinoUIController {
     @FXML
     public Button btnCancelar;
     @FXML
+    public Label lbNome;
+    @FXML
+    public Label lbTelefone;
+    @FXML
+    public Label lbPeso;
+    @FXML
+    public Label lbAltura;
+    @FXML
+    public Label lbObservacao;
+    @FXML
     private Label txtAlunoLogado;
     @FXML
     private TableView<FichaTreino> tabelaFichaTreino;
@@ -95,7 +105,11 @@ public class TabelaFichaTreinoUIController {
     }
 
     private void carregarDadosDaEntidadeNaView() {
-
+        lbNome.setText(usuarioSelecionado.getNome());
+        lbTelefone.setText(usuarioSelecionado.getAluno().getTelefone());
+        lbAltura.setText(String.valueOf(usuarioSelecionado.getAluno().getAltura()));
+        lbPeso.setText(String.valueOf(usuarioSelecionado.getAluno().getPeso()));
+        lbObservacao.setText(usuarioSelecionado.getAluno().getObservacoes());
     }
 
     private void carregarTabela() {

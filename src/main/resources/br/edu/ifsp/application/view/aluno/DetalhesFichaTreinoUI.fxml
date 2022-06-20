@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -93,15 +92,6 @@
                </Button>
             </children>
          </AnchorPane>
-          <Button fx:id="btnIniciarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutX="178.0" layoutY="584.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="66.0" prefWidth="125.0" text="INICIAR TREINO">
-              <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                          <Image url="@../../imagem/play_icone.png" />
-                      </image>
-                  </ImageView>
-              </graphic>
-          </Button>
           <Button fx:id="btnFinalizarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutX="312.0" layoutY="584.0" mnemonicParsing="false" onAction="#registrarFinalTreino" prefHeight="66.0" prefWidth="125.0" text="FINALIZAR TREINO">
               <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -111,9 +101,17 @@
                   </ImageView>
               </graphic>
           </Button>
+          <Button fx:id="btnIniciarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutX="178.0" layoutY="584.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="66.0" prefWidth="125.0" text="INICIAR TREINO">
+              <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../../imagem/play_icone.png" />
+                      </image>
+                  </ImageView>
+              </graphic>
+          </Button>
       </children>
    </AnchorPane>
-   <Accordion layoutX="59.0" layoutY="147.0" />
    <Pane layoutX="640.0" layoutY="10.0" prefHeight="73.0" prefWidth="319.0">
       <Label fx:id="txtAlunoLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="21.0" prefHeight="34.0" prefWidth="192.0">
          <font>

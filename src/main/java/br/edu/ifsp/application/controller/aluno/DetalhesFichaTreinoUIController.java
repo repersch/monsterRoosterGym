@@ -96,8 +96,8 @@ public class DetalhesFichaTreinoUIController {
                     if (!usuarioAutenticado.getInstrutor()) {
                         btnAdicionarTreino.setVisible(false);
                         btnAdicionarExercicio.setVisible(false);
-                        btnIniciarTreino.setLayoutY(btnAdicionarTreino.getLayoutY());
-                        btnFinalizarTreino.setLayoutY(btnAdicionarExercicio.getLayoutY());
+//                        btnIniciarTreino.setLayoutY(btnAdicionarTreino.getLayoutY());
+//                        btnFinalizarTreino.setLayoutY(btnAdicionarExercicio.getLayoutY());
                     }
                     else {
                         btnIniciarTreino.setVisible(false);
