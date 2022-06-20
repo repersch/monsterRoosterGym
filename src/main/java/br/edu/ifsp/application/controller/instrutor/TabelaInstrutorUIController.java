@@ -125,7 +125,7 @@ public class TabelaInstrutorUIController {
     }
 
     public void telaRelatorio(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("instrutor/RelatorioUI", new Dados(usuarioAutenticado.getId(), 0));
+        WindowLoader.setRoot("instrutor/TabelaRelatorioUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
 
     private void showAlert(String title, String message, Alert.AlertType type){

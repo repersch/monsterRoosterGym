@@ -8,6 +8,7 @@ import br.edu.ifsp.domain.entities.FichaTreino;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class TabelaFichaTreinoUIController {
@@ -34,11 +38,11 @@ public class TabelaFichaTreinoUIController {
     @FXML
     private TableColumn<FichaTreino, String> cIdFichaTreino;
     @FXML
-    private TableColumn<FichaTreino, String> cDataInicio;
+    private TableColumn<FichaTreino, LocalDate> cDataInicio;
     @FXML
-    private TableColumn<FichaTreino, String> cValidadeFichaTreino;
+    private TableColumn<FichaTreino, LocalDate> cValidadeFichaTreino;
     @FXML
-    private TableColumn<Usuario, String> cInstrutorFichaTreino;
+    private TableColumn<FichaTreino, String> cInstrutorFichaTreino;
     @FXML
     private Button btnDetalhesFichaTreino;
 
@@ -69,7 +73,7 @@ public class TabelaFichaTreinoUIController {
                     if (!usuarioAutenticado.getInstrutor()) {
                         btnCriarFichaTreino.setVisible(false);
                         btnEditarFichaTreino.setVisible(false);
-                        btnCancelar.setLayoutX(btnCriarFichaTreino.getLayoutX());
+                        btnCancelar.setVisible(false);
                     }
                 }
                 if (dados.getIdAuxiliar() > 0
@@ -81,8 +85,7 @@ public class TabelaFichaTreinoUIController {
                 cIdFichaTreino.setCellValueFactory(new PropertyValueFactory<>("id"));
                 cDataInicio.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
                 cValidadeFichaTreino.setCellValueFactory(new PropertyValueFactory<>("validade"));
-                // descobrir como faz pra aparecer só o nome do instrutor
-                cInstrutorFichaTreino.setCellValueFactory(new PropertyValueFactory<>("instrutor"));
+                cInstrutorFichaTreino.setCellValueFactory(info -> new SimpleStringProperty(info.getValue().getInstrutor().getNome()));
 
                 txtAlunoLogado.setText(usuarioAutenticado.getNome());
 

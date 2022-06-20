@@ -31,7 +31,7 @@ public class GerenciarExercicioTreinoUIController {
     @FXML
     public Button btnCriarFichaTreino;
     @FXML
-    public ComboBox cbNomeExercicio;
+    public ComboBox<Exercicio> cbNomeExercicio;
     @FXML
     public TextField txtGrupoMuscularExercicio;
 
@@ -44,8 +44,6 @@ public class GerenciarExercicioTreinoUIController {
     private Usuario alunoSelecionado;
     private ExercicioTreino exercicioTreinoSelecionado;
     private ExercicioTreino exercicioTreinoParaSalvar;
-
-
 
 
     @FXML
@@ -76,7 +74,7 @@ public class GerenciarExercicioTreinoUIController {
                     alunoSelecionado = buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).get();
                 }
                 if (dados.getIdAuxiliar2() > 0
-                        && buscarFichaTreinoUC.buscarPorId(dados.getIdAuxiliar2()).isPresent()) {
+                        && buscarExercicioTreinoUC.buscarPorId(dados.getIdAuxiliar2()).isPresent()) {
                     exercicioTreinoSelecionado = buscarExercicioTreinoUC.buscarPorId(dados.getIdAuxiliar2()).get();
                     carregarDadosDaEntidadeNaView();
                 }
@@ -86,7 +84,7 @@ public class GerenciarExercicioTreinoUIController {
     }
 
     private void carregarDadosDaEntidadeNaView() {
-        cbNomeExercicio.setValue(exercicioTreinoSelecionado.getExercicio().getNome());
+        cbNomeExercicio.setValue(exercicioTreinoSelecionado.getExercicio());
         txtGrupoMuscularExercicio.setText(exercicioTreinoSelecionado.getExercicio().getGrupoMuscular().getMusculo());
         txtGrupoMuscularExercicio.setEditable(false);
         txtGrupoMuscularExercicio.setDisable(true);
@@ -118,7 +116,7 @@ public class GerenciarExercicioTreinoUIController {
 
     private void carregarDadosDaViewNaEntidade() {
         exercicioTreinoParaSalvar = new ExercicioTreino();
-        exercicioTreinoParaSalvar.setExercicio((Exercicio) cbNomeExercicio.getSelectionModel().getSelectedItem());
+        exercicioTreinoParaSalvar.setExercicio(cbNomeExercicio.getSelectionModel().getSelectedItem());
 
     }
 

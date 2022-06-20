@@ -10,6 +10,7 @@ import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
 import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,9 +53,9 @@ public class DetalhesFichaTreinoUIController {
     @FXML
     private Button btnFinalizarTreino;
     @FXML
-    public TableColumn cExercicio;
+    public TableColumn<ExercicioTreino, String> cExercicio;
     @FXML
-    public TableColumn cGrupoMuscular;
+    public TableColumn<ExercicioTreino, String> cGrupoMuscular;
     @FXML
     public TableView<ExercicioTreino> tableViewExercicios;
 
@@ -122,8 +123,6 @@ public class DetalhesFichaTreinoUIController {
         });
     }
 
-
-
     public void telaDetalhesFichaTreino(ActionEvent actionEvent) throws IOException {
         ExercicioTreino exercicioTreinoSelecionado = tableViewExercicios.getSelectionModel().getSelectedItem();
         if (exercicioTreinoSelecionado == null) {
@@ -161,11 +160,21 @@ public class DetalhesFichaTreinoUIController {
     }
 
     public void voltarParaTelaAnterior(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("aluno/TabelaFichaTreinoUI", new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId(), fichaTreinoSelecionada.getId()));
+        WindowLoader.setRoot("aluno/TabelaFichaTreinoUI", new Dados(usuarioAutenticado.getId(),
+                                                                        alunoSelecionado.getId(),
+                                                                        fichaTreinoSelecionada.getId()));
     }
 
-    public void adicionarExercicioNoTreino(ActionEvent actionEvent) {
-        System.out.println("Adicionando exercício no treino...");
+    public void adicionarExercicioNoTreino(ActionEvent actionEvent) throws IOException {
+        treinoSelecionado = tableViewTreino.getSelectionModel().getSelectedItem();
+        if (treinoSelecionado == null) {
+            showAlert("Erro!", "Selecione um treino para adicionar um exercício.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        WindowLoader.setRoot("aluno/GerenciarExercicioTreinoUI", new Dados(usuarioAutenticado.getId(),
+                                                                                alunoSelecionado.getId(),
+                                                                                treinoSelecionado.getId()));
     }
 
     public void adicionarTreinoNaFichaTreino(ActionEvent actionEvent) throws IOException {
@@ -188,9 +197,8 @@ public class DetalhesFichaTreinoUIController {
         System.out.println(exerciciosTreino);
         tableViewExercicios.setItems(exerciciosTreino);
 
-        // precisa fazer aparecer o nome e o grupo muscular nas células da tabela
-        cExercicio.setCellValueFactory(new PropertyValueFactory<>("exercicio"));
-        cGrupoMuscular.setCellValueFactory(new PropertyValueFactory<>("exercicio"));
+        cExercicio.setCellValueFactory(info -> new SimpleStringProperty(info.getValue().getExercicio().getNome()));
+        cGrupoMuscular.setCellValueFactory(info -> new SimpleStringProperty(info.getValue().getExercicio().getGrupoMuscular().getMusculo()));
     }
 
 

@@ -98,7 +98,7 @@ public class DatabaseBuilder {
         String sql = """
                 CREATE TABLE Treino(
                      id INTEGER PRIMARY KEY AUTOINCREMENT,
-                     nome TEXT NOT NULL UNIQUE,
+                     nome TEXT NOT NULL,
                      observacao TEXT NOT NULL,
                      id_ficha_treino INTEGER NOT NULL,
                      FOREIGN KEY(id_ficha_treino) REFERENCES FichaTreino(id));

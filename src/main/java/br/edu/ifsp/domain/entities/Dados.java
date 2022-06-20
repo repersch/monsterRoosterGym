@@ -4,7 +4,6 @@ public class Dados {
 
     private Integer idUsuarioAutenticado;
     private Integer idAuxiliar;
-
     private Integer idAuxiliar2;
 
     public Dados(Integer idUsuarioAutenticado, Integer idAuxiliar) {

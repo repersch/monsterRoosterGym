@@ -14,9 +14,9 @@
 <AnchorPane prefHeight="700.0" prefWidth="950.0" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.controller.aluno.DetalhesFichaTreinoUIController">
    <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="700.0" prefWidth="950.0">
       <children>
-         <TableView fx:id="tableViewTreino" layoutX="217.0" layoutY="249.0" onMouseClicked="#selecionarTreino" prefHeight="313.0" prefWidth="186.0">
+         <TableView fx:id="tableViewTreino" layoutX="178.0" layoutY="249.0" onMouseClicked="#selecionarTreino" prefHeight="313.0" prefWidth="260.0">
            <columns>
-             <TableColumn fx:id="cTreino" prefWidth="184.0" text="Treinos" />
+             <TableColumn fx:id="cTreino" prefWidth="256.79998779296875" text="Treinos" />
            </columns>
          </TableView>
          <Label layoutX="605.0" layoutY="246.0" text="Nome: ">
@@ -62,7 +62,7 @@
          </Label>
          <AnchorPane fx:id="barraMenu" layoutX="-6.0" layoutY="-5.0" prefHeight="700.0" prefWidth="160.0">
             <children>
-               <Button fx:id="btnLogOut1" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="168.0" text="LogOut">
+               <Button fx:id="btnLogOut1" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="160.0" text="LogOut">
                   <graphic>
                      <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -71,52 +71,46 @@
                      </ImageView>
                   </graphic>
                </Button>
-               <Button fx:id="btnAdicionarTreino" layoutX="-2.0" layoutY="148.0" mnemonicParsing="false" onAction="#adicionarTreinoNaFichaTreino" prefHeight="90.0" prefWidth="168.0" text="Adicionar Treino">
+               <Button fx:id="btnAdicionarTreino" layoutX="-2.0" layoutY="148.0" mnemonicParsing="false" onAction="#adicionarTreinoNaFichaTreino" prefHeight="90.0" prefWidth="160.0" text="ADICIONAR TREINO">
                   <font>
-                     <Font size="15.0" />
+                     <Font size="13.0" />
                   </font>
                </Button>
-               <Button fx:id="btnAdicionarExercicio" layoutX="-2.0" layoutY="238.0" mnemonicParsing="false" onAction="#adicionarExercicioNoTreino" prefHeight="90.0" prefWidth="168.0" text="Adicionar Exercício">
+               <Button fx:id="btnAdicionarExercicio" layoutX="-2.0" layoutY="238.0" mnemonicParsing="false" onAction="#adicionarExercicioNoTreino" prefHeight="90.0" prefWidth="160.0" text="ADICIONAR EXERCÍCIO">
                   <font>
-                     <Font size="15.0" />
+                     <Font size="13.0" />
                   </font>
                </Button>
-               <Button fx:id="btnCancelar" layoutY="418.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="90.0" prefWidth="168.0" text="Cancelar">
+               <Button fx:id="btnCancelar" layoutY="418.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="90.0" prefWidth="160.0" text="CANCELAR">
                   <font>
-                     <Font size="15.0" />
+                     <Font size="13.0" />
                   </font>
                </Button>
-               <Button fx:id="btnDetalhesFichaTreino" layoutY="328.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="90.0" prefWidth="168.0" text="Detalhes">
+               <Button fx:id="btnDetalhesFichaTreino" layoutY="328.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="90.0" prefWidth="160.0" text="DETALHES">
                   <font>
-                     <Font size="15.0" />
+                     <Font size="13.0" />
                   </font>
                </Button>
-                <Button fx:id="btnIniciarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="260.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="92.0" prefWidth="160.0" text="INICIAR TREINO">
-                    <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../imagem/play_icone.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-                <Button fx:id="btnFinalizarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="352.0" mnemonicParsing="false" onAction="#registrarFinalTreino" prefHeight="92.0" prefWidth="160.0" text="FINALIZAR TREINO">
-                    <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../imagem/stop_icone.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
             </children>
          </AnchorPane>
+          <Button fx:id="btnIniciarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutX="178.0" layoutY="584.0" mnemonicParsing="false" onAction="#registrarInicioTreino" prefHeight="66.0" prefWidth="125.0" text="INICIAR TREINO">
+              <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../../imagem/play_icone.png" />
+                      </image>
+                  </ImageView>
+              </graphic>
+          </Button>
+          <Button fx:id="btnFinalizarTreino" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutX="312.0" layoutY="584.0" mnemonicParsing="false" onAction="#registrarFinalTreino" prefHeight="66.0" prefWidth="125.0" text="FINALIZAR TREINO">
+              <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../../imagem/stop_icone.png" />
+                      </image>
+                  </ImageView>
+              </graphic>
+          </Button>
       </children>
    </AnchorPane>
    <Accordion layoutX="59.0" layoutY="147.0" />

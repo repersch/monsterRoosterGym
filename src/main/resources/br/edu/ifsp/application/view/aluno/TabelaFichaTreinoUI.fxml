@@ -29,10 +29,6 @@
                   <TableColumn fx:id="cInstrutorFichaTreino" maxWidth="1000.0" prefWidth="154.40008544921875" text="Instrutor" />
                </columns>
             </TableView>
-            <Button fx:id="btnDetalhesFichaTreino" layoutX="618.0" layoutY="593.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Detalhes" />
-            <Button fx:id="btnCriarFichaTreino" layoutX="484.0" layoutY="593.0" mnemonicParsing="false" onAction="#criarFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Nova" />
-            <Button fx:id="btnEditarFichaTreino" layoutX="348.0" layoutY="593.0" mnemonicParsing="false" onAction="#editarFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Editar" />
-            <Button fx:id="btnCancelar" layoutX="209.0" layoutY="593.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="40.0" prefWidth="120.0" text="Cancelar" />
          </children>
       </AnchorPane>
       <Accordion layoutX="59.0" layoutY="147.0" />
@@ -49,7 +45,7 @@
             </ImageView>
          </children>
       </Pane>
-      <AnchorPane fx:id="barraMenu" layoutY="-1.0" prefHeight="703.0" prefWidth="160.0">
+      <AnchorPane fx:id="barraMenu" layoutY="-1.0" prefHeight="703.0" prefWidth="139.0">
          <children>
             <Button fx:id="btnLogOut1" alignment="CENTER" contentDisplay="TOP" graphicTextGap="10.0" layoutY="611.0" mnemonicParsing="false" onAction="#fazerLogOut" prefHeight="92.0" prefWidth="160.0" text="LogOut">
                <graphic>
@@ -59,6 +55,26 @@
                      </image>
                   </ImageView>
                </graphic>
+            </Button>
+            <Button fx:id="btnDetalhesFichaTreino" layoutY="338.0" mnemonicParsing="false" onAction="#telaDetalhesFichaTreino" prefHeight="90.0" prefWidth="160.0" text="DETALHES">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCriarFichaTreino" layoutY="156.0" mnemonicParsing="false" onAction="#criarFichaTreino" prefHeight="90.0" prefWidth="160.0" text="NOVA">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEditarFichaTreino" layoutY="247.0" mnemonicParsing="false" onAction="#editarFichaTreino" prefHeight="90.0" prefWidth="160.0" text="EDITAR">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCancelar" layoutY="428.0" mnemonicParsing="false" onAction="#voltarParaTelaAnterior" prefHeight="90.0" prefWidth="160.0" text="CANCELAR">
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Button>
          </children>
       </AnchorPane>

@@ -69,12 +69,6 @@ public class Exercicio {
 
     @Override
     public String toString() {
-        return "\nExercício: [" +
-                "ID = " + id +
-                ", Nome = '" + nome + '\'' +
-                ", Grupo Muscular = " + grupoMuscular +
-                ", Descrição = '" + descricao + '\'' +
-                ", Está em Uso? = " + emUso +
-                ']';
+        return nome;
     }
 }
