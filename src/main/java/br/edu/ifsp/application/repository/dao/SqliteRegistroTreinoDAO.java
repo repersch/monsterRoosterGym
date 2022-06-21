@@ -6,6 +6,8 @@ import br.edu.ifsp.domain.entities.RegistroTreino;
 import br.edu.ifsp.domain.entities.Treino;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistroTreinoDAO;
+import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
+import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +22,7 @@ import static br.edu.ifsp.application.main.Main.buscarTreinoUC;
 import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
 
 public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
+
 
     @Override
     public Integer create(RegistroTreino registroTreino) {

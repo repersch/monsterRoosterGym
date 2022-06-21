@@ -5,7 +5,7 @@ import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
-import br.edu.ifsp.domain.usecases.exercicioTreino.EditarExercicioTreinoUC;
+import br.edu.ifsp.domain.usecases.exercicioTreino.CriarExercicioTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class GerenciarExercicioTreinoUIController {
+public class AdicionarExercicioTreinoUIController {
     @FXML
     public TextField txtDescricaoExercicio;
     @FXML
@@ -41,10 +41,10 @@ public class GerenciarExercicioTreinoUIController {
     private BuscarExercicioTreinoUC buscarExercicioTreinoUC;
     private BuscarExercicioUC buscarExercicioUC;
     private BuscarTreinoUC buscarTreinoUC;
-    private EditarExercicioTreinoUC editarExercicioTreinoUC;
+    private CriarExercicioTreinoUC criarExercicioTreinoUC;
     private Usuario usuarioAutenticado;
     private Usuario alunoSelecionado;
-    private ExercicioTreino exercicioTreinoSelecionado;
+    private Treino treinoSelecionado;
     private ExercicioTreino exercicioTreinoParaSalvar;
 
 
@@ -56,7 +56,7 @@ public class GerenciarExercicioTreinoUIController {
         buscarExercicioTreinoUC = new BuscarExercicioTreinoUC(new SqliteExercicioTreinoDAO());
         buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
         buscarTreinoUC = new BuscarTreinoUC(new SqliteTreinoDAO());
-        editarExercicioTreinoUC = new EditarExercicioTreinoUC(new SqliteExercicioTreinoDAO());
+        criarExercicioTreinoUC = new CriarExercicioTreinoUC(new SqliteExercicioTreinoDAO());
 
         WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
             @Override
@@ -65,68 +65,39 @@ public class GerenciarExercicioTreinoUIController {
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
-
-                    if (!usuarioAutenticado.getInstrutor()) {
-                        cbNomeExercicio.setDisable(true);
-                        txtSeriesExercicioTreino.setDisable(true);
-                        txtRepeticoesExercicioTreino.setDisable(true);
-                    }
                 }
                 if (dados.getIdAuxiliar() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).isPresent()) {
                     alunoSelecionado = buscarUsuarioUC.buscarPorId(dados.getIdAuxiliar()).get();
                 }
                 if (dados.getIdAuxiliar2() > 0
-                        && buscarExercicioTreinoUC.buscarPorId(dados.getIdAuxiliar2()).isPresent()) {
-                    exercicioTreinoSelecionado = buscarExercicioTreinoUC.buscarPorId(dados.getIdAuxiliar2()).get();
-                    carregarDadosDaEntidadeNaView();
+                        && buscarTreinoUC.buscarPorId(dados.getIdAuxiliar2()).isPresent()) {
+                    treinoSelecionado = buscarTreinoUC.buscarPorId(dados.getIdAuxiliar2()).get();
                 }
                 cbNomeExercicio.getItems().setAll(buscarExercicioUC.buscarTodos());
             }
         });
     }
 
-    private void carregarDadosDaEntidadeNaView() {
-        cbNomeExercicio.setValue(exercicioTreinoSelecionado.getExercicio());
-        txtGrupoMuscularExercicio.setText(exercicioTreinoSelecionado.getExercicio().getGrupoMuscular().getMusculo());
-        txtGrupoMuscularExercicio.setEditable(false);
-        txtGrupoMuscularExercicio.setDisable(true);
-        txtDescricaoExercicio.setText(exercicioTreinoSelecionado.getExercicio().getDescricao());
-        txtDescricaoExercicio.setEditable(false);
-        txtDescricaoExercicio.setDisable(true);
-        txtSeriesExercicioTreino.setText(String.valueOf(exercicioTreinoSelecionado.getSerie()));
-        txtCargaExercicioTreino.setText(String.valueOf(exercicioTreinoSelecionado.getCarga()));
-        txtRepeticoesExercicioTreino.setText(String.valueOf(exercicioTreinoSelecionado.getRepeticao()));
-    }
-
 
     public void voltarParaTelaAnterior(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioAutenticado.getId(),
                                                                             alunoSelecionado.getId(),
-                                                                            exercicioTreinoSelecionado.getTreino().getFichaTreino().getId()));
+                                                                            treinoSelecionado.getFichaTreino().getId()));
     }
 
     public void salvarExercicioTreino(ActionEvent actionEvent) throws IOException {
         carregarDadosDaViewNaEntidade();
-        editarExercicioTreinoUC.atualizar(exercicioTreinoParaSalvar);
+        criarExercicioTreinoUC.salvar(exercicioTreinoParaSalvar);
         voltarParaTelaAnterior(actionEvent);
     }
 
     private void carregarDadosDaViewNaEntidade() {
         exercicioTreinoParaSalvar = new ExercicioTreino();
         exercicioTreinoParaSalvar.setExercicio(cbNomeExercicio.getSelectionModel().getSelectedItem());
-        exercicioTreinoParaSalvar.setTreino(exercicioTreinoSelecionado.getTreino());
+        exercicioTreinoParaSalvar.setTreino(treinoSelecionado);
         exercicioTreinoParaSalvar.setCarga(Double.valueOf(txtCargaExercicioTreino.getText()));
         exercicioTreinoParaSalvar.setRepeticao(Integer.valueOf(txtRepeticoesExercicioTreino.getText()));
         exercicioTreinoParaSalvar.setSerie(Integer.valueOf(txtSeriesExercicioTreino.getText()));
-        exercicioTreinoParaSalvar.setId(exercicioTreinoSelecionado.getId());
-    }
-
-    private void showAlert(String title, String message, Alert.AlertType type){
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.setHeaderText(null);
-        alert.showAndWait();
     }
 }

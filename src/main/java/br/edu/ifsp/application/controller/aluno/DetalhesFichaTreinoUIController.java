@@ -96,8 +96,6 @@ public class DetalhesFichaTreinoUIController {
                     if (!usuarioAutenticado.getInstrutor()) {
                         btnAdicionarTreino.setVisible(false);
                         btnAdicionarExercicio.setVisible(false);
-//                        btnIniciarTreino.setLayoutY(btnAdicionarTreino.getLayoutY());
-//                        btnFinalizarTreino.setLayoutY(btnAdicionarExercicio.getLayoutY());
                     }
                     else {
                         btnIniciarTreino.setVisible(false);
@@ -172,7 +170,7 @@ public class DetalhesFichaTreinoUIController {
             return;
         }
 
-        WindowLoader.setRoot("aluno/GerenciarExercicioTreinoUI", new Dados(usuarioAutenticado.getId(),
+        WindowLoader.setRoot("aluno/AdicionarExercicioTreinoUI", new Dados(usuarioAutenticado.getId(),
                                                                                 alunoSelecionado.getId(),
                                                                                 treinoSelecionado.getId()));
     }
