@@ -21,8 +21,6 @@ public class TabelaAlunoUIController {
     @FXML
     public Button btnLogOut;
     @FXML
-    public ListView listViewMenu;
-    @FXML
     private Button btnEditarAluno;
     @FXML
     private TableView<Usuario> tabelaAluno;
@@ -73,8 +71,6 @@ public class TabelaAlunoUIController {
                 cCpfAluno.setCellValueFactory(new PropertyValueFactory<>("email"));
 
                 txtAlunoLogado.setText(usuarioAutenticado.getNome());
-
-//                listViewMenu.setItems();
 
                 carregarTabela();
                 filtrarDadosDaTabela();

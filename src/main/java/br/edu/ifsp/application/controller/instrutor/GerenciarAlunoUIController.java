@@ -47,11 +47,12 @@ public class GerenciarAlunoUIController {
 
     @FXML
     protected void initialize() {
-        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
 
+        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+
+        WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newScreen, Dados dados) {
-                buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
                 alunoCriadoOuModificado = new Usuario();
 
                 if (dados.getIdAuxiliar() > 0
@@ -65,7 +66,6 @@ public class GerenciarAlunoUIController {
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {
                     usuarioAutenticado = buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).get();
                 }
-
             }
         });
     }
@@ -81,7 +81,6 @@ public class GerenciarAlunoUIController {
         txtAltura.setText(String.valueOf(alunoSelecionado.getAluno().getAltura()));
         txtObservacoes.setText(alunoSelecionado.getAluno().getObservacoes());
     }
-
 
     public void carregarDadosDaViewNaEntidade() {
         alunoCriadoOuModificado.setNome(txtNomeAluno.getText());

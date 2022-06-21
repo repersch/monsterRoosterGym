@@ -2,7 +2,10 @@ package br.edu.ifsp.application.controller.aluno;
 
 import br.edu.ifsp.application.repository.dao.*;
 import br.edu.ifsp.application.view.WindowLoader;
-import br.edu.ifsp.domain.entities.*;
+import br.edu.ifsp.domain.entities.Dados;
+import br.edu.ifsp.domain.entities.Exercicio;
+import br.edu.ifsp.domain.entities.ExercicioTreino;
+import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.EditarExercicioTreinoUC;
@@ -11,7 +14,6 @@ import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -99,7 +101,6 @@ public class GerenciarExercicioTreinoUIController {
         txtRepeticoesExercicioTreino.setText(String.valueOf(exercicioTreinoSelecionado.getRepeticao()));
     }
 
-
     public void voltarParaTelaAnterior(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioAutenticado.getId(),
                                                                             alunoSelecionado.getId(),
@@ -120,13 +121,5 @@ public class GerenciarExercicioTreinoUIController {
         exercicioTreinoParaSalvar.setRepeticao(Integer.valueOf(txtRepeticoesExercicioTreino.getText()));
         exercicioTreinoParaSalvar.setSerie(Integer.valueOf(txtSeriesExercicioTreino.getText()));
         exercicioTreinoParaSalvar.setId(exercicioTreinoSelecionado.getId());
-    }
-
-    private void showAlert(String title, String message, Alert.AlertType type){
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.setHeaderText(null);
-        alert.showAndWait();
     }
 }

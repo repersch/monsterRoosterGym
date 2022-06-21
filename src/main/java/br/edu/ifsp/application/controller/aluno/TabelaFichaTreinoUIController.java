@@ -137,17 +137,20 @@ public class TabelaFichaTreinoUIController {
             showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
             return;
         }
-//        aqui eu envio a fichaTreino como idAuxiliar2, através dele é possível encontrar o usuário
-        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", new Dados(usuarioAutenticado.getId(), usuarioSelecionado.getId(), fichaTreinoSelecionada.getId()));
+//       fichaTreino = idAuxiliar2, através dele é possível encontrar o usuário
+        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", new Dados(usuarioAutenticado.getId(),
+                                    usuarioSelecionado.getId(), fichaTreinoSelecionada.getId()));
     }
 
     public void criarFichaTreino(ActionEvent actionEvent) throws IOException {
-        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", new Dados(usuarioAutenticado.getId(), usuarioSelecionado.getId(), 0));
+        WindowLoader.setRoot("aluno/GerenciarFichaTreinoUI", new Dados(usuarioAutenticado.getId(),
+                                                    usuarioSelecionado.getId(), 0));
     }
 
     public void voltarParaTelaAnterior(ActionEvent actionEvent) throws IOException {
         if (usuarioAutenticado.getInstrutor()) {
-            WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
+            WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(),
+                                                                0, 0));
         }
     }
 
@@ -158,6 +161,4 @@ public class TabelaFichaTreinoUIController {
         alert.setHeaderText(null);
         alert.showAndWait();
     }
-
-
 }

@@ -60,14 +60,14 @@
             <TextField fx:id="txtBuscarExercicio" layoutX="71.0" layoutY="265.0" prefHeight="34.0" prefWidth="412.0" promptText="Buscar" />
             <Button fx:id="btnNovoExercicio" layoutX="643.0" layoutY="262.0" mnemonicParsing="false" onAction="#cadastrarNovoExercicio" prefHeight="40.0" prefWidth="120.0" text="Criar" />
             <Button fx:id="btnEditarExercicio" layoutX="502.0" layoutY="262.0" mnemonicParsing="false" onAction="#editarExercicio" prefHeight="40.0" prefWidth="120.0" text="Editar" />
-            <Pane layoutX="472.0" layoutY="14.0" prefHeight="73.0" prefWidth="319.0">
+            <Pane layoutX="411.0" layoutY="14.0" prefHeight="74.0" prefWidth="380.0">
                <children>
-                  <Label fx:id="txtUsuarioLogado" alignment="BASELINE_RIGHT" layoutX="45.0" layoutY="20.0" prefHeight="34.0" prefWidth="192.0">
+                  <Label fx:id="txtUsuarioLogado" alignment="BASELINE_RIGHT" layoutX="13.0" layoutY="20.0" prefHeight="34.0" prefWidth="295.0">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="247.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="47.0" fitWidth="46.0" layoutX="320.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../imagem/usuario.png" />
                      </image>

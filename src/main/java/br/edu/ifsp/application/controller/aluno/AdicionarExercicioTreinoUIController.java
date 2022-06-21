@@ -11,7 +11,6 @@ import br.edu.ifsp.domain.usecases.treino.BuscarTreinoUC;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -19,8 +18,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class AdicionarExercicioTreinoUIController {
-    @FXML
-    public TextField txtDescricaoExercicio;
+
     @FXML
     public TextField txtSeriesExercicioTreino;
     @FXML
@@ -33,8 +31,6 @@ public class AdicionarExercicioTreinoUIController {
     public Button btnCriarFichaTreino;
     @FXML
     public ComboBox<Exercicio> cbNomeExercicio;
-    @FXML
-    public TextField txtGrupoMuscularExercicio;
 
     private BuscarUsuarioUC buscarUsuarioUC;
     private BuscarFichaTreinoUC buscarFichaTreinoUC;
@@ -78,7 +74,6 @@ public class AdicionarExercicioTreinoUIController {
             }
         });
     }
-
 
     public void voltarParaTelaAnterior(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioAutenticado.getId(),

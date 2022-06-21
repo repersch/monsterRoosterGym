@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.controller.instrutor;
 
-import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
+import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.BuscarUsuarioUC;
@@ -50,7 +50,6 @@ public class GerenciarInstrutorUIController {
                     instrutorParaSalvar.setId(instrutorSelecionado.getId());
                     carregarDadosDaEntidadeParaView();
                 }
-
             }
         });
     }

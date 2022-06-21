@@ -40,6 +40,7 @@ public class TabelaInstrutorUIController {
 
     private ObservableList<Usuario> instrutores;
     private Usuario usuarioAutenticado;
+    private Usuario instrutorSelecionado;
     private BuscarUsuarioUC buscarUsuarioUC;
 
 
@@ -77,7 +78,7 @@ public class TabelaInstrutorUIController {
     }
 
     public void editarInstrutor(ActionEvent actionEvent) throws IOException {
-        Usuario instrutorSelecionado = tabelaInstrutor.getSelectionModel().getSelectedItem();
+        instrutorSelecionado = tabelaInstrutor.getSelectionModel().getSelectedItem();
         if (instrutorSelecionado == null) {
             showAlert("Erro!", "Selecione um instrutor.", Alert.AlertType.ERROR);
             return;
@@ -110,7 +111,6 @@ public class TabelaInstrutorUIController {
     public void fazerLogOut(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("AutenticacaoUI", new Dados(usuarioAutenticado.getId(), 0, 0));
     }
-
 
     public void telaAluno(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("instrutor/TabelaAlunoUI", new Dados(usuarioAutenticado.getId(), 0, 0));

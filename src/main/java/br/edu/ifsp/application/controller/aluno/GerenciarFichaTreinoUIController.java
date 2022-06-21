@@ -41,7 +41,6 @@ public class GerenciarFichaTreinoUIController {
     private Usuario usuarioAutenticado;
     private FichaTreino fichaTreinoSelecionada;
     private FichaTreino fichaTreinoParaSalvar;
-
     private Usuario alunoSelecionado;
 
 
@@ -87,7 +86,6 @@ public class GerenciarFichaTreinoUIController {
         lbNomeInstrutor.setText(fichaTreinoSelecionada.getInstrutor().getNome());
     }
 
-
     public void buscarAluno(ActionEvent actionEvent) {
         Optional<Usuario> resultado = buscarUsuarioUC.buscarPorNome(txtBuscarAluno.getText());
         Usuario alunoBuscado;
@@ -125,7 +123,6 @@ public class GerenciarFichaTreinoUIController {
             fichaTreinoParaSalvar.setId(fichaTreinoSelecionada.getId());
             editarFichaTreinoUC.atualizar(fichaTreinoParaSalvar);
         }
-
         voltarParaTelaAnterior(actionEvent);
     }
 
@@ -146,7 +143,6 @@ public class GerenciarFichaTreinoUIController {
         WindowLoader.setRoot("aluno/TabelaFichaTreinoUI",
                 new Dados(usuarioAutenticado.getId(), alunoSelecionado.getId(), fichaTreinoSelecionada != null ? fichaTreinoSelecionada.getId() : 0));
     }
-
 
     private void showAlert(String title, String message, Alert.AlertType type){
         Alert alert = new Alert(type);

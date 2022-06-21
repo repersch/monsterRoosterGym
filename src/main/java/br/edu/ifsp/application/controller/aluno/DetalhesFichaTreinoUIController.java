@@ -4,7 +4,6 @@ import br.edu.ifsp.application.repository.dao.*;
 import br.edu.ifsp.application.view.WindowLoader;
 import br.edu.ifsp.domain.entities.*;
 import br.edu.ifsp.domain.usecases.exercicio.BuscarExercicioUC;
-import br.edu.ifsp.domain.usecases.exercicio.EditarExercicioUC;
 import br.edu.ifsp.domain.usecases.exercicioTreino.BuscarExercicioTreinoUC;
 import br.edu.ifsp.domain.usecases.fichaTreino.BuscarFichaTreinoUC;
 import br.edu.ifsp.domain.usecases.registroTreino.RegistrarInicioTreinoUC;
@@ -61,10 +60,10 @@ public class DetalhesFichaTreinoUIController {
 
     private Usuario usuarioAutenticado;
     private Usuario alunoSelecionado;
+    private ExercicioTreino exercicioTreinoSelecionado;
     private FichaTreino fichaTreinoSelecionada;
     private Treino treinoSelecionado;
     private RegistroTreino registroTreinoParaSalvar;
-//    private RegistroTreino registroTreinoParaIniciarOuFinalizar;
     private ObservableList<Treino> treinos;
     private ObservableList<ExercicioTreino> exerciciosTreino;
 
@@ -73,8 +72,6 @@ public class DetalhesFichaTreinoUIController {
     private BuscarTreinoUC buscarTreinoUC;
     private BuscarExercicioTreinoUC buscarExercicioTreinoUC;
     private BuscarExercicioUC buscarExercicioUC;
-//    private RegistrarInicioTreinoUC registrarInicioTreinoUC;
-
 
     @FXML
     public void initialize() {
@@ -122,12 +119,11 @@ public class DetalhesFichaTreinoUIController {
     }
 
     public void telaDetalhesFichaTreino(ActionEvent actionEvent) throws IOException {
-        ExercicioTreino exercicioTreinoSelecionado = tableViewExercicios.getSelectionModel().getSelectedItem();
+        exercicioTreinoSelecionado = tableViewExercicios.getSelectionModel().getSelectedItem();
         if (exercicioTreinoSelecionado == null) {
             showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
             return;
         }
-
         WindowLoader.setRoot("aluno/GerenciarExercicioTreinoUi", new Dados(usuarioAutenticado.getId(),
                                                                                  alunoSelecionado.getId(),
                                                                                  exercicioTreinoSelecionado.getId()));
@@ -192,7 +188,6 @@ public class DetalhesFichaTreinoUIController {
         txtNomeTreino.setText(treinoSelecionado.getNome());
         txtObservacaoTreino.setText(treinoSelecionado.getObservacao());
         exerciciosTreino = FXCollections.observableArrayList(buscarExercicioTreinoUC.buscarExerciciosTreinoPorTreino(treinoSelecionado.getId()));
-        System.out.println(exerciciosTreino);
         tableViewExercicios.setItems(exerciciosTreino);
 
         cExercicio.setCellValueFactory(info -> new SimpleStringProperty(info.getValue().getExercicio().getNome()));

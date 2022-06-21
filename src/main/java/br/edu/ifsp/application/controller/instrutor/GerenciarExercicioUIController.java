@@ -1,8 +1,8 @@
 package br.edu.ifsp.application.controller.instrutor;
 
+import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
 import br.edu.ifsp.application.repository.dao.SqliteUsuarioDAO;
 import br.edu.ifsp.application.view.WindowLoader;
-import br.edu.ifsp.application.repository.dao.SqliteExercicioDAO;
 import br.edu.ifsp.domain.entities.Dados;
 import br.edu.ifsp.domain.entities.Exercicio;
 import br.edu.ifsp.domain.entities.GrupoMuscular;
@@ -40,11 +40,13 @@ public class GerenciarExercicioUIController {
 
     @FXML
     protected void initialize() {
+
+        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+        buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
+
         WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newScreen, Dados dados) {
-                buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
-                buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
 
                 if (dados.getIdUsuarioAutenticado() > 0
                         && buscarUsuarioUC.buscarPorId(dados.getIdUsuarioAutenticado()).isPresent()) {

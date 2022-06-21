@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class DatabaseBuilder {
 
     public void buildDatabaseIfMissing() {
-//        apagarBancoDeDados();
+        apagarBancoDeDados();
         if (isDatabaseMissing()) {
             criarTabelas();
         }
@@ -52,7 +52,7 @@ public class DatabaseBuilder {
                     cpf TEXT,
                     telefone TEXT,
                     genero TEXT,
-                    data_nascimento STRING,
+                    data_nascimento TEXT,
                     peso DOUBLE,
                     altura DOUBLE,
                     observacao TEXT);
@@ -113,10 +113,10 @@ public class DatabaseBuilder {
                 CREATE TABLE FichaTreino(
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     valido INTEGER NOT NULL,
-                    dataInicio STRING,
-                    validade STRING,
-                    id_aluno STRING NOT NULL,
-                    id_instrutor STRING,
+                    dataInicio TEXT,
+                    validade TEXT,
+                    id_aluno TEXT NOT NULL,
+                    id_instrutor TEXT,
                     FOREIGN KEY(id_aluno) REFERENCES Usuario(id),
                     FOREIGN KEY(id_instrutor) REFERENCES Usuario(id));
                 """;
