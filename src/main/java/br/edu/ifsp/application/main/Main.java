@@ -281,10 +281,10 @@ public class Main {
         System.out.println("-------------------- GERAR RELATORIO DE TREINO ------------------");
         System.out.println("--------------------------------------------------------------\n");
 
-        Usuario usuarioRelatorio = buscarUsuarioUC.buscarPorId(1).get();
-        GerarRelatorioTreinoAluno relatorio1 = new GerarRelatorioTreinoAluno(usuarioRelatorio, buscarFichaTreinoUC.buscarPorId(usuarioRelatorio.getId()).get());
+        GerarRelatorioTreinoAluno relatorio = new GerarRelatorioTreinoAluno(buscarUsuarioUC.buscarPorId(2).get());
+        relatorio.buscarFichasAluno(buscarFichaTreinoUC.buscarPorAluno(buscarUsuarioUC.buscarPorId(2).get()));
 
-        System.out.println(relatorio1);
+        System.out.println(relatorio);
 
     }
 
