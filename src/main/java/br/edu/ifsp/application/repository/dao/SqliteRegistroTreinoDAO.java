@@ -18,11 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static br.edu.ifsp.application.main.Main.buscarTreinoUC;
-import static br.edu.ifsp.application.main.Main.buscarUsuarioUC;
-
 public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
+    private BuscarTreinoUC buscarTreinoUC;
+    private BuscarUsuarioUC buscarUsuarioUC;
 
     @Override
     public Integer create(RegistroTreino registroTreino) {
@@ -135,6 +134,9 @@ public class SqliteRegistroTreinoDAO implements RegistroTreinoDAO {
 
 
     private RegistroTreino resultSetToEntity(ResultSet resultado) throws SQLException {
+        buscarTreinoUC = new BuscarTreinoUC(new SqliteTreinoDAO());
+        buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
+
         Usuario aluno = buscarUsuarioUC.buscarPorId(resultado.getInt("id_aluno")).get();
         Treino treino = buscarTreinoUC.buscarPorId(resultado.getInt("id_treino")).get();
 

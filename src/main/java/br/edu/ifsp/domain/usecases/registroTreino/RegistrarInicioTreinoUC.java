@@ -5,6 +5,8 @@ import br.edu.ifsp.domain.entities.RegistroTreino;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
+import java.util.List;
+
 public class RegistrarInicioTreinoUC {
 
     private final RegistroTreinoDAO registroTreinoDAO;

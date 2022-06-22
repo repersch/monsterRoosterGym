@@ -60,7 +60,7 @@
             <TableView fx:id="tabelaAluno" layoutX="71.0" layoutY="323.0" prefHeight="276.0" prefWidth="692.0" stylesheets="@../../style/style.css">
                <columns>
                   <TableColumn fx:id="cNomeAluno" prefWidth="407.0" text="Nome" />
-                  <TableColumn fx:id="cCpfAluno" prefWidth="283.0" text="CPF" />
+                  <TableColumn fx:id="cCpfAluno" prefWidth="283.0" text="E-mail" />
                </columns>
             </TableView>
             <Button fx:id="btnDetalhesFichaTreino" layoutX="643.0" layoutY="623.0" mnemonicParsing="false" onAction="#verFichaTreino" prefHeight="40.0" prefWidth="120.0" text="Ficha Treino" />

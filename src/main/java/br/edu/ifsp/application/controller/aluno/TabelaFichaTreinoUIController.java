@@ -121,7 +121,7 @@ public class TabelaFichaTreinoUIController {
     public void telaDetalhesFichaTreino(ActionEvent actionEvent) throws IOException {
         fichaTreinoSelecionada = tabelaFichaTreino.getSelectionModel().getSelectedItem();
         if (fichaTreinoSelecionada == null) {
-            showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
+            showAlert("Erro!", "Selecione uma ficha.", Alert.AlertType.ERROR);
             return;
         }
         WindowLoader.setRoot("aluno/DetalhesFichaTreinoUI", new Dados(usuarioAutenticado.getId(), usuarioSelecionado.getId(), fichaTreinoSelecionada.getId()));
@@ -134,7 +134,7 @@ public class TabelaFichaTreinoUIController {
     public void editarFichaTreino(ActionEvent actionEvent) throws IOException {
         fichaTreinoSelecionada = tabelaFichaTreino.getSelectionModel().getSelectedItem();
         if (fichaTreinoSelecionada == null) {
-            showAlert("Erro!", "Selecione um exercício.", Alert.AlertType.ERROR);
+            showAlert("Erro!", "Selecione uma ficha.", Alert.AlertType.ERROR);
             return;
         }
 //       fichaTreino = idAuxiliar2, através dele é possível encontrar o usuário

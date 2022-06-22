@@ -44,6 +44,7 @@ public class GerenciarExercicioUIController {
         buscarUsuarioUC = new BuscarUsuarioUC(new SqliteUsuarioDAO());
         buscarExercicioUC = new BuscarExercicioUC(new SqliteExercicioDAO());
 
+
         WindowLoader.addOnChangeScreenListener(new WindowLoader.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newScreen, Dados dados) {
